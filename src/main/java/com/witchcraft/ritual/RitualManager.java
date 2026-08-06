@@ -324,6 +324,25 @@ public class RitualManager {
             }
         }
 
+        // Check coven requirements
+        if (recipe.isCovenRitual()) {
+            com.witchcraft.data.CovenData coven = plugin.getCovenManager().getCovenForMember(caster.getUniqueId());
+            if (coven == null) {
+                caster.sendMessage("\u00A7cThis ritual requires a coven.");
+                applyCovenFailurePenalty(caster);
+                return;
+            }
+
+            int membersPresent = plugin.getCovenManager().countMembersNear(
+                    coven, cauldron.getCauldronLocation(), recipe.getCovenRadius());
+            if (membersPresent < recipe.getRequiredCovenSize()) {
+                caster.sendMessage("\u00A7cThis ritual requires " + recipe.getRequiredCovenSize() +
+                        " coven members nearby. Only " + membersPresent + " present.");
+                applyCovenFailurePenalty(caster);
+                return;
+            }
+        }
+
         // Check XP
         Spell spell = plugin.getSpellRegistry().getSpell(recipe.getSpellId());
         if (spell != null && caster.getLevel() < spell.getXpCost()) {
@@ -347,6 +366,19 @@ public class RitualManager {
 
         caster.sendMessage(plugin.getConfigManager().getMessage("ritual.ritual-started"));
         playRitualEffects(cauldron.getCauldronLocation(), "start");
+    }
+
+    /**
+     * Applies the coven failure penalty - caster loses magic for 3 Minecraft days (63000 ticks).
+     */
+    private void applyCovenFailurePenalty(Player caster) {
+        plugin.getArcaneExhaustion().applyExhaustion(caster.getUniqueId());
+        caster.sendMessage("\u00A7c\u00A7lThe ancient spirits punish your failure!");
+        caster.sendMessage("\u00A77You have lost your magic for 3 Minecraft days.");
+        caster.getWorld().spawnParticle(org.bukkit.Particle.SMOKE,
+                caster.getLocation().add(0, 1, 0), 50, 0.5, 0.5, 0.5);
+        caster.getWorld().playSound(caster.getLocation(),
+                org.bukkit.Sound.ENTITY_WITHER_HURT, 1.0f, 0.5f);
     }
 
     /**

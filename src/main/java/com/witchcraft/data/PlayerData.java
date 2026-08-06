@@ -14,6 +14,7 @@ public class PlayerData {
     private final Set<String> knownRituals;
     private long lastLogin;
     private boolean hasReceivedGuide;
+    private UUID covenId;
 
     public PlayerData(UUID playerId) {
         this.playerId = playerId;
@@ -21,6 +22,7 @@ public class PlayerData {
         this.knownRituals = new java.util.HashSet<>();
         this.lastLogin = System.currentTimeMillis();
         this.hasReceivedGuide = false;
+        this.covenId = null;
     }
 
     public UUID getPlayerId() {
@@ -69,5 +71,17 @@ public class PlayerData {
 
     public void setHasReceivedGuide(boolean hasReceivedGuide) {
         this.hasReceivedGuide = hasReceivedGuide;
+    }
+
+    public UUID getCovenId() {
+        return covenId;
+    }
+
+    public void setCovenId(UUID covenId) {
+        this.covenId = covenId;
+    }
+
+    public boolean isInCoven() {
+        return covenId != null;
     }
 }

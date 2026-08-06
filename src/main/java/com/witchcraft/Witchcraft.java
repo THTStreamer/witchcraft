@@ -5,6 +5,8 @@ import com.witchcraft.commands.WitchcraftCommand;
 import com.witchcraft.config.ConfigManager;
 import com.witchcraft.core.ArcaneExhaustion;
 import com.witchcraft.core.SpellRegistry;
+import com.witchcraft.coven.CovenManager;
+import com.witchcraft.coven.CovenSpellRegistry;
 import com.witchcraft.data.DataManager;
 import com.witchcraft.incantation.IncantationManager;
 import com.witchcraft.ritual.RitualManager;
@@ -32,6 +34,8 @@ public final class Witchcraft extends JavaPlugin {
     private IncantationManager incantationManager;
     private ArcaneExhaustion arcaneExhaustion;
     private GuideBookBuilder guideBookBuilder;
+    private CovenManager covenManager;
+    private CovenSpellRegistry covenSpellRegistry;
 
     @Override
     public void onEnable() {
@@ -46,6 +50,8 @@ public final class Witchcraft extends JavaPlugin {
         this.incantationManager = new IncantationManager(this);
         this.ritualManager = new RitualManager(this);
         this.guideBookBuilder = new GuideBookBuilder(this);
+        this.covenManager = new CovenManager(this);
+        this.covenSpellRegistry = new CovenSpellRegistry(this);
 
         // Register commands
         WitchcraftCommand command = new WitchcraftCommand(this);
@@ -74,10 +80,31 @@ public final class Witchcraft extends JavaPlugin {
             }
         }
 
+        // Register coven command
+        var covenCommand = new com.witchcraft.coven.CovenCommand(this);
+        try {
+            var getMap = Bukkit.getServer().getClass().getMethod("getCommandMap");
+            var commandMap = (org.bukkit.command.CommandMap) getMap.invoke(Bukkit.getServer());
+            var cmd = new org.bukkit.command.Command("coven", "Coven management command", "/coven <subcommand>", List.of()) {
+                @Override
+                public boolean execute(CommandSender sender, String commandLabel, String[] args) {
+                    return covenCommand.onCommand(sender, this, commandLabel, args);
+                }
+                @Override
+                public List<String> tabComplete(CommandSender sender, String alias, String[] args) {
+                    return covenCommand.onTabComplete(sender, this, alias, args);
+                }
+            };
+            commandMap.register("witchcraft", cmd);
+        } catch (Exception e) {
+            getLogger().severe("Failed to register coven command: " + e.getMessage());
+        }
+
         // Register listeners
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.ritual.RitualListener(this), this);
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.incantation.IncantationListener(this), this);
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.spells.protection.ProtectionListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new com.witchcraft.coven.CovenSpellListener(this), this);
 
         // Start periodic save task
         startSaveTask();
@@ -173,5 +200,13 @@ public final class Witchcraft extends JavaPlugin {
 
     public GuideBookBuilder getGuideBookBuilder() {
         return guideBookBuilder;
+    }
+
+    public CovenManager getCovenManager() {
+        return covenManager;
+    }
+
+    public CovenSpellRegistry getCovenSpellRegistry() {
+        return covenSpellRegistry;
     }
 }

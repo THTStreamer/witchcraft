@@ -19,6 +19,8 @@ public class RitualRecipe {
     private final int requiredMoonPhase;
     private final boolean weatherRequired;
     private final String requiredWeather;
+    private final int requiredCovenSize;
+    private final double covenRadius;
 
     private RitualRecipe(Builder builder) {
         this.spellId = builder.spellId;
@@ -31,6 +33,8 @@ public class RitualRecipe {
         this.requiredMoonPhase = builder.requiredMoonPhase;
         this.weatherRequired = builder.weatherRequired;
         this.requiredWeather = builder.requiredWeather;
+        this.requiredCovenSize = builder.requiredCovenSize;
+        this.covenRadius = builder.covenRadius;
     }
 
     public String getSpellId() {
@@ -73,6 +77,18 @@ public class RitualRecipe {
         return requiredWeather;
     }
 
+    public int getRequiredCovenSize() {
+        return requiredCovenSize;
+    }
+
+    public double getCovenRadius() {
+        return covenRadius;
+    }
+
+    public boolean isCovenRitual() {
+        return requiredCovenSize > 0;
+    }
+
     /**
      * Checks if the given ingredients match this recipe.
      *
@@ -113,6 +129,8 @@ public class RitualRecipe {
         private int requiredMoonPhase = 0;
         private boolean weatherRequired = false;
         private String requiredWeather = "clear";
+        private int requiredCovenSize = 0;
+        private double covenRadius = 10.0;
 
         Builder(String spellId) {
             this.spellId = spellId;
@@ -152,6 +170,16 @@ public class RitualRecipe {
         public Builder weather(String weather) {
             this.weatherRequired = true;
             this.requiredWeather = weather;
+            return this;
+        }
+
+        public Builder covenSize(int size) {
+            this.requiredCovenSize = size;
+            return this;
+        }
+
+        public Builder covenRadius(double radius) {
+            this.covenRadius = radius;
             return this;
         }
 
