@@ -1,0 +1,96 @@
+# Witchcraft Configuration
+# An immersive magical progression system
+
+# General settings
+general:
+  # The maximum number of ingredients that can be added to a cauldron
+  max-cauldron-ingredients: 12
+  # Default ritual duration in ticks (20 ticks = 1 second)
+  default-ritual-duration: 100
+  # Whether moon phase affects rituals
+  moon-phase-enabled: true
+  # Whether weather affects rituals
+  weather-enabled: true
+  # Distance in blocks to stand near cauldron to begin ritual
+  cauldron-activation-distance: 3.0
+  # Maximum number of active wards per player
+  max-wards-per-player: 10
+  # Whether to give new players the Witchcraft guide book
+  give-guide-on-join: true
+  # Arcane Exhaustion duration in Minecraft days (1 day = 24000 ticks)
+  arcane-exhaustion-days: 3
+
+# Spell settings
+spells:
+  # Default cooldown between spell casts in ticks
+  default-cooldown: 600
+  # Default success chance (0.0 to 1.0)
+  default-success-chance: 0.8
+  # Default failure chance (0.0 to 1.0)
+  default-failure-chance: 0.15
+  # Default backfire chance (0.0 to 1.0)
+  default-backfire-chance: 0.05
+  # XP cost per spell cast
+  default-xp-cost: 3
+
+# Curse settings
+curses:
+  # Maximum active curses per player
+  max-active-curses: 5
+  # Whether curses can be removed by drinking milk
+  milk-removes-curses: false
+  # Whether water cleanses curses
+  water-cleanses-curses: false
+
+# Protection settings
+protection:
+  # Default protection duration in ticks
+  default-duration: 72000
+  # Whether protection reflects curses
+  reflects-curses: true
+  # Whether protection blocks scrying
+  blocks-scrying: true
+  # Maximum protection radius
+  max-radius: 16
+
+# Scrying settings
+scrying:
+  # Whether to reveal exact coordinates
+  reveal-exact-coordinates: false
+  # Maximum scrying distance (blocks)
+  max-distance: 10000
+  # Whether higher-level rituals reveal more information
+  level-based-revelation: true
+
+# Ritual Cauldron settings
+cauldron:
+  # Whether the cauldron boils when ingredients are added
+  boils-when-filled: true
+  # Particle effect when ritual succeeds
+  success-particles: true
+  # Sound when ritual succeeds
+  success-sounds: true
+  # Whether failed rituals damage the cauldron
+  damage-on-failure: true
+  # Maximum cauldron fill level
+  max-fill-level: 3
+
+# Visual settings
+effects:
+  # Particle density multiplier (0.0 to 2.0)
+  particle-density: 1.0
+  # Whether to show ritual circle on ground
+  show-ritual-circle: true
+  # Ritual circle color (hex color)
+  ritual-circle-color: "#6B21A8"
+  # Candle color for rituals (hex color)
+  candle-color: "#F59E0B"
+
+# Data storage settings
+storage:
+  # Save interval in ticks
+  save-interval: 6000
+  # Whether to backup data on save
+  backup-on-save: true
+
+# Messages are stored in messages.yml

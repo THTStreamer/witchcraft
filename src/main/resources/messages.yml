@@ -1,0 +1,209 @@
+# Witchcraft Messages
+# All user-facing messages are configurable here
+
+# General
+general:
+  prefix: "&5[Witchcraft] &r"
+  no-permission: "&cYou lack the arcane knowledge for this."
+  reload-success: "&aWitchcraft configuration reloaded successfully."
+  reload-fail: "&cFailed to reload configuration."
+
+# Ritual messages
+ritual:
+  cauldron-empty: "&7The cauldron bubbles quietly..."
+  cauldron-filling: "&7You add water to the cauldron."
+  ingredient-added: "&7You add the ingredient to the cauldron."
+  ingredient-failed: "&cThat ingredient does not belong in the cauldron."
+  ritual-started: "&5The ritual begins... Stand close to the cauldron."
+  ritual-charging: "&7The air thickens with arcane energy..."
+  ritual-success: "&aThe ritual completes with a surge of power!"
+  ritual-failure: "&cThe ritual fails! The ingredients dissolve into nothing."
+  ritual-backfire: "&4The ritual backfires! You feel a terrible pain."
+  cauldron-destroyed: "&cThe cauldron shatters from the magical backlash."
+  too-far-away: "&cYou are too far from the cauldron."
+  already-ritual: "&cA ritual is already in progress at this cauldron."
+  moon-phase-wrong: "&cThe moon phase is not right for this ritual."
+  weather-wrong: "&cThe weather is not suitable for this ritual."
+  insufficient-xp: "&cYou lack the experience to channel this magic."
+  target-required: "&cThis ritual requires a target paper with a player's name."
+  target-added: "&aTarget set to &c%target%&a."
+  target-before-ingredients: "&cAdd the ritual ingredients first, then the target paper."
+  invalid-target-paper: "&cThis paper does not contain a valid target."
+  no-target-needed: "&cThis ritual does not require a target."
+  cannot-target-self: "&cYou cannot target yourself."
+  target-offline: "&cYour target &f%target%&c is not online."
+
+# Incantation messages
+incantation:
+  learned: "&aYou have learned the incantation: &5%spell%"
+  already-known: "&7You already understand this incantation."
+  unknown: "&7Nothing happens..."
+  on-cooldown: "&cThe incantation is not ready yet."
+  exhausted: "&cYour connection to the unseen has been severed."
+  cast-success: "&5The words of power resonate through the air."
+  cast-fail: "&7The incantation falters and fades."
+  target-required: "&cThis incantation requires a target paper held in your hand."
+  invalid-target: "&cThe target paper does not contain a valid target."
+  target-offline: "&cYour target is not online."
+  cannot-target-self: "&cYou cannot target yourself."
+
+# Curse messages
+curse:
+  applied: "&5You have cursed &c%target%&5."
+  received: "&4A dark presence settles over you..."
+  removed: "&aThe curse has been lifted."
+  expired: "&7The curse's grip loosens and fades."
+
+# Protection messages
+protection:
+  applied: "&aA protective ward now surrounds you."
+  applied-to-other: "&aYou have placed a protective ward on &c%target%&a."
+  expired: "&7The protective ward fades."
+  reflected: "&5The spell reflects back at the caster!"
+
+# Scrying messages
+scrying:
+  started: "&5You peer through the veil..."
+  result: "&7You see %target% in %biome%, %dimension%."
+  result-coords: "&7Approximate position: %x%, %z%"
+  result-health: "&7Health: %health%"
+  result-hunger: "&7Hunger: %hunger%"
+  result-weather: "&7Weather: %weather%"
+  result-held-item: "&7Holding: %item%"
+  blocked: "&cYour scrying was blocked by a protective ward."
+
+# Anti-scrying
+anti-scrying:
+  backlash: "&4You feel a terrible backlash! Your magic falters."
+  exhaustion: "&4You have been struck with Arcane Exhaustion."
+  exhaustion-attempt: "&cYour connection to the unseen has been severed."
+  protected-player-notified: "&aA dark presence was deflected by your wards."
+
+# Fertility ritual
+fertility:
+  started: "&5The Fertility Ritual begins..."
+  success: "&aThe land grows fertile around you."
+  expired: "&7The fertile blessing fades."
+
+# Mob prevention
+mob-prevention:
+  started: "&5The Warding Ritual begins..."
+  success: "&aA protective ward now guards this chunk."
+  expired: "&7The ward protecting this chunk fades."
+
+# Guide book
+guide:
+  title: "Witchcraft Guide"
+  author: "The Old Ones"
+  # Page content (auto-paginated)
+  pages:
+    - |
+      &5&lWitchcraft Guide&0
+      
+      &7This book will guide you through
+      the ancient art of folk magic.
+      
+      &7Magic is not instant. It requires
+      preparation, knowledge, and respect
+      for the unseen forces.
+    - |
+      &5&lRitual Magic&0
+      
+      &7Rituals are performed at cauldrons.
+      
+      &71. Fill a cauldron with water
+      &72. Add the required ingredients
+      &73. Stand near the cauldron
+      &74. Begin the ritual
+      &75. Wait for the magic to unfold
+    - |
+      &5&lCauldrons&0
+      
+      &7Cauldrons are your primary tool
+      for ritual magic.
+      
+      &7Different rituals require different
+      ingredient combinations.
+      
+      &7Never use a crafting table. All
+      magic is ritual-based.
+    - |
+      &5&lIncantations&0
+      
+      &7Some spells are cast by speaking
+      words of power in chat.
+      
+      &7You must first learn incantations
+      from magical books.
+      
+      &7Type the incantation in chat to cast.
+    - |
+      &5&lLearning Spells&0
+      
+      &7Incantations are learned from
+      Written Books.
+      
+      &7Right-click the book to learn
+      the incantation.
+      
+      &7You cannot relearn known
+      incantations.
+    - |
+      &5&lCurses&0
+      
+      &7Curses are dark spells cast upon
+      other players.
+      
+      &7Use cauldrons to perform curse
+      rituals.
+      
+      &7Curses can be removed through
+      protective rituals.
+    - |
+      &5&lProtection&0
+      
+      &7Protection rituals shield players
+      from curses and scrying.
+      
+      &7Place protective wards to defend
+      yourself and allies.
+      
+      &7Wards expire over time.
+    - |
+      &5&lScrying&0
+      
+      &7Scrying allows you to observe
+      other players.
+      
+      &7Requires significant effort and
+      preparation.
+      
+      &7Higher-level rituals reveal more.
+    - |
+      &5&lBackfires&0
+      
+      &7Incorrect ingredients cause
+      rituals to fail.
+      
+      &7Failed rituals may backfire,
+      causing harm to the caster.
+      
+      &7Be careful with your magic.
+    - |
+      &5&lProgression&0
+      
+      &7Discover spell books through:
+      &7- Dungeons and structures
+      &7- Villager trades
+      &7- Exploration
+      
+      &7Experiment with ingredients
+      to discover new rituals.
+    - |
+      &5&lTips&0
+      
+      &7- Always have protective wards
+      &7- Experiment carefully
+      &7- Trade with other witches
+      &7- Respect the balance of magic
+      &7- The moon and weather matter
