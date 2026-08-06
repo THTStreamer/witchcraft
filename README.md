@@ -53,6 +53,15 @@ Both methods trigger the same spell effects. Choose the approach that fits your 
 - Cannot cast magic during exhaustion period
 - Persists across server restarts
 
+### Target Paper System
+- Player-targeting rituals and spells require a **target paper** with the target's username
+- Players craft their own target papers by renaming paper at an anvil with the target's username
+- Target papers are consumed when used
+- For rituals: add the target paper to the cauldron after ingredients
+- For incantations: hold the target paper in main or off hand while chanting
+- For coven spells: the caster holds the target paper while chanting with the coven
+- Without a target paper, AoE spells affect all nearby enemies
+
 ### Covens
 - Form groups of witches to unlock more powerful magic
 - Coven rituals require multiple members near the cauldron
@@ -111,6 +120,8 @@ Coven spells are powerful incantations that require multiple members to chant in
 
 All members must be within range of each other. If the incantation isn't completed in time, it fails.
 
+**Target Paper:** To target a specific player with a coven spell, the caster holds a target paper (renamed at an anvil to the target's username) in their main or off hand while chanting. When the spell completes, it targets only that player. Without a target paper, the spell affects all nearby enemies.
+
 ### Built-in Coven Spells
 
 | Spell | Members Required | Incantation Lines |
@@ -146,7 +157,7 @@ All members must be within range of each other. If the incantation isn't complet
 - Not under Arcane Exhaustion
 - Some rituals require specific moon phase or weather
 
-**Target Paper:** For player-targeting rituals, create a target paper with `/witchcraft targetpaper <player>` and add it to the cauldron after adding ingredients. The paper is consumed on use.
+**Target Paper:** For player-targeting rituals, you need a target paper with the target's username written on it. Create one by placing paper in an anvil and renaming it to the target player's exact username. Add the target paper to the cauldron after adding all ingredients. The paper is consumed when the ritual completes. Without a target paper, AoE spells affect all nearby enemies instead.
 
 ---
 
@@ -603,6 +614,8 @@ Coven rituals require a minimum number of coven members to be present near the c
 - Not under Arcane Exhaustion
 - Cooldown must have expired
 
+**Target Paper:** To target a specific player, rename paper at an anvil to the target's exact username. Hold this target paper in your main hand or off hand when you speak the incantation. The paper is consumed when the spell is cast. Without a target paper, AoE spells affect all nearby enemies.
+
 ---
 
 ### Curse Incantations
@@ -717,8 +730,10 @@ Coven rituals require a minimum number of coven members to be present near the c
 | `/witchcraft purge <player>` | Clear all magic effects | `witchcraft.admin` |
 | `/witchcraft list` | List all spells | `witchcraft.admin` |
 | `/witchcraft exhaust <player>` | Apply exhaustion | `witchcraft.admin` |
-| `/witchcraft targetpaper <player>` | Create target paper | `witchcraft.admin` |
+| `/witchcraft targetpaper <player>` | Create target paper (admin only) | `witchcraft.admin` |
 | `/witchcraft debug` | Show debug info | `witchcraft.debug` |
+
+**Note:** The `/witchcraft targetpaper` command is admin-only. Players create target papers by placing paper in an anvil and renaming it to the target player's exact username.
 
 ## Permissions
 

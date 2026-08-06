@@ -281,9 +281,12 @@ public class WitchcraftCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 1) {
-            return Arrays.asList("help", "reload", "givebook", "learn", "unlearn",
-                            "purge", "list", "exhaust", "targetpaper", "debug")
-                    .stream()
+            List<String> commands = new ArrayList<>(Arrays.asList("help", "reload", "givebook", "learn", "unlearn",
+                            "purge", "list", "exhaust", "debug"));
+            if (sender.hasPermission("witchcraft.admin")) {
+                commands.add("targetpaper");
+            }
+            return commands.stream()
                     .filter(s -> s.startsWith(args[0].toLowerCase()))
                     .collect(Collectors.toList());
         }
@@ -291,6 +294,9 @@ public class WitchcraftCommand implements CommandExecutor, TabCompleter {
         if (args.length == 2) {
             switch (args[0].toLowerCase()) {
                 case "givebook", "learn", "unlearn", "purge", "exhaust", "targetpaper" -> {
+                    if (args[0].equalsIgnoreCase("targetpaper") && !sender.hasPermission("witchcraft.admin")) {
+                        return new ArrayList<>();
+                    }
                     return Bukkit.getOnlinePlayers().stream()
                             .map(Player::getName)
                             .filter(name -> name.toLowerCase().startsWith(args[1].toLowerCase()))
