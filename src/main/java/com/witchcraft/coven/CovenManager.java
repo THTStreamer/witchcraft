@@ -1,6 +1,9 @@
 package com.witchcraft.coven;
 
 import com.witchcraft.Witchcraft;
+import com.witchcraft.api.events.WitchCovenCreateEvent;
+import com.witchcraft.api.events.WitchCovenJoinEvent;
+import com.witchcraft.api.events.WitchCovenLeaveEvent;
 import com.witchcraft.data.CovenData;
 import com.witchcraft.data.PlayerData;
 import org.bukkit.Bukkit;
@@ -38,6 +41,15 @@ public class CovenManager {
         CovenData coven = new CovenData(covenId, name, leader.getUniqueId());
         covens.put(covenId, coven);
         data.setCovenId(covenId);
+
+        WitchCovenCreateEvent event = new WitchCovenCreateEvent(leader, coven, name);
+        Bukkit.getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            covens.remove(covenId);
+            data.setCovenId(null);
+            return null;
+        }
+
         return coven;
     }
 
@@ -79,6 +91,15 @@ public class CovenManager {
             if (coven.hasInvite(player.getUniqueId())) {
                 coven.addMember(player.getUniqueId());
                 data.setCovenId(coven.getCovenId());
+
+                WitchCovenJoinEvent event = new WitchCovenJoinEvent(player, coven);
+                Bukkit.getPluginManager().callEvent(event);
+                if (event.isCancelled()) {
+                    coven.removeMember(player.getUniqueId());
+                    data.setCovenId(null);
+                    return null;
+                }
+
                 return coven;
             }
         }
@@ -98,6 +119,10 @@ public class CovenManager {
         }
 
         PlayerData data = plugin.getDataManager().getPlayerData(player.getUniqueId());
+
+        WitchCovenLeaveEvent event = new WitchCovenLeaveEvent(player, coven);
+        Bukkit.getPluginManager().callEvent(event);
+
         coven.removeMember(player.getUniqueId());
         data.setCovenId(null);
 

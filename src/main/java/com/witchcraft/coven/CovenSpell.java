@@ -1,6 +1,7 @@
 package com.witchcraft.coven;
 
 import com.witchcraft.Witchcraft;
+import com.witchcraft.api.events.WitchCovenSpellCastEvent;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -187,6 +188,24 @@ public class CovenSpell {
                     target = null;
                 }
             }
+        }
+
+        // Build participant list from active spell speakers
+        List<Player> participants = new ArrayList<>();
+        for (UUID memberId : coven.getMemberIds()) {
+            Player member = Bukkit.getPlayer(memberId);
+            if (member != null && member.isOnline()) {
+                participants.add(member);
+            }
+        }
+
+        // Fire event
+        WitchCovenSpellCastEvent event = new WitchCovenSpellCastEvent(caster, this, coven,
+                participants, target);
+        Bukkit.getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            broadcastToCoven(coven, "\u00A7cThe spell was disrupted!");
+            return;
         }
 
         // Execute the effect spell

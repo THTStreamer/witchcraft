@@ -1,6 +1,8 @@
 package com.witchcraft.ritual;
 
 import com.witchcraft.Witchcraft;
+import com.witchcraft.api.events.WitchRitualCompleteEvent;
+import com.witchcraft.api.events.WitchRitualStartEvent;
 import com.witchcraft.api.events.WitchSpellCastEvent;
 import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
@@ -16,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -364,6 +367,26 @@ public class RitualManager {
         cauldron.setStartTime(Bukkit.getCurrentTick());
         activeRituals.put(cauldron.getLocationKey(), cauldron);
 
+        // Resolve target for event
+        Player target = null;
+        if (cauldron.hasTarget()) {
+            target = Bukkit.getPlayer(cauldron.getTargetPlayerId());
+        }
+
+        // Fire start event
+        ArrayList<String> ingredientNames = new ArrayList<>();
+        for (Ingredient ing : recipe.getRequiredIngredients()) {
+            ingredientNames.add(ing.getDisplayName());
+        }
+        WitchRitualStartEvent startEvent = new WitchRitualStartEvent(caster, spell, recipe,
+                cauldron.getCauldronLocation(), ingredientNames, target);
+        Bukkit.getPluginManager().callEvent(startEvent);
+        if (startEvent.isCancelled()) {
+            caster.sendMessage(plugin.getConfigManager().getMessage("ritual.ritual-failure"));
+            activeRituals.remove(cauldron.getLocationKey());
+            return;
+        }
+
         caster.sendMessage(plugin.getConfigManager().getMessage("ritual.ritual-started"));
         playRitualEffects(cauldron.getCauldronLocation(), "start");
     }
@@ -515,6 +538,11 @@ public class RitualManager {
             default -> {
             }
         }
+
+        // Fire completion event
+        WitchRitualCompleteEvent completeEvent = new WitchRitualCompleteEvent(caster, spell,
+                ritual.getRecipe(), ritual.getCauldronLocation(), target, result);
+        Bukkit.getPluginManager().callEvent(completeEvent);
 
         ritual.setCompleted(true);
     }

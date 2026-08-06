@@ -753,24 +753,51 @@ Coven rituals require a minimum number of coven members to be present near the c
 Witchcraft exposes an API for other plugins:
 
 ```java
-// Get the spell registry
-SpellRegistry registry = WitchcraftAPI.getSpellRegistry();
+// Spell Registry
+Spell spell = WitchcraftAPI.getSpell("fireball");
+List<Spell> combatSpells = WitchcraftAPI.getSpellsByCategory(SpellCategory.COMBAT);
 
-// Check if a player knows an incantation
-boolean knows = WitchcraftAPI.hasLearnedIncantation(playerId, "incantation_id");
+// Incantations
+boolean knows = WitchcraftAPI.hasLearnedIncantation(playerId, "fireball");
+boolean onCooldown = WitchcraftAPI.isOnCooldown(playerId, "fireball");
+long remaining = WitchcraftAPI.getCooldownRemaining(playerId, "fireball");
 
-// Check if a player is exhausted
+// Arcane Exhaustion
 boolean exhausted = WitchcraftAPI.isExhausted(playerId);
+long exhaustRemaining = WitchcraftAPI.getExhaustionRemaining(playerId);
+
+// Ritual Recipes
+RitualRecipe recipe = WitchcraftAPI.getRitualRecipe("fireball");
+List<RitualRecipe> allRecipes = WitchcraftAPI.getAllRitualRecipes();
+
+// Covens
+CovenData coven = WitchcraftAPI.getCovenForMember(playerId);
+boolean inCoven = WitchcraftAPI.isInCoven(playerId);
+int covenSize = WitchcraftAPI.getCovenSize(covenId);
+
+// Coven Spells
+CovenSpell covenSpell = WitchcraftAPI.getCovenSpell("apocalypse");
 ```
 
 ### Events
 
-- `WitchSpellCastEvent` - Fired when a spell is cast
-- `WitchCurseApplyEvent` - Fired when a curse is applied
-- `WitchCurseRemoveEvent` - Fired when a curse is removed
-- `WitchProtectionApplyEvent` - Fired when protection is applied
-- `WitchScryEvent` - Fired when scrying is attempted
+**Core Events:**
+- `WitchSpellCastEvent` - Fired when a spell is cast (cancellable)
 - `WitchBackfireEvent` - Fired when a spell backfires
+- `WitchCurseApplyEvent` - Fired when a curse is applied (cancellable)
+- `WitchCurseRemoveEvent` - Fired when a curse is removed
+- `WitchProtectionApplyEvent` - Fired when protection is applied (cancellable)
+- `WitchScryEvent` - Fired when scrying is attempted (cancellable)
+
+**Coven Events:**
+- `WitchCovenCreateEvent` - Fired when a coven is created (cancellable)
+- `WitchCovenJoinEvent` - Fired when a player joins a coven (cancellable)
+- `WitchCovenLeaveEvent` - Fired when a player leaves a coven
+- `WitchCovenSpellCastEvent` - Fired when a coven spell is cast (cancellable)
+
+**Ritual Events:**
+- `WitchRitualStartEvent` - Fired when a ritual starts in a cauldron (cancellable)
+- `WitchRitualCompleteEvent` - Fired when a ritual completes
 
 ## Building
 
