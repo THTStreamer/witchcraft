@@ -81,6 +81,15 @@ Some rituals require a minimum number of coven members to be present near the ca
 
 Coven members must be within a certain radius of the cauldron (varies per ritual).
 
+#### Coven Ritual Requirements
+
+| Ritual | Members | Radius | Ingredients | Effect |
+|---|---|---|---|---|
+| **Ritual of Shared Power** | 2 | 15 | Blaze Powder + Gold Ingot + Nether Wart | Strength + Regeneration for all nearby coven members |
+| **Ritual of the Binding Circle** | 3 | 20 | Obsidian + Echo Shard + Amethyst Shard + Nether Quartz | Resistance + Fire Resistance for all nearby coven members |
+| **Ritual of Mass Summons** | 2 | 15 | Ender Pearl + Echo Shard + Amethyst Shard | Teleports all online coven members to the cauldron |
+| **Ritual of the Dark Harvest** | 3 | 25 | Nether Wart + Fermented Spider Eye + Ghast Tear + Coal | Curses all non-coven players nearby |
+
 ### Coven Spells
 
 Coven spells are powerful incantations that require multiple members to chant in sequence. Each member says one line of the incantation, in order, within a time limit.
