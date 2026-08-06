@@ -244,15 +244,6 @@ public class IncantationManager {
                 "banishment rite", "exilium repellere"
         ));
 
-        registerIncantation(new Incantation(
-                "summoning",
-                "voca ad locum alligare",
-                "summoning_ritual",
-                "Calling of the Bound",
-                "Summons a target to your location",
-                "summoning calling", "voca alligare"
-        ));
-
         // === NEW PROTECTION INCANTATIONS ===
         registerIncantation(new Incantation(
                 "fire_shield",
