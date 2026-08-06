@@ -1,14 +1,13 @@
 package com.witchcraft.spells.curse;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.List;
+
 
 /**
  * Curse spell that increases phantom activity around a target.
@@ -18,8 +17,6 @@ public class PhantomActivityCurse extends Spell {
     public PhantomActivityCurse(Witchcraft plugin) {
         super(plugin, "phantom_activity_curse", "Curse of the Night Watch",
                 SpellCategory.CURSE,
-                List.of(Ingredient.PHANTOM_MEMBRANE, Ingredient.ECHO_SHARD, Ingredient.COAL),
-                "umbra vigilare noctis",
                 600, 3, 0.8, 0.15, 0.05,
                 "witchcraft.curse", true);
     }

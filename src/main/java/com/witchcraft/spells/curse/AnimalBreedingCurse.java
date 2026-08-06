@@ -1,14 +1,13 @@
 package com.witchcraft.spells.curse;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.List;
+
 
 /**
  * Curse spell that prevents animals from breeding near the target.
@@ -18,8 +17,6 @@ public class AnimalBreedingCurse extends Spell {
     public AnimalBreedingCurse(Witchcraft plugin) {
         super(plugin, "animal_breeding_curse", "Curse of Sterility",
                 SpellCategory.CURSE,
-                List.of(Ingredient.BONE_MEAL, Ingredient.SPIDER_EYE, Ingredient.NETHER_WART),
-                "procreatio negare infructuosa",
                 600, 3, 0.8, 0.15, 0.05,
                 "witchcraft.curse", true);
     }

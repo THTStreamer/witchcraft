@@ -1,7 +1,6 @@
 package com.witchcraft.spells.divination;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -9,15 +8,13 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
-import java.util.List;
+
 
 public class AuraSightRitual extends Spell {
 
     public AuraSightRitual(Witchcraft plugin) {
         super(plugin, "aura_sight_ritual", "The Witch's Third Eye",
                 SpellCategory.DIVINATION,
-                List.of(Ingredient.AMETHYST_SHARD, Ingredient.ECHO_SHARD, Ingredient.GLOWSTONE_DUST),
-                "oculus tertius aura videre",
                 2400, 7, 0.85, 0.1, 0.05,
                 "witchcraft.scrying", true);
     }

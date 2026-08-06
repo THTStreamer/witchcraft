@@ -1,7 +1,6 @@
 package com.witchcraft.spells.protection;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -10,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,8 +20,6 @@ public class FireShieldRitual extends Spell {
     public FireShieldRitual(Witchcraft plugin) {
         super(plugin, "fire_shield_ritual", "Ward of the Immolator",
                 SpellCategory.PROTECTION,
-                List.of(Ingredient.BLAZE_POWDER, Ingredient.OBSIDIAN, Ingredient.GLOWSTONE_DUST),
-                "ignis scutum immolare",
                 1800, 5, 0.9, 0.08, 0.02,
                 "witchcraft.protection");
     }

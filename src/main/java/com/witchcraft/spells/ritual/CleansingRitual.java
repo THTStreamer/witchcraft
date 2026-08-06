@@ -1,7 +1,6 @@
 package com.witchcraft.spells.ritual;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -10,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.List;
+
 
 /**
  * Cleansing ritual that removes negative effects from a player.
@@ -20,8 +19,6 @@ public class CleansingRitual extends Spell {
     public CleansingRitual(Witchcraft plugin) {
         super(plugin, "cleansing_ritual", "Rite of Purification",
                 SpellCategory.CLEANSING,
-                List.of(Ingredient.GHAST_TEAR, Ingredient.SUGAR, Ingredient.BONE_MEAL),
-                "purgatio maledictio liberare",
                 900, 4, 0.9, 0.08, 0.02,
                 "witchcraft.cast");
     }

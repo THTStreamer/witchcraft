@@ -1,14 +1,12 @@
 package com.witchcraft.spells.protection;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,8 +21,6 @@ public class AntiScryingProtection extends Spell {
     public AntiScryingProtection(Witchcraft plugin) {
         super(plugin, "anti_scrying_protection", "Veil of Obscurity",
                 SpellCategory.PROTECTION,
-                List.of(Ingredient.ECHO_SHARD, Ingredient.AMETHYST_SHARD, Ingredient.CRYING_OBSIDIAN),
-                "obscurus ne videar",
                 1800, 5, 0.9, 0.08, 0.02,
                 "witchcraft.protection");
     }

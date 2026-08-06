@@ -2,11 +2,9 @@ package com.witchcraft.core;
 
 import com.witchcraft.Witchcraft;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -15,27 +13,22 @@ import java.util.logging.Level;
 
 /**
  * Central registry for all spells in the plugin.
- * Loads spell definitions from configuration files.
+ * Spells define effects only. Rituals (cauldron + ingredients) and
+ * incantations (spoken words) are separate systems that trigger spells.
  */
 public class SpellRegistry {
 
     private final Witchcraft plugin;
     private final Map<String, Spell> spells = new ConcurrentHashMap<>();
-    private final Map<String, Spell> incantationSpells = new ConcurrentHashMap<>();
 
     public SpellRegistry(Witchcraft plugin) {
         this.plugin = plugin;
         loadSpells();
     }
 
-    /**
-     * Loads all spells from the spells directory and registers built-in spells.
-     */
     private void loadSpells() {
-        // Register built-in spells
         registerBuiltInSpells();
 
-        // Load custom spells from configuration
         File spellsDir = new File(plugin.getDataFolder(), "spells");
         if (!spellsDir.exists()) {
             spellsDir.mkdirs();
@@ -55,9 +48,6 @@ public class SpellRegistry {
         plugin.getLogger().info("Registered " + spells.size() + " spells.");
     }
 
-    /**
-     * Registers all built-in spells.
-     */
     private void registerBuiltInSpells() {
         // Curse spells
         registerSpell(new com.witchcraft.spells.curse.MiningFatigueCurse(plugin));
@@ -95,97 +85,28 @@ public class SpellRegistry {
         registerSpell(new com.witchcraft.spells.divination.AuraSightRitual(plugin));
     }
 
-    /**
-     * Registers a spell.
-     *
-     * @param spell the spell to register
-     */
     public void registerSpell(Spell spell) {
         spells.put(spell.getId(), spell);
-        if (spell.getIncantation() != null) {
-            incantationSpells.put(normalizeIncantation(spell.getIncantation()), spell);
-        }
     }
 
-    /**
-     * Unregisters a spell.
-     *
-     * @param spellId the spell ID to unregister
-     */
     public void unregisterSpell(String spellId) {
-        Spell removed = spells.remove(spellId);
-        if (removed != null && removed.getIncantation() != null) {
-            incantationSpells.remove(normalizeIncantation(removed.getIncantation()));
-        }
+        spells.remove(spellId);
     }
 
-    /**
-     * Gets a spell by ID.
-     *
-     * @param spellId the spell ID
-     * @return the spell, or null if not found
-     */
     public Spell getSpell(String spellId) {
         return spells.get(spellId);
     }
 
-    /**
-     * Gets a spell by incantation.
-     *
-     * @param incantation the incantation to search for
-     * @return the spell, or null if not found
-     */
-    public Spell getSpellByIncantation(String incantation) {
-        return incantationSpells.get(normalizeIncantation(incantation));
-    }
-
-    /**
-     * Gets all registered spells.
-     *
-     * @return unmodifiable collection of spells
-     */
     public Collection<Spell> getAllSpells() {
         return Collections.unmodifiableCollection(spells.values());
     }
 
-    /**
-     * Gets all spells in a specific category.
-     *
-     * @param category the category to filter by
-     * @return collection of spells in the category
-     */
     public Collection<Spell> getSpellsByCategory(SpellCategory category) {
         return spells.values().stream()
                 .filter(s -> s.getCategory() == category)
                 .toList();
     }
 
-    /**
-     * Gets all spells that can be cast via incantation.
-     *
-     * @return unmodifiable collection of incantation spells
-     */
-    public Collection<Spell> getIncantationSpells() {
-        return Collections.unmodifiableCollection(incantationSpells.values());
-    }
-
-    /**
-     * Normalizes an incantation by removing punctuation, extra spaces,
-     * and converting to lowercase.
-     *
-     * @param incantation the raw incantation
-     * @return the normalized incantation
-     */
-    public static String normalizeIncantation(String incantation) {
-        return incantation.toLowerCase()
-                .replaceAll("[^a-z0-9\\s]", "")
-                .replaceAll("\\s+", " ")
-                .trim();
-    }
-
-    /**
-     * Loads a spell definition from a YAML file.
-     */
     private void loadSpellFromFile(File file) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
         ConfigurationSection section = config.getConfigurationSection("spell");
@@ -196,17 +117,6 @@ public class SpellRegistry {
         String categoryName = section.getString("category");
         SpellCategory category = SpellCategory.valueOf(categoryName.toUpperCase());
 
-        // Load ingredients
-        var ingredientNames = section.getStringList("ingredients");
-        var ingredients = new java.util.ArrayList<Ingredient>();
-        for (String name : ingredientNames) {
-            Ingredient ing = Ingredient.fromName(name);
-            if (ing != null) {
-                ingredients.add(ing);
-            }
-        }
-
-        String incantation = section.getString("incantation");
         long cooldown = section.getLong("cooldown", 600);
         int xpCost = section.getInt("xp-cost", 3);
         double successChance = section.getDouble("success-chance", 0.8);
@@ -214,10 +124,8 @@ public class SpellRegistry {
         double backfireChance = section.getDouble("backfire-chance", 0.05);
         String permission = section.getString("permission", "witchcraft.cast");
 
-        // Create a dynamic spell from configuration
-        Spell spell = new ConfiguredSpell(plugin, id, displayName, category, ingredients,
-                incantation, cooldown, xpCost, successChance, failureChance, backfireChance,
-                permission, section);
+        Spell spell = new ConfiguredSpell(plugin, id, displayName, category, cooldown,
+                xpCost, successChance, failureChance, backfireChance, permission, section);
         registerSpell(spell);
     }
 
@@ -229,18 +137,16 @@ public class SpellRegistry {
         private final ConfigurationSection config;
 
         ConfiguredSpell(Witchcraft plugin, String id, String displayName, SpellCategory category,
-                        java.util.List<Ingredient> ingredients, String incantation, long cooldown,
-                        int xpCost, double successChance, double failureChance, double backfireChance,
-                        String permission, ConfigurationSection config) {
-            super(plugin, id, displayName, category, ingredients, incantation, cooldown,
-                    xpCost, successChance, failureChance, backfireChance, permission);
+                        long cooldown, int xpCost, double successChance, double failureChance,
+                        double backfireChance, String permission, ConfigurationSection config) {
+            super(plugin, id, displayName, category, cooldown, xpCost, successChance,
+                    failureChance, backfireChance, permission);
             this.config = config;
         }
 
         @Override
         public SpellResult execute(org.bukkit.entity.Player caster, org.bukkit.Location location,
                                    org.bukkit.entity.Player target) {
-            // Execute configured effects
             var effects = config.getConfigurationSection("effects");
             if (effects != null) {
                 applyEffects(caster, location, target, effects);
@@ -250,7 +156,6 @@ public class SpellRegistry {
 
         private void applyEffects(org.bukkit.entity.Player caster, org.bukkit.Location location,
                                   org.bukkit.entity.Player target, ConfigurationSection effects) {
-            // Apply potion effects
             var potions = effects.getConfigurationSection("potions");
             if (potions != null) {
                 for (String key : potions.getKeys(false)) {
@@ -272,7 +177,6 @@ public class SpellRegistry {
                 }
             }
 
-            // Apply particles
             var particleType = effects.getString("particle");
             if (particleType != null && location != null) {
                 try {

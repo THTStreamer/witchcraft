@@ -1,7 +1,6 @@
 package com.witchcraft.spells.ritual;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -9,15 +8,13 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.ExperienceOrb;
 
-import java.util.List;
+
 
 public class SoulHarvestRitual extends Spell {
 
     public SoulHarvestRitual(Witchcraft plugin) {
         super(plugin, "soul_harvest_ritual", "Gathering of Lost Souls",
                 SpellCategory.CURSE,
-                List.of(Ingredient.ECHO_SHARD, Ingredient.QUARTZ, Ingredient.COAL),
-                "anima collectio perdita",
                 1200, 5, 0.85, 0.1, 0.05,
                 "witchcraft.cast");
     }

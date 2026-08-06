@@ -1,7 +1,6 @@
 package com.witchcraft.spells.curse;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -10,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.List;
+
 
 /**
  * Curse spell that applies Weakness to a target.
@@ -20,8 +19,6 @@ public class WeaknessCurse extends Spell {
     public WeaknessCurse(Witchcraft plugin) {
         super(plugin, "weakness_curse", "Curse of Feebleness",
                 SpellCategory.CURSE,
-                List.of(Ingredient.BONE_MEAL, Ingredient.SUGAR, Ingredient.COAL),
-                "vis deficiat invalidus",
                 600, 3, 0.8, 0.15, 0.05,
                 "witchcraft.curse", true);
     }

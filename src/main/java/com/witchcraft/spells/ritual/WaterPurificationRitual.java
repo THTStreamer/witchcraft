@@ -1,7 +1,6 @@
 package com.witchcraft.spells.ritual;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -10,15 +9,13 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-import java.util.List;
+
 
 public class WaterPurificationRitual extends Spell {
 
     public WaterPurificationRitual(Witchcraft plugin) {
         super(plugin, "water_purification_ritual", "Purification of the Clear Spring",
                 SpellCategory.CLEANSING,
-                List.of(Ingredient.GHAST_TEAR, Ingredient.QUARTZ, Ingredient.BONE_MEAL),
-                "aqua purificatio fons clarus",
                 1200, 4, 0.85, 0.1, 0.05,
                 "witchcraft.cast");
     }

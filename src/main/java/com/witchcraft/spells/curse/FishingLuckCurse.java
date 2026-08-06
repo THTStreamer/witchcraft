@@ -1,7 +1,6 @@
 package com.witchcraft.spells.curse;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -10,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.List;
+
 
 /**
  * Curse spell that reduces fishing luck for the target.
@@ -20,8 +19,6 @@ public class FishingLuckCurse extends Spell {
     public FishingLuckCurse(Witchcraft plugin) {
         super(plugin, "fishing_luck_curse", "Curse of the Empty Net",
                 SpellCategory.CURSE,
-                List.of(Ingredient.NAUTILUS_SHELL, Ingredient.PRISMARINE_SHARD, Ingredient.COAL),
-                "piscis fortuna careat",
                 600, 3, 0.8, 0.15, 0.05,
                 "witchcraft.curse", true);
     }

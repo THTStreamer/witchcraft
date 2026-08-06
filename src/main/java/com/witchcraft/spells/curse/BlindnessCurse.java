@@ -1,7 +1,6 @@
 package com.witchcraft.spells.curse;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -10,15 +9,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.List;
+
 
 public class BlindnessCurse extends Spell {
 
     public BlindnessCurse(Witchcraft plugin) {
         super(plugin, "blindness_curse", "Curse of the Shrouded Eye",
                 SpellCategory.CURSE,
-                List.of(Ingredient.FERMENTED_SPIDER_EYE, Ingredient.COAL, Ingredient.QUARTZ),
-                "oculus tenebris velare",
                 600, 3, 0.8, 0.15, 0.05,
                 "witchcraft.curse", true);
     }

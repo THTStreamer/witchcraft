@@ -1,7 +1,6 @@
 package com.witchcraft.spells.curse;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -9,7 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import java.util.List;
+
 
 /**
  * Curse spell that causes crop failure around a target's base.
@@ -19,8 +18,6 @@ public class CropFailureCurse extends Spell {
     public CropFailureCurse(Witchcraft plugin) {
         super(plugin, "crop_failure_curse", "Curse of Barren Fields",
                 SpellCategory.CURSE,
-                List.of(Ingredient.BONE_MEAL, Ingredient.SUGAR, Ingredient.NETHER_WART),
-                "agricultura maledictio sterile",
                 600, 3, 0.8, 0.15, 0.05,
                 "witchcraft.curse", true);
     }

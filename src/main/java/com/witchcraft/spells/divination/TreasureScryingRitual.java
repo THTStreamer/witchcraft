@@ -1,22 +1,19 @@
 package com.witchcraft.spells.divination;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.List;
+
 
 public class TreasureScryingRitual extends Spell {
 
     public TreasureScryingRitual(Witchcraft plugin) {
         super(plugin, "treasure_scrying_ritual", "Dowsing of the Hidden Way",
                 SpellCategory.DIVINATION,
-                List.of(Ingredient.ECHO_SHARD, Ingredient.GOLD_INGOT, Ingredient.AMETHYST_SHARD),
-                "thesaurus videre via abscondita",
                 2400, 7, 0.85, 0.1, 0.05,
                 "witchcraft.scrying");
     }

@@ -1,7 +1,6 @@
 package com.witchcraft.spells.ritual;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -10,7 +9,6 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -21,8 +19,6 @@ public class MobPreventionRitual extends Spell {
     public MobPreventionRitual(Witchcraft plugin) {
         super(plugin, "mob_prevention_ritual", "Guardian's Ward",
                 SpellCategory.WARDING,
-                List.of(Ingredient.OBSIDIAN, Ingredient.ECHO_SHARD, Ingredient.BONE_MEAL),
-                "custos praesidio locus",
                 1800, 5, 0.85, 0.1, 0.05,
                 "witchcraft.cast");
     }

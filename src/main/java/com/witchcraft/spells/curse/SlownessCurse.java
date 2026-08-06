@@ -1,7 +1,6 @@
 package com.witchcraft.spells.curse;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -10,15 +9,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.List;
+
 
 public class SlownessCurse extends Spell {
 
     public SlownessCurse(Witchcraft plugin) {
         super(plugin, "slowness_curse", "Curse of the Iron Boots",
                 SpellCategory.CURSE,
-                List.of(Ingredient.IRON_INGOT, Ingredient.SUGAR, Ingredient.COAL),
-                "ferrum gradus tardus",
                 600, 3, 0.8, 0.15, 0.05,
                 "witchcraft.curse", true);
     }

@@ -8,9 +8,18 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 
 ## Features
 
+### Two Ways to Cast Magic
+
+Witchcraft provides **two separate systems** for casting spells:
+
+1. **Rituals** — Use a cauldron + ingredients (no incantation needed)
+2. **Spells** — Type incantations in chat (no ingredients needed)
+
+Both methods trigger the same spell effects. Choose the approach that fits your playstyle.
+
 ### Ritual Cauldron Magic
 - Perform rituals using cauldrons and ingredients
-- Different spells require different ingredient combinations
+- Ingredients are consumed when the ritual starts
 - Moon phase and weather can affect rituals
 - Experience cost for powerful magic
 
@@ -18,7 +27,7 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 - Cast spells by typing magical phrases in chat
 - Learn incantations from magical books
 - Cooldowns and exhaustion systems
-- Configurable aliases and matching
+- No ingredients required
 
 ### Curse System
 - Curse other players with various afflictions
@@ -44,7 +53,7 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 
 ---
 
-## Ritual Guide
+## Ritual Guide (Cauldron + Ingredients)
 
 ### How to Perform a Ritual
 
@@ -61,7 +70,7 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 - Not under Arcane Exhaustion
 - Some rituals require specific moon phase or weather
 
-**Target Paper:** For curses and player-targeting spells, create a target paper with `/witchcraft targetpaper <player>` and add it to the cauldron after adding ingredients. The paper is consumed on use.
+**Target Paper:** For player-targeting rituals, create a target paper with `/witchcraft targetpaper <player>` and add it to the cauldron after adding ingredients. The paper is consumed on use.
 
 ---
 
@@ -72,7 +81,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Afflicts target with Mining Fatigue |
 | **Ingredients** | Nether Wart + Redstone + Coal |
-| **Incantation** | `tenebris ferrum obstaculum` |
 | **XP Cost** | 3 |
 | **Requires Target** | Yes |
 
@@ -81,7 +89,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Brings bad luck to the target |
 | **Ingredients** | Spider Eye + Fermented Spider Eye + Coal |
-| **Incantation** | `fortuna inversa cadat` |
 | **XP Cost** | 3 |
 | **Requires Target** | Yes |
 
@@ -90,7 +97,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Slows healing on the target |
 | **Ingredients** | Bone Meal + Ghast Tear + Coal |
-| **Incantation** | `vita sanatio lento` |
 | **XP Cost** | 3 |
 | **Requires Target** | Yes |
 
@@ -99,7 +105,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Weakens the target |
 | **Ingredients** | Bone Meal + Sugar + Coal |
-| **Incantation** | `vis deficiat invalidus` |
 | **XP Cost** | 3 |
 | **Requires Target** | Yes |
 
@@ -108,7 +113,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Increases phantom activity around the target |
 | **Ingredients** | Phantom Membrane + Echo Shard + Coal |
-| **Incantation** | `umbra vigilare noctis` |
 | **XP Cost** | 3 |
 | **Requires Target** | Yes |
 | **Special** | Requires Full Moon (moon phase 4) |
@@ -118,7 +122,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Causes crop failure around the target |
 | **Ingredients** | Bone Meal + Sugar + Nether Wart |
-| **Incantation** | `agricultura maledictio sterile` |
 | **XP Cost** | 3 |
 | **Requires Target** | Yes |
 
@@ -127,7 +130,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Prevents animals from breeding near the target |
 | **Ingredients** | Bone Meal + Spider Eye + Nether Wart |
-| **Incantation** | `procreatio negare infructuosa` |
 | **XP Cost** | 3 |
 | **Requires Target** | Yes |
 
@@ -136,7 +138,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Reduces fishing luck for the target |
 | **Ingredients** | Nautilus Shell + Prismarine Shard + Coal |
-| **Incantation** | `piscis fortuna careat` |
 | **XP Cost** | 3 |
 | **Requires Target** | Yes |
 
@@ -145,7 +146,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Prevents a target from casting spells |
 | **Ingredients** | Gunpowder + Fermented Spider Eye + Coal |
-| **Incantation** | `mutus lingua sileat` |
 | **XP Cost** | 3 |
 | **Requires Target** | Yes |
 
@@ -154,7 +154,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Blinds the target |
 | **Ingredients** | Fermented Spider Eye + Coal + Nether Quartz |
-| **Incantation** | `oculus caligo tenebris` |
 | **XP Cost** | 3 |
 | **Requires Target** | Yes |
 
@@ -163,7 +162,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Slows the target |
 | **Ingredients** | Iron Ingot + Sugar + Coal |
-| **Incantation** | `gradus lentus ferrum` |
 | **XP Cost** | 3 |
 | **Requires Target** | Yes |
 
@@ -172,7 +170,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Makes the target endlessly hungry |
 | **Ingredients** | Magma Cream + Sugar + Coal |
-| **Incantation** | `esuries fames devorat` |
 | **XP Cost** | 3 |
 | **Requires Target** | Yes |
 
@@ -185,7 +182,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Blesses the land with fertility, accelerates crop growth |
 | **Ingredients** | Bone Meal + Glowstone Dust + Sugar |
-| **Incantation** | `terra foecunditas abundet` |
 | **XP Cost** | 5 |
 | **Special** | Requires Clear Weather |
 
@@ -194,7 +190,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Accelerates crop growth in the area |
 | **Ingredients** | Bone Meal + Glowstone Dust + Nether Quartz |
-| **Incantation** | `germen floreant viridis` |
 | **XP Cost** | 5 |
 
 ---
@@ -206,7 +201,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Creates a ward against hostile mobs |
 | **Ingredients** | Obsidian + Echo Shard + Bone Meal |
-| **Incantation** | `custos praesidio locus` |
 | **XP Cost** | 5 |
 
 ---
@@ -218,7 +212,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Removes curses from a player |
 | **Ingredients** | Ghast Tear + Sugar + Bone Meal |
-| **Incantation** | `purgatio maledictio liberare` |
 | **XP Cost** | 4 |
 
 #### Purification of the Clear Spring
@@ -226,7 +219,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Cleanses nearby water sources |
 | **Ingredients** | Ghast Tear + Nether Quartz + Bone Meal |
-| **Incantation** | `aqua purificatio fons` |
 | **XP Cost** | 4 |
 
 ---
@@ -238,7 +230,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Creates a protective ward against curses |
 | **Ingredients** | Obsidian + Amethyst Shard + Glowstone Dust |
-| **Incantation** | `custodio sanctum aegis` |
 | **XP Cost** | 5 |
 
 #### Veil of Obscurity
@@ -246,7 +237,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Blocks scrying attempts on you |
 | **Ingredients** | Echo Shard + Amethyst Shard + Crying Obsidian |
-| **Incantation** | `obscurus ne videar` |
 | **XP Cost** | 5 |
 
 #### Ward of the Immolator
@@ -254,7 +244,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Grants fire resistance through ritual |
 | **Ingredients** | Blaze Powder + Obsidian + Glowstone Dust |
-| **Incantation** | `ignis scutum immolare` |
 | **XP Cost** | 5 |
 
 #### Aegis of Deflection
@@ -262,7 +251,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Protects against projectile attacks |
 | **Ingredients** | Iron Ingot + Obsidian + Flint |
-| **Incantation** | `aegis deflexio projicere` |
 | **XP Cost** | 5 |
 
 ---
@@ -274,7 +262,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Allows scrying on another player (location, health, items) |
 | **Ingredients** | Echo Shard + Amethyst Shard + Ender Pearl |
-| **Incantation** | `speculum anima videre` |
 | **XP Cost** | 7 |
 | **Requires Target** | Yes |
 
@@ -283,7 +270,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Reveals nearby hidden structures |
 | **Ingredients** | Echo Shard + Gold Ingot + Amethyst Shard |
-| **Incantation** | `thesaurus videre via abscondita` |
 | **XP Cost** | 7 |
 
 #### The Witch's Third Eye
@@ -291,7 +277,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Reveals a target's inner aura and status |
 | **Ingredients** | Amethyst Shard + Echo Shard + Glowstone Dust |
-| **Incantation** | `oculus tertius aura videre` |
 | **XP Cost** | 7 |
 | **Requires Target** | Yes |
 
@@ -304,7 +289,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Collects ambient soul energy |
 | **Ingredients** | Echo Shard + Nether Quartz + Coal |
-| **Incantation** | `anima colligere umbrarum` |
 | **XP Cost** | 5 |
 
 #### Chains of the Bound Soul
@@ -312,7 +296,6 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Binds a target's spirit to a location |
 | **Ingredients** | Iron Ingot + Echo Shard + Coal |
-| **Incantation** | `catena anima vincire` |
 | **XP Cost** | 4 |
 | **Requires Target** | Yes |
 
@@ -321,19 +304,90 @@ Witchcraft adds a deep, ritualistic magic system to Minecraft. Unlike flashy RPG
 |---|---|
 | **Effect** | Banishes a target to the void |
 | **Ingredients** | Ender Pearl + Echo Shard + Nether Quartz |
-| **Incantation** | `exilium repellere portam` |
 | **XP Cost** | 5 |
 | **Requires Target** | Yes |
 
 ---
 
-## Incantation Casting
+## Spell Guide (Spoken Incantations)
 
-In addition to cauldron rituals, you can cast spells by typing the incantation phrase in chat. You must first learn the incantation (via guide book or admin command).
+### How to Cast a Spell via Incantation
 
-**Example:** Type `tenebris ferrum obstaculum` in chat to cast Curse of the Deep Mine on yourself or the nearest valid target.
+1. **Learn the incantation** from a spell book (right-click to learn)
+2. **Type the incantation phrase** in chat
+3. The spell is cast on yourself (or the nearest valid target)
+4. For player-targeting spells, hold a **target paper** in your main or off hand
 
-Aliases are available for each incantation (e.g., `deep mine curse` for the mining fatigue curse).
+**Requirements:**
+- Permission: `witchcraft.cast`
+- Must have learned the incantation
+- Enough XP levels
+- Not under Arcane Exhaustion
+- Cooldown must have expired
+
+---
+
+### Curse Incantations
+
+| Spell | Incantation | Alias |
+|-------|-------------|-------|
+| Curse of the Deep Mine | `tenebris ferrum obstaculum` | `deep mine curse` |
+| Curse of Misfortune | `fortuna inversa cadat` | `misfortune curse` |
+| Curse of the Withering | `vita sanatio lento` | `withering curse` |
+| Curse of Feebleness | `vis deficiat invalidus` | `feebleness curse` |
+| Curse of the Night Watch | `umbra vigilare noctis` | `night watch curse` |
+| Curse of Barren Fields | `agricultura maledictio sterile` | `barren fields curse` |
+| Curse of Sterility | `procreatio negare infructuosa` | `sterility curse` |
+| Curse of the Empty Net | `piscis fortuna careat` | `empty net curse` |
+| Curse of the Muted Tongue | `mutus lingua sileat` | `muted tongue curse` |
+| Curse of the Shrouded Eye | `oculus caligo tenebris` | `shrouded eye curse` |
+| Curse of the Iron Boots | `gradus lentus ferrum` | `iron boots curse` |
+| Curse of the Ravenous Maw | `esuries fames devorat` | `ravenous maw curse` |
+
+### Protection Incantations
+
+| Spell | Incantation | Alias |
+|-------|-------------|-------|
+| Ward of Protection | `custodio sanctum aegis` | `ward protection` |
+| Veil of Obscurity | `obscurus ne videar` | `veil obscurity` |
+| Ward of the Immolator | `ignis scutum immolare` | `immolator ward` |
+| Aegis of Deflection | `aegis deflexio projicere` | `deflection aegis` |
+
+### Divination Incantations
+
+| Spell | Incantation | Alias |
+|-------|-------------|-------|
+| Mirror of the Soul | `speculum anima videre` | `mirror soul` |
+| Dowsing of the Hidden Way | `thesaurus videre via abscondita` | `hidden way dowsing` |
+| The Witch's Third Eye | `oculus tertius aura videre` | `third eye sight` |
+
+### Fertility Incantations
+
+| Spell | Incantation | Alias |
+|-------|-------------|-------|
+| Blessing of Abundance | `terra foecunditas abundet` | `abundance blessing` |
+| Bloom of the Green Hand | `germen floreant viridis` | `green hand bloom` |
+
+### Warding Incantations
+
+| Spell | Incantation | Alias |
+|-------|-------------|-------|
+| Guardian's Ward | `custos praesidio locus` | `guardian ward` |
+
+### Cleansing Incantations
+
+| Spell | Incantation | Alias |
+|-------|-------------|-------|
+| Rite of Purification | `purgatio maledictio liberare` | `purification rite` |
+| Purification of the Clear Spring | `aqua purificatio fons` | `clear spring purification` |
+
+### Ritual-Based Incantations
+
+| Spell | Incantation | Alias |
+|-------|-------------|-------|
+| Gathering of Lost Souls | `anima colligere umbrarum` | `lost souls gathering` |
+| Chains of the Bound Soul | `catena anima vincire` | `bound soul chains` |
+| Rite of Banishment | `exilium repellere portam` | `banishment rite` |
 
 ---
 

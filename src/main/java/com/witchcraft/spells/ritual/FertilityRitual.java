@@ -1,7 +1,6 @@
 package com.witchcraft.spells.ritual;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -12,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -23,8 +21,6 @@ public class FertilityRitual extends Spell {
     public FertilityRitual(Witchcraft plugin) {
         super(plugin, "fertility_ritual", "Blessing of Abundance",
                 SpellCategory.FERTILITY,
-                List.of(Ingredient.BONE_MEAL, Ingredient.GLOWSTONE_DUST, Ingredient.SUGAR),
-                "terra foecunditas abundet",
                 1200, 5, 0.85, 0.1, 0.05,
                 "witchcraft.cast");
     }

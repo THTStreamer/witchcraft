@@ -1,22 +1,19 @@
 package com.witchcraft.spells.ritual;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.List;
+
 
 public class BanishmentRitual extends Spell {
 
     public BanishmentRitual(Witchcraft plugin) {
         super(plugin, "banishment_ritual", "Rite of Banishment",
                 SpellCategory.CURSE,
-                List.of(Ingredient.ENDER_PEARL, Ingredient.ECHO_SHARD, Ingredient.QUARTZ),
-                "exilium proiectio removere",
                 1200, 5, 0.85, 0.1, 0.05,
                 "witchcraft.curse", true);
     }

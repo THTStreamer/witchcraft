@@ -1,7 +1,6 @@
 package com.witchcraft.spells.curse;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -10,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.List;
+
 
 /**
  * Curse spell that applies Mining Fatigue to a target.
@@ -20,8 +19,6 @@ public class MiningFatigueCurse extends Spell {
     public MiningFatigueCurse(Witchcraft plugin) {
         super(plugin, "mining_fatigue_curse", "Curse of the Deep Mine",
                 SpellCategory.CURSE,
-                List.of(Ingredient.NETHER_WART, Ingredient.REDSTONE, Ingredient.COAL),
-                "tenebris ferrum obstaculum",
                 600, 3, 0.8, 0.15, 0.05,
                 "witchcraft.curse", true);
     }

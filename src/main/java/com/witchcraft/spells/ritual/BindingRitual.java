@@ -1,22 +1,19 @@
 package com.witchcraft.spells.ritual;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.List;
+
 
 public class BindingRitual extends Spell {
 
     public BindingRitual(Witchcraft plugin) {
         super(plugin, "binding_ritual", "Chains of the Bound Soul",
                 SpellCategory.CURSE,
-                List.of(Ingredient.IRON_INGOT, Ingredient.ECHO_SHARD, Ingredient.COAL),
-                "catena anima ligare",
                 600, 4, 0.85, 0.1, 0.05,
                 "witchcraft.curse", true);
     }

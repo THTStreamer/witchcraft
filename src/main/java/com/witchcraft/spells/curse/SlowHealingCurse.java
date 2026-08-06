@@ -1,7 +1,6 @@
 package com.witchcraft.spells.curse;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -10,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.List;
+
 
 /**
  * Curse spell that applies Slow Healing to a target.
@@ -20,8 +19,6 @@ public class SlowHealingCurse extends Spell {
     public SlowHealingCurse(Witchcraft plugin) {
         super(plugin, "slow_healing_curse", "Curse of the Withering",
                 SpellCategory.CURSE,
-                List.of(Ingredient.BONE_MEAL, Ingredient.GHAST_TEAR, Ingredient.COAL),
-                "vita sanatio lento",
                 600, 3, 0.8, 0.15, 0.05,
                 "witchcraft.curse", true);
     }

@@ -1,7 +1,6 @@
 package com.witchcraft.spells.divination;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Ingredient;
 import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
@@ -9,7 +8,7 @@ import com.witchcraft.spells.protection.AntiScryingProtection;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.List;
+
 
 /**
  * Scrying ritual that allows spying on another player.
@@ -19,8 +18,6 @@ public class ScryingRitual extends Spell {
     public ScryingRitual(Witchcraft plugin) {
         super(plugin, "scrying_ritual", "Mirror of the Soul",
                 SpellCategory.DIVINATION,
-                List.of(Ingredient.ECHO_SHARD, Ingredient.AMETHYST_SHARD, Ingredient.ENDER_PEARL),
-                "speculum anima videre",
                 2400, 7, 0.85, 0.1, 0.05,
                 "witchcraft.scrying", true);
     }
