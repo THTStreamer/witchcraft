@@ -26,10 +26,15 @@ public class DoomRitual extends Spell {
         switch (result) {
             case SUCCESS -> {
                 int radius = 20;
-                List<Player> enemies = caster.getWorld().getNearbyPlayers(caster.getLocation(), radius)
-                        .stream()
-                        .filter(p -> p.isOnline() && !p.equals(caster))
-                        .toList();
+                List<Player> enemies;
+                if (target != null) {
+                    enemies = List.of(target);
+                } else {
+                    enemies = caster.getWorld().getNearbyPlayers(caster.getLocation(), radius)
+                            .stream()
+                            .filter(p -> p.isOnline() && !p.equals(caster))
+                            .toList();
+                }
                 for (Player enemy : enemies) {
                     enemy.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 400, 2));
                     enemy.addPotionEffect(new PotionEffect(PotionEffectType.MINING_FATIGUE, 400, 2));

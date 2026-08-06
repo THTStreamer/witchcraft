@@ -26,10 +26,15 @@ public class SoulHarvestCovenSpell extends Spell {
         switch (result) {
             case SUCCESS -> {
                 int radius = 30;
-                List<Player> enemies = caster.getWorld().getNearbyPlayers(caster.getLocation(), radius)
-                        .stream()
-                        .filter(p -> p.isOnline() && !p.equals(caster))
-                        .toList();
+                List<Player> enemies;
+                if (target != null) {
+                    enemies = List.of(target);
+                } else {
+                    enemies = caster.getWorld().getNearbyPlayers(caster.getLocation(), radius)
+                            .stream()
+                            .filter(p -> p.isOnline() && !p.equals(caster))
+                            .toList();
+                }
                 double totalHealed = 0;
                 for (Player enemy : enemies) {
                     double damage = Math.min(enemy.getHealth() * 0.4, 16);

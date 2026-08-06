@@ -30,10 +30,15 @@ public class EternalDamnationCovenSpell extends Spell {
                 world.setThundering(true);
 
                 int radius = 45;
-                List<Player> enemies = world.getNearbyPlayers(caster.getLocation(), radius)
-                        .stream()
-                        .filter(p -> p.isOnline() && !p.equals(caster))
-                        .toList();
+                List<Player> enemies;
+                if (target != null) {
+                    enemies = List.of(target);
+                } else {
+                    enemies = world.getNearbyPlayers(caster.getLocation(), radius)
+                            .stream()
+                            .filter(p -> p.isOnline() && !p.equals(caster))
+                            .toList();
+                }
                 for (Player enemy : enemies) {
                     // The ultimate punishment - every negative effect
                     enemy.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 1600, 5));

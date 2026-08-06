@@ -26,11 +26,16 @@ public class DarkHarvestRitual extends Spell {
         switch (result) {
             case SUCCESS -> {
                 int radius = 25;
-                List<Player> enemies = caster.getWorld().getNearbyPlayers(caster.getLocation(), radius)
-                        .stream()
-                        .filter(p -> p.isOnline() && !plugin.getCovenManager().getCovenForMember(p.getUniqueId())
-                                .equals(plugin.getCovenManager().getCovenForMember(caster.getUniqueId())))
-                        .toList();
+                List<Player> enemies;
+                if (target != null) {
+                    enemies = List.of(target);
+                } else {
+                    enemies = caster.getWorld().getNearbyPlayers(caster.getLocation(), radius)
+                            .stream()
+                            .filter(p -> p.isOnline() && !plugin.getCovenManager().getCovenForMember(p.getUniqueId())
+                                    .equals(plugin.getCovenManager().getCovenForMember(caster.getUniqueId())))
+                            .toList();
+                }
                 for (Player enemy : enemies) {
                     enemy.addPotionEffect(new PotionEffect(PotionEffectType.MINING_FATIGUE, 400, 2));
                     enemy.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 400, 1));

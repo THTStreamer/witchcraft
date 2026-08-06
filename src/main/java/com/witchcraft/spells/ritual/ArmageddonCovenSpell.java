@@ -27,10 +27,15 @@ public class ArmageddonCovenSpell extends Spell {
             case SUCCESS -> {
                 var world = caster.getWorld();
                 int radius = 35;
-                List<Player> enemies = world.getNearbyPlayers(caster.getLocation(), radius)
-                        .stream()
-                        .filter(p -> p.isOnline() && !p.equals(caster))
-                        .toList();
+                List<Player> enemies;
+                if (target != null) {
+                    enemies = List.of(target);
+                } else {
+                    enemies = world.getNearbyPlayers(caster.getLocation(), radius)
+                            .stream()
+                            .filter(p -> p.isOnline() && !p.equals(caster))
+                            .toList();
+                }
                 for (Player enemy : enemies) {
                     enemy.getWorld().strikeLightningEffect(enemy.getLocation());
                     enemy.getWorld().strikeLightningEffect(enemy.getLocation().clone().add(2, 0, 0));

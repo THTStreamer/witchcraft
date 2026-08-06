@@ -26,10 +26,15 @@ public class MassTransmutationCovenSpell extends Spell {
         switch (result) {
             case SUCCESS -> {
                 int radius = 30;
-                List<Player> enemies = caster.getWorld().getNearbyPlayers(caster.getLocation(), radius)
-                        .stream()
-                        .filter(p -> p.isOnline() && !p.equals(caster))
-                        .toList();
+                List<Player> enemies;
+                if (target != null) {
+                    enemies = List.of(target);
+                } else {
+                    enemies = caster.getWorld().getNearbyPlayers(caster.getLocation(), radius)
+                            .stream()
+                            .filter(p -> p.isOnline() && !p.equals(caster))
+                            .toList();
+                }
                 for (Player enemy : enemies) {
                     // Strip all their buffs and give them debuffs
                     enemy.getActivePotionEffects().forEach(effect -> {

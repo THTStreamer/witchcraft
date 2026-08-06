@@ -5,9 +5,11 @@ import com.witchcraft.core.Spell;
 import com.witchcraft.core.SpellCategory;
 import com.witchcraft.core.SpellResult;
 import com.witchcraft.data.CovenData;
+import com.witchcraft.util.TargetPaper;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -170,8 +172,25 @@ public class CovenSpell {
 
         broadcastToCoven(coven, "\u00A75\u00A7lThe incantation is complete! " + displayName + " activates!");
 
+        // Check for target paper in caster's hand
+        Player target = null;
+        ItemStack targetPaper = TargetPaper.findInInventory(plugin, caster);
+        if (targetPaper != null) {
+            java.util.UUID targetUUID = TargetPaper.getTargetUUID(plugin, targetPaper);
+            if (targetUUID != null) {
+                target = Bukkit.getPlayer(targetUUID);
+                if (target != null && target.isOnline() && !targetUUID.equals(caster.getUniqueId())) {
+                    // Consume the target paper
+                    TargetPaper.consumeFromInventory(plugin, caster);
+                    broadcastToCoven(coven, "\u00A75\u00A7lTarget locked: \u00A7f" + target.getName());
+                } else {
+                    target = null;
+                }
+            }
+        }
+
         // Execute the effect spell
-        SpellResult result = effectSpell.execute(caster, active.getCenter(), null);
+        SpellResult result = effectSpell.execute(caster, active.getCenter(), target);
 
         // Play success effects
         playCovenSpellEffects(active.getCenter(), result);

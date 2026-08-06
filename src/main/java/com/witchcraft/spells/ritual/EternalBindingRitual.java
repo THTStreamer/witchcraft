@@ -26,10 +26,15 @@ public class EternalBindingRitual extends Spell {
         switch (result) {
             case SUCCESS -> {
                 int radius = 25;
-                List<Player> enemies = caster.getWorld().getNearbyPlayers(caster.getLocation(), radius)
-                        .stream()
-                        .filter(p -> p.isOnline() && !p.equals(caster))
-                        .toList();
+                List<Player> enemies;
+                if (target != null) {
+                    enemies = List.of(target);
+                } else {
+                    enemies = caster.getWorld().getNearbyPlayers(caster.getLocation(), radius)
+                            .stream()
+                            .filter(p -> p.isOnline() && !p.equals(caster))
+                            .toList();
+                }
                 for (Player enemy : enemies) {
                     // Complete immobilization
                     enemy.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 800, 255));
