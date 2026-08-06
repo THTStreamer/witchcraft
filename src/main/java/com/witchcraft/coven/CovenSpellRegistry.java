@@ -59,6 +59,47 @@ public class CovenSpellRegistry {
                 ),
                 new com.witchcraft.spells.divination.ScryingRitual(plugin),
                 400));
+
+        // Storm Calling - requires 3 members, calls lightning on enemies
+        register(new CovenSpell(plugin,
+                "storm_calling_ritual",
+                "Storm Calling",
+                com.witchcraft.core.SpellCategory.CURSE,
+                3, 20.0,
+                java.util.List.of(
+                        "tempestas vocare fulmen",
+                        "iratus nubium potestas",
+                        "caelum irritare hostes"
+                ),
+                new com.witchcraft.spells.ritual.StormCallingRitual(plugin),
+                600));
+
+        // Soul Drain - requires 2 members, drains life from target
+        register(new CovenSpell(plugin,
+                "soul_drain_ritual",
+                "Soul Drain",
+                com.witchcraft.core.SpellCategory.CURSE,
+                2, 15.0,
+                java.util.List.of(
+                        "anima exhaurire vitam",
+                        "vis vitalis subtrahere"
+                ),
+                new com.witchcraft.spells.ritual.SoulDrainRitual(plugin),
+                400));
+
+        // Doom - requires 3 members, devastating area curse
+        register(new CovenSpell(plugin,
+                "doom_ritual",
+                "Ritual of Doom",
+                com.witchcraft.core.SpellCategory.CURSE,
+                3, 25.0,
+                java.util.List.of(
+                        "exitium invocare magnus",
+                        "perditio anima consumere",
+                        "doom aeternum hostes"
+                ),
+                new com.witchcraft.spells.ritual.DoomRitual(plugin),
+                800));
     }
 
     public void register(CovenSpell spell) {

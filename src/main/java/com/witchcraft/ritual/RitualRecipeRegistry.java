@@ -236,6 +236,88 @@ public class RitualRecipeRegistry {
                 .ritualDuration(300)
                 .build());
 
+        // === NEW CURSE RITUALS (Expanded) ===
+        // Curse of the Plague: Nether Wart + Spider Eye + Gunpowder
+        register(RitualRecipe.builder("plague_curse")
+                .displayName("Curse of the Plague")
+                .ingredients(Ingredient.NETHER_WART, Ingredient.SPIDER_EYE, Ingredient.GUNPOWDER)
+                .ritualDuration(120)
+                .build());
+
+        // Curse of Withering: Bone Meal + Coal + Echo Shard
+        register(RitualRecipe.builder("withering_curse")
+                .displayName("Curse of Withering")
+                .ingredients(Ingredient.BONE_MEAL, Ingredient.COAL, Ingredient.ECHO_SHARD)
+                .ritualDuration(120)
+                .build());
+
+        // Curse of Madness: Nether Quartz + Fermented Spider Eye + Echo Shard
+        register(RitualRecipe.builder("confusion_curse")
+                .displayName("Curse of Madness")
+                .ingredients(Ingredient.QUARTZ, Ingredient.FERMENTED_SPIDER_EYE, Ingredient.ECHO_SHARD)
+                .ritualDuration(120)
+                .build());
+
+        // === NEW BLESSING RITUALS ===
+        // Blessing of the Harvest: Bone Meal + Sugar + Glowstone Dust
+        register(RitualRecipe.builder("blessing_of_harvest")
+                .displayName("Blessing of the Harvest")
+                .ingredients(Ingredient.BONE_MEAL, Ingredient.SUGAR, Ingredient.GLOWSTONE_DUST)
+                .ritualDuration(200)
+                .build());
+
+        // Blessing of Fortitude: Iron Ingot + Obsidian + Amethyst Shard
+        register(RitualRecipe.builder("blessing_of_fortitude")
+                .displayName("Blessing of Fortitude")
+                .ingredients(Ingredient.IRON_INGOT, Ingredient.OBSIDIAN, Ingredient.AMETHYST_SHARD)
+                .ritualDuration(250)
+                .build());
+
+        // === NEW DIVINATION RITUALS ===
+        // Spirit Walk: Ender Pearl + Echo Shard + Phantom Membrane
+        register(RitualRecipe.builder("spirit_walk_ritual")
+                .displayName("Spirit Walk")
+                .ingredients(Ingredient.ENDER_PEARL, Ingredient.ECHO_SHARD, Ingredient.PHANTOM_MEMBRANE)
+                .ritualDuration(200)
+                .build());
+
+        // Ritual of Renewal: Ghast Tear + Glowstone Dust + Sugar
+        register(RitualRecipe.builder("renewal_ritual")
+                .displayName("Ritual of Renewal")
+                .ingredients(Ingredient.GHAST_TEAR, Ingredient.GLOWSTONE_DUST, Ingredient.SUGAR)
+                .ritualDuration(200)
+                .build());
+
+        // The Coven's Eye: Amethyst Shard + Echo Shard + Ender Pearl
+        register(RitualRecipe.builder("coven_eye_ritual")
+                .displayName("The Coven's Eye")
+                .ingredients(Ingredient.AMETHYST_SHARD, Ingredient.ECHO_SHARD, Ingredient.ENDER_PEARL)
+                .ritualDuration(250)
+                .build());
+
+        // === NEW PROTECTION RITUALS (Expanded) ===
+        // Ward of Thorns: Cactus + Iron Ingot + Bone Meal
+        register(RitualRecipe.builder("thorn_ward")
+                .displayName("Ward of Thorns")
+                .ingredients(Ingredient.IRON_INGOT, Ingredient.BONE_MEAL, Ingredient.QUARTZ)
+                .ritualDuration(200)
+                .build());
+
+        // Ward of Absorption: Gold Ingot + Sugar + Glowstone Dust
+        register(RitualRecipe.builder("absorption_ward")
+                .displayName("Ward of Absorption")
+                .ingredients(Ingredient.GOLD_INGOT, Ingredient.SUGAR, Ingredient.GLOWSTONE_DUST)
+                .ritualDuration(200)
+                .build());
+
+        // === NEW DIVINATION RITUALS (Expanded) ===
+        // Eyes of the Coven: Amethyst Shard + Ender Pearl + Echo Shard
+        register(RitualRecipe.builder("player_reveal_ritual")
+                .displayName("Eyes of the Coven")
+                .ingredients(Ingredient.AMETHYST_SHARD, Ingredient.ENDER_PEARL, Ingredient.ECHO_SHARD)
+                .ritualDuration(200)
+                .build());
+
         // === COVEN RITUALS ===
         // Ritual of Shared Power: 2 members required
         // Enhances all nearby coven members with strength and regeneration
@@ -275,6 +357,36 @@ public class RitualRecipeRegistry {
                 .ritualDuration(350)
                 .covenSize(3)
                 .covenRadius(25.0)
+                .build());
+
+        // Ritual of Storm Calling: 3 members required
+        // Calls down lightning on all nearby enemies
+        register(RitualRecipe.builder("storm_calling_ritual")
+                .displayName("Ritual of Storm Calling")
+                .ingredients(Ingredient.BLAZE_POWDER, Ingredient.GUNPOWDER, Ingredient.GHAST_TEAR)
+                .ritualDuration(300)
+                .covenSize(3)
+                .covenRadius(25.0)
+                .build());
+
+        // Ritual of Soul Drain: 2 members required
+        // Drains life from a target and empowers the coven
+        register(RitualRecipe.builder("soul_drain_ritual")
+                .displayName("Ritual of Soul Drain")
+                .ingredients(Ingredient.ECHO_SHARD, Ingredient.FERMENTED_SPIDER_EYE, Ingredient.COAL)
+                .ritualDuration(250)
+                .covenSize(2)
+                .covenRadius(15.0)
+                .build());
+
+        // Ritual of Doom: 3 members required
+        // Afflicts all nearby enemies with devastating curses
+        register(RitualRecipe.builder("doom_ritual")
+                .displayName("Ritual of Doom")
+                .ingredients(Ingredient.NETHER_WART, Ingredient.COAL, Ingredient.CRYING_OBSIDIAN)
+                .ritualDuration(350)
+                .covenSize(3)
+                .covenRadius(20.0)
                 .build());
     }
 

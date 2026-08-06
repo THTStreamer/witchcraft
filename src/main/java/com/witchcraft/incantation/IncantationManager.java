@@ -281,6 +281,110 @@ public class IncantationManager {
                 "Reveals a target's inner aura and status",
                 "third eye sight", "oculus aura"
         ));
+
+        // === EXPANDED CURSE INCANTATIONS ===
+        registerIncantation(new Incantation(
+                "curse_plague",
+                "pestilentia maledictio serpere",
+                "plague_curse",
+                "Curse of the Plague",
+                "Afflicts a target with sickness and weakness",
+                "plague curse", "pestilentia serpere"
+        ));
+
+        registerIncantation(new Incantation(
+                "curse_withering",
+                "corpus marcescere senescere",
+                "withering_curse",
+                "Curse of Withering",
+                "Withers the target's body and mind",
+                "withering curse", "corpus senescere"
+        ));
+
+        registerIncantation(new Incantation(
+                "curse_confusion",
+                "mens dissipare insania",
+                "confusion_curse",
+                "Curse of Madness",
+                "Unravels the target's sanity",
+                "madness curse", "insania dissipare"
+        ));
+
+        // === EXPANDED BLESSING INCANTATIONS ===
+        registerIncantation(new Incantation(
+                "blessing_harvest",
+                "copia messis abundantia",
+                "blessing_of_harvest",
+                "Blessing of the Harvest",
+                "Enriches crops and blesses nearby players",
+                "harvest blessing", "copia abundantia"
+        ));
+
+        registerIncantation(new Incantation(
+                "blessing_fortitude",
+                "fortitudo perseverare virtus",
+                "blessing_of_fortitude",
+                "Blessing of Fortitude",
+                "Grants absorption and regeneration to nearby allies",
+                "fortitude blessing", "fortitudo virtus"
+        ));
+
+        // === EXPANDED DIVINATION INCANTATIONS ===
+        registerIncantation(new Incantation(
+                "spirit_walk",
+                "spiritus ambulare transcendere",
+                "spirit_walk_ritual",
+                "Spirit Walk",
+                "Grants speed, jump boost, and night vision",
+                "spirit walk", "spiritus transcendere"
+        ));
+
+        registerIncantation(new Incantation(
+                "renewal",
+                "renovatio restaurare integrum",
+                "renewal_ritual",
+                "Ritual of Renewal",
+                "Fully restores health, hunger, and removes all effects",
+                "renewal ritual", "renovatio integrum"
+        ));
+
+        registerIncantation(new Incantation(
+                "coven_eye",
+                "oculus congregatio videre",
+                "coven_eye_ritual",
+                "The Coven's Eye",
+                "Reveals all nearby players with glowing effect",
+                "coven eye", "oculus congregatio"
+        ));
+
+        // === EXPANDED PROTECTION INCANTATIONS ===
+        registerIncantation(new Incantation(
+                "thorn_ward",
+                "spina custodire vulnerare",
+                "thorn_ward",
+                "Ward of Thorns",
+                "Surrounds a player with thorns that hurt attackers",
+                "thorn ward", "spina vulnerare"
+        ));
+
+        registerIncantation(new Incantation(
+                "absorption_ward",
+                "absorptio scutum aureum",
+                "absorption_ward",
+                "Ward of Absorption",
+                "Grants golden hearts that absorb damage",
+                "absorption ward", "absorptio aureum"
+        ));
+
+        // === EXPANDED DIVINATION INCANTATIONS (Player Reveal) ===
+        registerIncantation(new Incantation(
+                "player_reveal",
+                "oculus congregatio revelare",
+                "player_reveal_ritual",
+                "Eyes of the Coven",
+                "Lists all nearby players with distance and direction",
+                "player reveal", "revelare congregatio"
+        ));
     }
 
     /**

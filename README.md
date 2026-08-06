@@ -30,7 +30,7 @@ Both methods trigger the same spell effects. Choose the approach that fits your 
 - No ingredients required
 
 ### Curse System
-- Curse other players with various afflictions
+- 15 curses including Plague, Withering, and Madness
 - Mining fatigue, bad luck, crop failure, and more
 - Curses can be removed through protective rituals
 
@@ -38,12 +38,14 @@ Both methods trigger the same spell effects. Choose the approach that fits your 
 - Create protective wards against curses
 - Anti-scrying protection
 - Fire and projectile shields
+- Thorn and Absorption wards
 - Reflective backlash for attackers
 
 ### Scrying
 - Spy on other players from afar
 - Learn their location, health, and held items
 - Treasure dowsing and aura sight
+- Player reveal and Coven's Eye
 - Blocked by protective wards
 
 ### Arcane Exhaustion
@@ -89,6 +91,9 @@ Coven members must be within a certain radius of the cauldron (varies per ritual
 | **Ritual of the Binding Circle** | 3 | 20 | Obsidian + Echo Shard + Amethyst Shard + Nether Quartz | Resistance + Fire Resistance for all nearby coven members |
 | **Ritual of Mass Summons** | 2 | 15 | Ender Pearl + Echo Shard + Amethyst Shard | Teleports all online coven members to the cauldron |
 | **Ritual of the Dark Harvest** | 3 | 25 | Nether Wart + Fermented Spider Eye + Ghast Tear + Coal | Curses all non-coven players nearby |
+| **Ritual of Storm Calling** | 3 | 25 | Blaze Powder + Gunpowder + Ghast Tear | Calls lightning on all nearby enemies |
+| **Ritual of Soul Drain** | 2 | 15 | Echo Shard + Fermented Spider Eye + Coal | Drains life from target, empowers coven |
+| **Ritual of Doom** | 3 | 20 | Nether Wart + Coal + Crying Obsidian | Devastating curse on all nearby enemies |
 
 ### Coven Spells
 
@@ -108,6 +113,9 @@ All members must be within range of each other. If the incantation isn't complet
 | **Wrath of the Coven** | 3 | `ira congregatio spiritus` → `furor antiquus invocare` → `potentia devastare hostes` |
 | **Unity Shield** | 2 | `unitas scutum protectionis` → `congregatio defensare animas` |
 | **Shared Sight** | 2 | `oculus communis videre` → `animae nexus revelare` |
+| **Storm Calling** | 3 | `tempestas vocare fulmen` → `iratus nubium potestas` → `caelum irritare hostes` |
+| **Soul Drain** | 2 | `anima exhaurire vitam` → `vis vitalis subtrahere` |
+| **Ritual of Doom** | 3 | `exitium invocare magnus` → `perditio anima consumere` → `doom aeternum hostes` |
 
 ---
 
@@ -231,6 +239,30 @@ All members must be within range of each other. If the incantation isn't complet
 | **XP Cost** | 3 |
 | **Requires Target** | Yes |
 
+#### Curse of the Plague
+| | |
+|---|---|
+| **Effect** | Afflicts target with Poison, Weakness, and Hunger |
+| **Ingredients** | Nether Wart + Spider Eye + Gunpowder |
+| **XP Cost** | 5 |
+| **Requires Target** | Yes |
+
+#### Curse of Withering
+| | |
+|---|---|
+| **Effect** | Applies Wither and Mining Fatigue to the target |
+| **Ingredients** | Bone Meal + Coal + Echo Shard |
+| **XP Cost** | 5 |
+| **Requires Target** | Yes |
+
+#### Curse of Madness
+| | |
+|---|---|
+| **Effect** | Inflicts Nausea, Blindness, and Slowness |
+| **Ingredients** | Nether Quartz + Fermented Spider Eye + Echo Shard |
+| **XP Cost** | 5 |
+| **Requires Target** | Yes |
+
 ---
 
 ### Fertility Rituals
@@ -248,6 +280,20 @@ All members must be within range of each other. If the incantation isn't complet
 |---|---|
 | **Effect** | Accelerates crop growth in the area |
 | **Ingredients** | Bone Meal + Glowstone Dust + Nether Quartz |
+| **XP Cost** | 5 |
+
+#### Blessing of the Harvest
+| | |
+|---|---|
+| **Effect** | Enriches crops and grants Speed to nearby players |
+| **Ingredients** | Bone Meal + Sugar + Glowstone Dust |
+| **XP Cost** | 4 |
+
+#### Blessing of Fortitude
+| | |
+|---|---|
+| **Effect** | Grants Absorption, Regeneration, and Dolphin's Grace to nearby allies |
+| **Ingredients** | Iron Ingot + Obsidian + Amethyst Shard |
 | **XP Cost** | 5 |
 
 ---
@@ -311,6 +357,20 @@ All members must be within range of each other. If the incantation isn't complet
 | **Ingredients** | Iron Ingot + Obsidian + Flint |
 | **XP Cost** | 5 |
 
+#### Ward of Thorns
+| | |
+|---|---|
+| **Effect** | Surrounds a player with thorns that damage attackers |
+| **Ingredients** | Iron Ingot + Bone Meal + Nether Quartz |
+| **XP Cost** | 5 |
+
+#### Ward of Absorption
+| | |
+|---|---|
+| **Effect** | Grants golden hearts that absorb damage |
+| **Ingredients** | Gold Ingot + Sugar + Glowstone Dust |
+| **XP Cost** | 5 |
+
 ---
 
 ### Divination Rituals
@@ -337,6 +397,34 @@ All members must be within range of each other. If the incantation isn't complet
 | **Ingredients** | Amethyst Shard + Echo Shard + Glowstone Dust |
 | **XP Cost** | 7 |
 | **Requires Target** | Yes |
+
+#### Spirit Walk
+| | |
+|---|---|
+| **Effect** | Grants Speed, Jump Boost, and Night Vision to nearby players |
+| **Ingredients** | Ender Pearl + Echo Shard + Phantom Membrane |
+| **XP Cost** | 4 |
+
+#### Ritual of Renewal
+| | |
+|---|---|
+| **Effect** | Fully restores health, hunger, and removes all effects from nearby players |
+| **Ingredients** | Ghast Tear + Glowstone Dust + Sugar |
+| **XP Cost** | 4 |
+
+#### The Coven's Eye
+| | |
+|---|---|
+| **Effect** | Makes all nearby players glow, revealing their positions |
+| **Ingredients** | Amethyst Shard + Echo Shard + Ender Pearl |
+| **XP Cost** | 4 |
+
+#### Eyes of the Coven
+| | |
+|---|---|
+| **Effect** | Lists all nearby players with distance and direction |
+| **Ingredients** | Amethyst Shard + Ender Pearl + Echo Shard |
+| **XP Cost** | 4 |
 
 ---
 
@@ -415,6 +503,33 @@ Coven rituals require a minimum number of coven members to be present near the c
 | **Members Required** | 3 |
 | **Radius** | 25 blocks |
 
+#### Ritual of Storm Calling
+| | |
+|---|---|
+| **Effect** | Calls down lightning on all nearby enemies, inflicts Nausea and Blindness |
+| **Ingredients** | Blaze Powder + Gunpowder + Ghast Tear |
+| **XP Cost** | 7 |
+| **Members Required** | 3 |
+| **Radius** | 25 blocks |
+
+#### Ritual of Soul Drain
+| | |
+|---|---|
+| **Effect** | Drains life from a target and heals the caster |
+| **Ingredients** | Echo Shard + Fermented Spider Eye + Coal |
+| **XP Cost** | 6 |
+| **Members Required** | 2 |
+| **Radius** | 15 blocks |
+
+#### Ritual of Doom
+| | |
+|---|---|
+| **Effect** | Afflicts all nearby enemies with Wither, Mining Fatigue, Blindness, and Unluck |
+| **Ingredients** | Nether Wart + Coal + Crying Obsidian |
+| **XP Cost** | 8 |
+| **Members Required** | 3 |
+| **Radius** | 20 blocks |
+
 ---
 
 ## Spell Guide (Spoken Incantations)
@@ -451,6 +566,9 @@ Coven rituals require a minimum number of coven members to be present near the c
 | Curse of the Shrouded Eye | `oculus caligo tenebris` | `shrouded eye curse` |
 | Curse of the Iron Boots | `gradus lentus ferrum` | `iron boots curse` |
 | Curse of the Ravenous Maw | `esuries fames devorat` | `ravenous maw curse` |
+| Curse of the Plague | `pestilentia maledictio serpere` | `plague curse` |
+| Curse of Withering | `corpus marcescere senescere` | `withering curse` |
+| Curse of Madness | `mens dissipare insania` | `madness curse` |
 
 ### Protection Incantations
 
@@ -460,6 +578,8 @@ Coven rituals require a minimum number of coven members to be present near the c
 | Veil of Obscurity | `obscurus ne videar` | `veil obscurity` |
 | Ward of the Immolator | `ignis scutum immolare` | `immolator ward` |
 | Aegis of Deflection | `aegis deflexio projicere` | `deflection aegis` |
+| Ward of Thorns | `spina custodire vulnerare` | `thorn ward` |
+| Ward of Absorption | `absorptio scutum aureum` | `absorption ward` |
 
 ### Divination Incantations
 
@@ -468,6 +588,10 @@ Coven rituals require a minimum number of coven members to be present near the c
 | Mirror of the Soul | `speculum anima videre` | `mirror soul` |
 | Dowsing of the Hidden Way | `thesaurus videre via abscondita` | `hidden way dowsing` |
 | The Witch's Third Eye | `oculus tertius aura videre` | `third eye sight` |
+| Spirit Walk | `spiritus ambulare transcendere` | `spirit walk` |
+| Ritual of Renewal | `renovatio restaurare integrum` | `renewal ritual` |
+| The Coven's Eye | `oculus congregatio videre` | `coven eye` |
+| Eyes of the Coven | `oculus congregatio revelare` | `player reveal` |
 
 ### Fertility Incantations
 
@@ -475,6 +599,8 @@ Coven rituals require a minimum number of coven members to be present near the c
 |-------|-------------|-------|
 | Blessing of Abundance | `terra foecunditas abundet` | `abundance blessing` |
 | Bloom of the Green Hand | `germen floreant viridis` | `green hand bloom` |
+| Blessing of the Harvest | `copia messis abundantia` | `harvest blessing` |
+| Blessing of Fortitude | `fortitudo perseverare virtus` | `fortitude blessing` |
 
 ### Warding Incantations
 
@@ -599,6 +725,7 @@ src/main/java/com/witchcraft/
 ├── core/                    # Core systems (Spell, Registry, etc.)
 ├── ritual/                  # Ritual cauldron system
 ├── incantation/             # Spoken incantation system
+├── coven/                   # Coven system (groups, multi-player spells)
 ├── spells/                  # Spell implementations
 │   ├── curse/               # Curse spells
 │   ├── ritual/              # Ritual spells

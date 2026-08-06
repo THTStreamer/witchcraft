@@ -90,6 +90,28 @@ public class SpellRegistry {
         registerSpell(new com.witchcraft.spells.divination.ScryingRitual(plugin));
         registerSpell(new com.witchcraft.spells.divination.TreasureScryingRitual(plugin));
         registerSpell(new com.witchcraft.spells.divination.AuraSightRitual(plugin));
+        registerSpell(new com.witchcraft.spells.divination.PlayerRevealRitual(plugin));
+
+        // New curse spells
+        registerSpell(new com.witchcraft.spells.curse.PlagueCurse(plugin));
+        registerSpell(new com.witchcraft.spells.curse.WitheringCurse(plugin));
+        registerSpell(new com.witchcraft.spells.curse.ConfusionCurse(plugin));
+
+        // New ritual/blessing spells
+        registerSpell(new com.witchcraft.spells.ritual.BlessingOfHarvest(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.BlessingOfFortitude(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.SpiritWalkRitual(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.RenewalRitual(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.CovenEyeRitual(plugin));
+
+        // New coven rituals (also registered as spells for effects)
+        registerSpell(new com.witchcraft.spells.ritual.StormCallingRitual(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.SoulDrainRitual(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.DoomRitual(plugin));
+
+        // New protection spells
+        registerSpell(new com.witchcraft.spells.protection.ThornWard(plugin));
+        registerSpell(new com.witchcraft.spells.protection.AbsorptionWard(plugin));
     }
 
     public void registerSpell(Spell spell) {
