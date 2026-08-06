@@ -8,12 +8,6 @@ website: https://github.com/WitchcraftPlugin/Witchcraft
 softdepend: []
 load: POSTWORLD
 
-commands:
-  witchcraft:
-    description: Main Witchcraft command
-    usage: /witchcraft <subcommand>
-    permission: witchcraft.admin
-
 permissions:
   witchcraft.admin:
     description: Allows access to all Witchcraft admin commands

@@ -9,9 +9,12 @@ import com.witchcraft.data.DataManager;
 import com.witchcraft.incantation.IncantationManager;
 import com.witchcraft.ritual.RitualManager;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.CommandMap;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.List;
 import java.util.logging.Level;
 
 /**
@@ -46,8 +49,30 @@ public final class Witchcraft extends JavaPlugin {
 
         // Register commands
         WitchcraftCommand command = new WitchcraftCommand(this);
-        getCommand("witchcraft").setExecutor(command);
-        getCommand("witchcraft").setTabCompleter(command);
+        var cmdMap = Bukkit.getPluginCommand("witchcraft");
+        if (cmdMap != null) {
+            cmdMap.setExecutor(command);
+            cmdMap.setTabCompleter(command);
+        } else {
+            // Fallback: register via reflection-based command map access for Paper
+            try {
+                var getMap = Bukkit.getServer().getClass().getMethod("getCommandMap");
+                var commandMap = (org.bukkit.command.CommandMap) getMap.invoke(Bukkit.getServer());
+                var cmd = new org.bukkit.command.Command("witchcraft", "Main Witchcraft command", "/witchcraft <subcommand>", List.of("wc")) {
+                    @Override
+                    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
+                        return command.onCommand(sender, this, commandLabel, args);
+                    }
+                    @Override
+                    public List<String> tabComplete(CommandSender sender, String alias, String[] args) {
+                        return command.onTabComplete(sender, this, alias, args);
+                    }
+                };
+                commandMap.register("witchcraft", cmd);
+            } catch (Exception e) {
+                getLogger().severe("Failed to register witchcraft command: " + e.getMessage());
+            }
+        }
 
         // Register listeners
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.ritual.RitualListener(this), this);
