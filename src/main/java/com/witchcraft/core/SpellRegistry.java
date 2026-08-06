@@ -72,6 +72,7 @@ public class SpellRegistry {
         registerSpell(new com.witchcraft.spells.ritual.SoulHarvestRitual(plugin));
         registerSpell(new com.witchcraft.spells.ritual.BindingRitual(plugin));
         registerSpell(new com.witchcraft.spells.ritual.BanishmentRitual(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.SummoningRitual(plugin));
 
         // Protection spells
         registerSpell(new com.witchcraft.spells.protection.ProtectionRitual(plugin));

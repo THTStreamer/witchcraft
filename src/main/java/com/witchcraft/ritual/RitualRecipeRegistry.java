@@ -199,6 +199,13 @@ public class RitualRecipeRegistry {
                 .ritualDuration(150)
                 .build());
 
+        // Calling of the Bound: Ender Pearl + Echo Shard + Amethyst Shard
+        register(RitualRecipe.builder("summoning_ritual")
+                .displayName("Calling of the Bound")
+                .ingredients(Ingredient.ENDER_PEARL, Ingredient.ECHO_SHARD, Ingredient.AMETHYST_SHARD)
+                .ritualDuration(200)
+                .build());
+
         // === NEW PROTECTION RITUALS ===
         // Ward of the Immolator: Blaze Powder + Obsidian + Glowstone Dust
         register(RitualRecipe.builder("fire_shield_ritual")
