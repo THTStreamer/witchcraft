@@ -6,12 +6,6 @@ description: An immersive magical progression system for Minecraft
 author: WitchcraftTeam
 website: https://github.com/WitchcraftPlugin/Witchcraft
 
-dependencies:
-  server:
-    Paper:
-      load: BEFORE
-      required: true
-
 folia-supported: false
 
 permissions:
