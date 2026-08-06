@@ -235,6 +235,47 @@ public class RitualRecipeRegistry {
                 .ingredients(Ingredient.AMETHYST_SHARD, Ingredient.ECHO_SHARD, Ingredient.GLOWSTONE_DUST)
                 .ritualDuration(300)
                 .build());
+
+        // === COVEN RITUALS ===
+        // Ritual of Shared Power: 2 members required
+        // Enhances all nearby coven members with strength and regeneration
+        register(RitualRecipe.builder("shared_power_ritual")
+                .displayName("Ritual of Shared Power")
+                .ingredients(Ingredient.BLAZE_POWDER, Ingredient.GOLD_INGOT, Ingredient.NETHER_WART)
+                .ritualDuration(250)
+                .covenSize(2)
+                .covenRadius(15.0)
+                .build());
+
+        // Ritual of the Binding Circle: 3 members required
+        // Creates a protective circle that shields all coven members in range
+        register(RitualRecipe.builder("binding_circle_ritual")
+                .displayName("Ritual of the Binding Circle")
+                .ingredients(Ingredient.OBSIDIAN, Ingredient.ECHO_SHARD, Ingredient.AMETHYST_SHARD, Ingredient.QUARTZ)
+                .ritualDuration(300)
+                .covenSize(3)
+                .covenRadius(20.0)
+                .build());
+
+        // Ritual of Mass Summons: 2 members required
+        // Teleports all online coven members to the cauldron
+        register(RitualRecipe.builder("mass_summons_ritual")
+                .displayName("Ritual of Mass Summons")
+                .ingredients(Ingredient.ENDER_PEARL, Ingredient.ECHO_SHARD, Ingredient.AMETHYST_SHARD)
+                .ritualDuration(200)
+                .covenSize(2)
+                .covenRadius(15.0)
+                .build());
+
+        // Ritual of the Dark Harvest: 3 members required
+        // A powerful curse that afflicts all enemies near the coven
+        register(RitualRecipe.builder("dark_harvest_ritual")
+                .displayName("Ritual of the Dark Harvest")
+                .ingredients(Ingredient.NETHER_WART, Ingredient.FERMENTED_SPIDER_EYE, Ingredient.GHAST_TEAR, Ingredient.COAL)
+                .ritualDuration(350)
+                .covenSize(3)
+                .covenRadius(25.0)
+                .build());
     }
 
     /**

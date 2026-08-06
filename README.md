@@ -366,6 +366,48 @@ All members must be within range of each other. If the incantation isn't complet
 
 ---
 
+### Coven Rituals (Require Multiple Members)
+
+Coven rituals require a minimum number of coven members to be present near the cauldron. If not enough members are present, the caster **loses their magic for 3 Minecraft days**.
+
+#### Ritual of Shared Power
+| | |
+|---|---|
+| **Effect** | Grants Strength and Regeneration to all nearby coven members |
+| **Ingredients** | Blaze Powder + Gold Ingot + Nether Wart |
+| **XP Cost** | 6 |
+| **Members Required** | 2 |
+| **Radius** | 15 blocks |
+
+#### Ritual of the Binding Circle
+| | |
+|---|---|
+| **Effect** | Creates a protective circle granting Resistance and Fire Resistance |
+| **Ingredients** | Obsidian + Echo Shard + Amethyst Shard + Nether Quartz |
+| **XP Cost** | 7 |
+| **Members Required** | 3 |
+| **Radius** | 20 blocks |
+
+#### Ritual of Mass Summons
+| | |
+|---|---|
+| **Effect** | Teleports all online coven members to the cauldron |
+| **Ingredients** | Ender Pearl + Echo Shard + Amethyst Shard |
+| **XP Cost** | 6 |
+| **Members Required** | 2 |
+| **Radius** | 15 blocks |
+
+#### Ritual of the Dark Harvest
+| | |
+|---|---|
+| **Effect** | Afflicts all non-coven players nearby with Mining Fatigue, Weakness, and Blindness |
+| **Ingredients** | Nether Wart + Fermented Spider Eye + Ghast Tear + Coal |
+| **XP Cost** | 8 |
+| **Members Required** | 3 |
+| **Radius** | 25 blocks |
+
+---
+
 ## Spell Guide (Spoken Incantations)
 
 ### How to Cast a Spell via Incantation

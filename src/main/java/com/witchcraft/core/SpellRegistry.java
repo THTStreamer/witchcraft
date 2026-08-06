@@ -74,6 +74,12 @@ public class SpellRegistry {
         registerSpell(new com.witchcraft.spells.ritual.BanishmentRitual(plugin));
         registerSpell(new com.witchcraft.spells.ritual.SummoningRitual(plugin));
 
+        // Coven rituals
+        registerSpell(new com.witchcraft.spells.ritual.SharedPowerRitual(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.BindingCircleRitual(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.MassSummonsRitual(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.DarkHarvestRitual(plugin));
+
         // Protection spells
         registerSpell(new com.witchcraft.spells.protection.ProtectionRitual(plugin));
         registerSpell(new com.witchcraft.spells.protection.AntiScryingProtection(plugin));
