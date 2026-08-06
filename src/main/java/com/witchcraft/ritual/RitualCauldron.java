@@ -17,9 +17,9 @@ public class RitualCauldron {
     private final UUID cauldronId;
     private final UUID casterId;
     private final Location cauldronLocation;
-    private final RitualRecipe recipe;
+    private RitualRecipe recipe;
     private final List<Ingredient> addedIngredients;
-    private final long chargeDuration;
+    private long chargeDuration;
     private int fillLevel;
     private boolean active;
     private boolean completed;
@@ -73,6 +73,16 @@ public class RitualCauldron {
 
     public RitualRecipe getRecipe() {
         return recipe;
+    }
+
+    /**
+     * Sets the recipe for this cauldron (used when switching to a better match).
+     *
+     * @param recipe the new recipe
+     */
+    public void setRecipe(RitualRecipe recipe) {
+        this.recipe = recipe;
+        this.chargeDuration = recipe.getRitualDurationTicks();
     }
 
     public List<Ingredient> getAddedIngredients() {

@@ -162,26 +162,42 @@ public class RitualManager {
             return false;
         }
 
+        // Check if this cauldron has water
+        if (block.getType() != Material.WATER_CAULDRON) {
+            player.sendMessage(plugin.getConfigManager().getMessage("ritual.cauldron-empty"));
+            return false;
+        }
+
         // Get or create pending ritual for this cauldron
         RitualCauldron cauldron = pendingRituals.get(locationKey);
 
         if (cauldron == null) {
-            // Find a recipe that matches after adding this ingredient
-            // We need to figure out which recipe this ingredient belongs to
+            // No pending ritual yet - find all recipes that contain this ingredient
+            // and create a tentative cauldron with the best match
             RitualRecipe recipe = findRecipeForIngredient(ingredient);
             if (recipe == null) {
                 player.sendMessage(plugin.getConfigManager().getMessage("ritual.ingredient-failed"));
                 return false;
             }
 
-            // Check if this cauldron has water
-            if (block.getType() != Material.WATER_CAULDRON) {
-                player.sendMessage(plugin.getConfigManager().getMessage("ritual.cauldron-empty"));
+            cauldron = new RitualCauldron(player.getUniqueId(), block.getLocation(), recipe);
+            pendingRituals.put(locationKey, cauldron);
+        } else {
+            // Already have a pending ritual - check if this ingredient fits
+            // Try to find a recipe that matches ALL added ingredients + this new one
+            java.util.List<Ingredient> allIngredients = new java.util.ArrayList<>(cauldron.getAddedIngredients());
+            allIngredients.add(ingredient);
+
+            RitualRecipe bestMatch = findBestRecipeMatch(allIngredients);
+            if (bestMatch == null) {
+                player.sendMessage(plugin.getConfigManager().getMessage("ritual.ingredient-failed"));
                 return false;
             }
 
-            cauldron = new RitualCauldron(player.getUniqueId(), block.getLocation(), recipe);
-            pendingRituals.put(locationKey, cauldron);
+            // If we found a better matching recipe, switch to it
+            if (!bestMatch.equals(cauldron.getRecipe())) {
+                cauldron.setRecipe(bestMatch);
+            }
         }
 
         // Verify the ingredient belongs to this recipe
@@ -226,6 +242,44 @@ public class RitualManager {
         }
 
         return true;
+    }
+
+    /**
+     * Finds the best recipe match for a set of ingredients.
+     * Prefers recipes where the ingredients are a subset of required ingredients.
+     *
+     * @param ingredients the ingredients to match
+     * @return the best matching recipe, or null if none match
+     */
+    private RitualRecipe findBestRecipeMatch(java.util.List<Ingredient> ingredients) {
+        RitualRecipe bestMatch = null;
+        int bestScore = -1;
+
+        for (RitualRecipe recipe : recipeRegistry.getAllRecipes()) {
+            java.util.List<Ingredient> required = recipe.getRequiredIngredients();
+
+            // Check if all provided ingredients are in this recipe
+            boolean allMatch = true;
+            for (Ingredient ing : ingredients) {
+                long requiredCount = required.stream().filter(i -> i == ing).count();
+                long providedCount = ingredients.stream().filter(i -> i == ing).count();
+                if (providedCount > requiredCount) {
+                    allMatch = false;
+                    break;
+                }
+            }
+
+            if (allMatch) {
+                // Score = how many required ingredients we've provided (more is better)
+                int score = ingredients.size();
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMatch = recipe;
+                }
+            }
+        }
+
+        return bestMatch;
     }
 
     /**
