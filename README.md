@@ -51,6 +51,55 @@ Both methods trigger the same spell effects. Choose the approach that fits your 
 - Cannot cast magic during exhaustion period
 - Persists across server restarts
 
+### Covens
+- Form groups of witches to unlock more powerful magic
+- Coven rituals require multiple members near the cauldron
+- Coven spells require members to chant incantations in sequence
+- The more members, the stronger the spells
+- Failure to meet coven requirements results in losing magic for 3 days
+
+---
+
+## Coven Guide
+
+### Forming a Coven
+
+| Command | Description |
+|---|---|
+| `/coven create <name>` | Create a new coven (you become the leader) |
+| `/coven invite <player>` | Invite a player to your coven |
+| `/coven accept` | Accept a pending coven invite |
+| `/coven leave` | Leave your current coven |
+| `/coven kick <player>` | Kick a member (leader only) |
+| `/coven disband` | Disband the coven entirely (leader only) |
+| `/coven info` | View your coven's info |
+| `/coven list` | List all covens on the server |
+
+### Coven Rituals
+
+Some rituals require a minimum number of coven members to be present near the cauldron. If not enough members are present when the ritual starts, the caster **loses their magic for 3 Minecraft days**.
+
+Coven members must be within a certain radius of the cauldron (varies per ritual).
+
+### Coven Spells
+
+Coven spells are powerful incantations that require multiple members to chant in sequence. Each member says one line of the incantation, in order, within a time limit.
+
+**Example:** A 3-member coven spell requires:
+1. Member A says: `ira congregatio spiritus`
+2. Member B says: `furor antiquus invocare`
+3. Member C says: `potentia devastare hostes`
+
+All members must be within range of each other. If the incantation isn't completed in time, it fails.
+
+### Built-in Coven Spells
+
+| Spell | Members Required | Incantation Lines |
+|---|---|---|
+| **Wrath of the Coven** | 3 | `ira congregatio spiritus` → `furor antiquus invocare` → `potentia devastare hostes` |
+| **Unity Shield** | 2 | `unitas scutum protectionis` → `congregatio defensare animas` |
+| **Shared Sight** | 2 | `oculus communis videre` → `animae nexus revelare` |
+
 ---
 
 ## Ritual Guide (Cauldron + Ingredients)
@@ -305,6 +354,14 @@ Both methods trigger the same spell effects. Choose the approach that fits your 
 | **Effect** | Banishes a target to the void |
 | **Ingredients** | Ender Pearl + Echo Shard + Nether Quartz |
 | **XP Cost** | 5 |
+| **Requires Target** | Yes |
+
+#### Calling of the Bound
+| | |
+|---|---|
+| **Effect** | Summons a target player to your location |
+| **Ingredients** | Ender Pearl + Echo Shard + Amethyst Shard |
+| **XP Cost** | 6 |
 | **Requires Target** | Yes |
 
 ---
