@@ -94,6 +94,11 @@ Coven members must be within a certain radius of the cauldron (varies per ritual
 | **Ritual of Storm Calling** | 3 | 25 | Blaze Powder + Gunpowder + Ghast Tear | Calls lightning on all nearby enemies |
 | **Ritual of Soul Drain** | 2 | 15 | Echo Shard + Fermented Spider Eye + Coal | Drains life from target, empowers coven |
 | **Ritual of Doom** | 3 | 20 | Nether Wart + Coal + Crying Obsidian | Devastating curse on all nearby enemies |
+| **Ritual of the Eternal Storm** | 4 | 30 | Blaze Powder + Gunpowder + Ghast Tear + Quartz + Echo Shard | Endless storm with lightning, wither, and slowness |
+| **Ritual of the Lich King** | 5 | 35 | Echo Shard + Nether Wart + Bone Meal + Coal + Crying Obsidian + Ghast Tear | Summons 8 undead, wither + weakness on all enemies |
+| **Ritual of the Blood Moon** | 5 | 40 | Nether Wart + Fermented Spider Eye + Ghast Tear + Coal + Dragon's Breath + Crying Obsidian | Every negative effect + massive damage in huge radius |
+| **Ritual of the Eternal Binding** | 4 | 25 | Iron Ingot + Echo Shard + Amethyst Shard + Ender Pearl + Quartz | Complete immobilization (Slowness 255 + Mining Fatigue 255) |
+| **Ritual of the World Ender** | 5 | 50 | Dragon's Breath + Echo Shard + Nether Wart + Fermented Spider Eye + Ghast Tear + Crying Obsidian + Coal | Most devastating ritual - halves enemy max health, all debuffs |
 
 ### Coven Spells
 
@@ -116,6 +121,11 @@ All members must be within range of each other. If the incantation isn't complet
 | **Storm Calling** | 3 | `tempestas vocare fulmen` → `iratus nubium potestas` → `caelum irritare hostes` |
 | **Soul Drain** | 2 | `anima exhaurire vitam` → `vis vitalis subtrahere` |
 | **Ritual of Doom** | 3 | `exitium invocare magnus` → `perditio anima consumere` → `doom aeternum hostes` |
+| **Apocalypse** | 5 | `exitium mundi invocare` → `apocalypsis venire tenebris` → `perpetua damnatio animarum` → `cineres mundi consumere` → `apocalypse eternum dominare` |
+| **Armageddon** | 4 | `ignis aeternus descendat` → `fulmen iratus caelum` → `armageddon hostes consumere` → `cineres hostium flammare` |
+| **Mass Transmutation** | 4 | `transmutatio magna animarum` → `vis auferre potentiam` → `debilitas in perpetuum` → `transmutare hostes in nihilum` |
+| **Soul Harvest** | 4 | `anima hostium colligere` → `vis vitalis subtrahere` → `harvest animarum potestas` → `vita furari in perpetuum` |
+| **Eternal Damnation** | 5 | `damnatio aeterna invocare` → `perpetua tenebris consumere` → `anima in inferno ligare` → `maledictio sempiterna descendat` → `eternal damnation hostes` |
 
 ---
 
@@ -529,6 +539,51 @@ Coven rituals require a minimum number of coven members to be present near the c
 | **XP Cost** | 8 |
 | **Members Required** | 3 |
 | **Radius** | 20 blocks |
+
+#### Ritual of the Eternal Storm
+| | |
+|---|---|
+| **Effect** | Calls down an endless storm with lightning, Wither, Slowness, and Mining Fatigue on all enemies |
+| **Ingredients** | Blaze Powder + Gunpowder + Ghast Tear + Quartz + Echo Shard |
+| **XP Cost** | 10 |
+| **Members Required** | 4 |
+| **Radius** | 30 blocks |
+
+#### Ritual of the Lich King
+| | |
+|---|---|
+| **Effect** | Summons 8 undead minions (Zombies, Skeletons, Wither Skeletons) and curses all enemies with Wither, Weakness, Slowness, and Blindness |
+| **Ingredients** | Echo Shard + Nether Wart + Bone Meal + Coal + Crying Obsidian + Ghast Tear |
+| **XP Cost** | 12 |
+| **Members Required** | 5 |
+| **Radius** | 35 blocks |
+
+#### Ritual of the Blood Moon
+| | |
+|---|---|
+| **Effect** | The ultimate curse - applies every negative effect (Wither, Poison, Mining Fatigue, Weakness, Slowness, Blindness, Nausea, Unluck, Hunger) and 15 hearts of damage in a massive radius |
+| **Ingredients** | Nether Wart + Fermented Spider Eye + Ghast Tear + Coal + Dragon's Breath + Crying Obsidian |
+| **XP Cost** | 15 |
+| **Members Required** | 5 |
+| **Radius** | 40 blocks |
+
+#### Ritual of the Eternal Binding
+| | |
+|---|---|
+| **Effect** | Complete immobilization - applies Slowness 255 and Mining Fatigue 255 to all enemies, plus Nausea, Blindness, and Weakness |
+| **Ingredients** | Iron Ingot + Echo Shard + Amethyst Shard + Ender Pearl + Quartz |
+| **XP Cost** | 10 |
+| **Members Required** | 4 |
+| **Radius** | 25 blocks |
+
+#### Ritual of the World Ender
+| | |
+|---|---|
+| **Effect** | The most devastating ritual - halves enemy max health, applies every negative effect at maximum potency, 20 hearts of damage, and buffs all coven members with Strength, Regeneration, Resistance, Fire Resistance, and Speed |
+| **Ingredients** | Dragon's Breath + Echo Shard + Nether Wart + Fermented Spider Eye + Ghast Tear + Crying Obsidian + Coal |
+| **XP Cost** | 20 |
+| **Members Required** | 5 |
+| **Radius** | 50 blocks |
 
 ---
 

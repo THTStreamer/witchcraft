@@ -388,6 +388,57 @@ public class RitualRecipeRegistry {
                 .covenSize(3)
                 .covenRadius(20.0)
                 .build());
+
+        // === HIGH-TIER COVEN RITUALS (4-5+ members) ===
+        // Ritual of the Eternal Storm: 4 members required
+        // Calls down an endless storm with lightning, wither, and slowness on all enemies
+        register(RitualRecipe.builder("eternal_storm_ritual")
+                .displayName("Ritual of the Eternal Storm")
+                .ingredients(Ingredient.BLAZE_POWDER, Ingredient.GUNPOWDER, Ingredient.GHAST_TEAR, Ingredient.QUARTZ, Ingredient.ECHO_SHARD)
+                .ritualDuration(400)
+                .covenSize(4)
+                .covenRadius(30.0)
+                .build());
+
+        // Ritual of the Lich King: 5 members required
+        // Summons 8 undead minions and curses all enemies with wither, weakness, and slowness
+        register(RitualRecipe.builder("lich_king_ritual")
+                .displayName("Ritual of the Lich King")
+                .ingredients(Ingredient.ECHO_SHARD, Ingredient.NETHER_WART, Ingredient.BONE_MEAL, Ingredient.COAL, Ingredient.CRYING_OBSIDIAN, Ingredient.GHAST_TEAR)
+                .ritualDuration(500)
+                .covenSize(5)
+                .covenRadius(35.0)
+                .build());
+
+        // Ritual of the Blood Moon: 5 members required
+        // The ultimate curse - applies every negative effect and massive damage in a huge radius
+        register(RitualRecipe.builder("blood_moon_ritual")
+                .displayName("Ritual of the Blood Moon")
+                .ingredients(Ingredient.NETHER_WART, Ingredient.FERMENTED_SPIDER_EYE, Ingredient.GHAST_TEAR, Ingredient.COAL, Ingredient.DRAGON_BREATH, Ingredient.CRYING_OBSIDIAN)
+                .ritualDuration(600)
+                .covenSize(5)
+                .covenRadius(40.0)
+                .build());
+
+        // Ritual of the Eternal Binding: 4 members required
+        // Complete immobilization of all enemies with slowness 255 and mining fatigue 255
+        register(RitualRecipe.builder("eternal_binding_ritual")
+                .displayName("Ritual of the Eternal Binding")
+                .ingredients(Ingredient.IRON_INGOT, Ingredient.ECHO_SHARD, Ingredient.AMETHYST_SHARD, Ingredient.ENDER_PEARL, Ingredient.QUARTZ)
+                .ritualDuration(400)
+                .covenSize(4)
+                .covenRadius(25.0)
+                .build());
+
+        // Ritual of the World Ender: 5 members required
+        // The most devastating ritual - massive damage, all debuffs, halves enemy max health
+        register(RitualRecipe.builder("world_ender_ritual")
+                .displayName("Ritual of the World Ender")
+                .ingredients(Ingredient.DRAGON_BREATH, Ingredient.ECHO_SHARD, Ingredient.NETHER_WART, Ingredient.FERMENTED_SPIDER_EYE, Ingredient.GHAST_TEAR, Ingredient.CRYING_OBSIDIAN, Ingredient.COAL)
+                .ritualDuration(700)
+                .covenSize(5)
+                .covenRadius(50.0)
+                .build());
     }
 
     /**

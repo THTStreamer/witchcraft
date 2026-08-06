@@ -100,6 +100,85 @@ public class CovenSpellRegistry {
                 ),
                 new com.witchcraft.spells.ritual.DoomRitual(plugin),
                 800));
+
+        // === HIGH-TIER COVEN SPELLS (4-5+ members) ===
+
+        // Apocalypse - requires 5 members, devastating area annihilation
+        register(new CovenSpell(plugin,
+                "apocalypse_coven_spell",
+                "Apocalypse",
+                com.witchcraft.core.SpellCategory.CURSE,
+                5, 35.0,
+                java.util.List.of(
+                        "exitium mundi invocare",
+                        "apocalypsis venire tenebris",
+                        "perpetua damnatio animarum",
+                        "cineres mundi consumere",
+                        "apocalypse eternum dominare"
+                ),
+                new com.witchcraft.spells.ritual.ApocalypseCovenSpell(plugin),
+                1200));
+
+        // Armageddon - requires 4 members, fire and lightning devastation
+        register(new CovenSpell(plugin,
+                "armageddon_coven_spell",
+                "Armageddon",
+                com.witchcraft.core.SpellCategory.CURSE,
+                4, 30.0,
+                java.util.List.of(
+                        "ignis aeternus descendat",
+                        "fulmen iratus caelum",
+                        "armageddon hostes consumere",
+                        "cineres hostium flammare"
+                ),
+                new com.witchcraft.spells.ritual.ArmageddonCovenSpell(plugin),
+                1000));
+
+        // Mass Transmutation - requires 4 members, strips all buffs and weakens
+        register(new CovenSpell(plugin,
+                "mass_transmutation_coven_spell",
+                "Mass Transmutation",
+                com.witchcraft.core.SpellCategory.CURSE,
+                4, 25.0,
+                java.util.List.of(
+                        "transmutatio magna animarum",
+                        "vis auferre potentiam",
+                        "debilitas in perpetuum",
+                        "transmutare hostes in nihilum"
+                ),
+                new com.witchcraft.spells.ritual.MassTransmutationCovenSpell(plugin),
+                800));
+
+        // Soul Harvest - requires 4 members, drains life from all enemies
+        register(new CovenSpell(plugin,
+                "soul_harvest_coven_spell",
+                "Soul Harvest",
+                com.witchcraft.core.SpellCategory.CURSE,
+                4, 25.0,
+                java.util.List.of(
+                        "anima hostium colligere",
+                        "vis vitalis subtrahere",
+                        "harvest animarum potestas",
+                        "vita furari in perpetuum"
+                ),
+                new com.witchcraft.spells.ritual.SoulHarvestCovenSpell(plugin),
+                800));
+
+        // Eternal Damnation - requires 5 members, the ultimate curse
+        register(new CovenSpell(plugin,
+                "eternal_damnation_coven_spell",
+                "Eternal Damnation",
+                com.witchcraft.core.SpellCategory.CURSE,
+                5, 40.0,
+                java.util.List.of(
+                        "damnatio aeterna invocare",
+                        "perpetua tenebris consumere",
+                        "anima in inferno ligare",
+                        "maledictio sempiterna descendat",
+                        "eternal damnation hostes"
+                ),
+                new com.witchcraft.spells.ritual.EternalDamnationCovenSpell(plugin),
+                1600));
     }
 
     public void register(CovenSpell spell) {

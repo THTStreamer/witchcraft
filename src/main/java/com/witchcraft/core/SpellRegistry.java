@@ -112,6 +112,20 @@ public class SpellRegistry {
         // New protection spells
         registerSpell(new com.witchcraft.spells.protection.ThornWard(plugin));
         registerSpell(new com.witchcraft.spells.protection.AbsorptionWard(plugin));
+
+        // High-tier coven rituals (4-5+ members)
+        registerSpell(new com.witchcraft.spells.ritual.EternalStormRitual(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.LichKingRitual(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.BloodMoonRitual(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.EternalBindingRitual(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.WorldEnderRitual(plugin));
+
+        // High-tier coven spells (4-5+ members)
+        registerSpell(new com.witchcraft.spells.ritual.ApocalypseCovenSpell(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.ArmageddonCovenSpell(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.MassTransmutationCovenSpell(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.SoulHarvestCovenSpell(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.EternalDamnationCovenSpell(plugin));
     }
 
     public void registerSpell(Spell spell) {
