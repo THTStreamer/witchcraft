@@ -1,6 +1,7 @@
 package com.witchcraft;
 
 import com.witchcraft.book.GuideBookBuilder;
+import com.witchcraft.book.SpellBookManager;
 import com.witchcraft.commands.WitchcraftCommand;
 import com.witchcraft.config.ConfigManager;
 import com.witchcraft.core.ArcaneExhaustion;
@@ -34,6 +35,7 @@ public final class Witchcraft extends JavaPlugin {
     private IncantationManager incantationManager;
     private ArcaneExhaustion arcaneExhaustion;
     private GuideBookBuilder guideBookBuilder;
+    private SpellBookManager spellBookManager;
     private CovenManager covenManager;
     private CovenSpellRegistry covenSpellRegistry;
 
@@ -50,6 +52,7 @@ public final class Witchcraft extends JavaPlugin {
         this.incantationManager = new IncantationManager(this);
         this.ritualManager = new RitualManager(this);
         this.guideBookBuilder = new GuideBookBuilder(this);
+        this.spellBookManager = new SpellBookManager();
         this.covenManager = new CovenManager(this);
         this.covenSpellRegistry = new CovenSpellRegistry(this);
 
@@ -106,6 +109,8 @@ public final class Witchcraft extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.spells.protection.ProtectionListener(this), this);
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.coven.CovenSpellListener(this), this);
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.coven.CovenChunkListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new com.witchcraft.book.SpellBookLootListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new com.witchcraft.book.SpellBookTradeListener(this), this);
 
         // Start periodic save task
         startSaveTask();
@@ -209,5 +214,9 @@ public final class Witchcraft extends JavaPlugin {
 
     public CovenSpellRegistry getCovenSpellRegistry() {
         return covenSpellRegistry;
+    }
+
+    public SpellBookManager getSpellBookManager() {
+        return spellBookManager;
     }
 }
