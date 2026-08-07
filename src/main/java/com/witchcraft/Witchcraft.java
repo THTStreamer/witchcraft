@@ -105,6 +105,7 @@ public final class Witchcraft extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.incantation.IncantationListener(this), this);
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.spells.protection.ProtectionListener(this), this);
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.coven.CovenSpellListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new com.witchcraft.coven.CovenChunkListener(this), this);
 
         // Start periodic save task
         startSaveTask();

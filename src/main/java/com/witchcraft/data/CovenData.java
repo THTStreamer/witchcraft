@@ -1,5 +1,6 @@
 package com.witchcraft.data;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -9,11 +10,14 @@ import java.util.UUID;
  */
 public class CovenData {
 
+    public static final int MAX_CLAIMED_CHUNKS = 4;
+
     private final UUID covenId;
     private final String name;
     private final UUID leaderId;
     private final Set<UUID> memberIds;
     private final Set<UUID> pendingInvites;
+    private final Set<String> claimedChunks;
     private final long createdAt;
 
     public CovenData(UUID covenId, String name, UUID leaderId) {
@@ -22,6 +26,7 @@ public class CovenData {
         this.leaderId = leaderId;
         this.memberIds = new HashSet<>();
         this.pendingInvites = new HashSet<>();
+        this.claimedChunks = new HashSet<>();
         this.createdAt = System.currentTimeMillis();
         this.memberIds.add(leaderId);
     }
@@ -44,6 +49,10 @@ public class CovenData {
 
     public Set<UUID> getPendingInvites() {
         return pendingInvites;
+    }
+
+    public Set<String> getClaimedChunks() {
+        return Collections.unmodifiableSet(claimedChunks);
     }
 
     public long getCreatedAt() {
@@ -81,5 +90,47 @@ public class CovenData {
 
     public void removeInvite(UUID playerId) {
         pendingInvites.remove(playerId);
+    }
+
+    /**
+     * Claims a chunk for this coven.
+     *
+     * @param chunkKey the chunk key in "world:chunkX:chunkZ" format
+     * @return true if the chunk was claimed, false if already at max or already claimed
+     */
+    public boolean claimChunk(String chunkKey) {
+        if (claimedChunks.size() >= MAX_CLAIMED_CHUNKS) {
+            return false;
+        }
+        return claimedChunks.add(chunkKey);
+    }
+
+    /**
+     * Unclaims a chunk.
+     *
+     * @param chunkKey the chunk key
+     * @return true if the chunk was unclaimed
+     */
+    public boolean unclaimChunk(String chunkKey) {
+        return claimedChunks.remove(chunkKey);
+    }
+
+    /**
+     * Checks if a chunk is claimed by this coven.
+     *
+     * @param chunkKey the chunk key
+     * @return true if claimed
+     */
+    public boolean isChunkClaimed(String chunkKey) {
+        return claimedChunks.contains(chunkKey);
+    }
+
+    /**
+     * Gets the number of claimed chunks.
+     *
+     * @return the count
+     */
+    public int getClaimedChunkCount() {
+        return claimedChunks.size();
     }
 }

@@ -7,6 +7,8 @@ import com.witchcraft.api.events.WitchCovenLeaveEvent;
 import com.witchcraft.data.CovenData;
 import com.witchcraft.data.PlayerData;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -22,6 +24,9 @@ public class CovenManager {
 
     public CovenManager(Witchcraft plugin) {
         this.plugin = plugin;
+        // Load persisted covens from DataManager
+        plugin.getDataManager().loadCovensIntoCache();
+        covens.putAll(plugin.getDataManager().getCovenManagerCache());
     }
 
     /**
@@ -229,5 +234,147 @@ public class CovenManager {
     public boolean hasEnoughMembersNear(CovenData coven, org.bukkit.Location center,
                                          double radius, int requiredSize) {
         return countMembersNear(coven, center, radius) >= requiredSize;
+    }
+
+    // ===== Chunk Claiming =====
+
+    /**
+     * Generates a chunk key from a location.
+     *
+     * @param location the location
+     * @return "world:chunkX:chunkZ"
+     */
+    public static String getChunkKey(Location location) {
+        return location.getWorld().getName() + ":" +
+                (location.getBlockX() >> 4) + ":" +
+                (location.getBlockZ() >> 4);
+    }
+
+    /**
+     * Generates a chunk key from world name and chunk coordinates.
+     *
+     * @param worldName the world name
+     * @param chunkX    the chunk X
+     * @param chunkZ    the chunk Z
+     * @return "world:chunkX:chunkZ"
+     */
+    public static String getChunkKey(String worldName, int chunkX, int chunkZ) {
+        return worldName + ":" + chunkX + ":" + chunkZ;
+    }
+
+    /**
+     * Claims the chunk at the player's current location for their coven.
+     *
+     * @param player the player claiming
+     * @return true if successfully claimed
+     */
+    public boolean claimChunk(Player player) {
+        CovenData coven = getCovenForMember(player.getUniqueId());
+        if (coven == null) {
+            player.sendMessage("\u00A7cYou are not in a coven.");
+            return false;
+        }
+
+        if (!coven.isLeader(player.getUniqueId())) {
+            player.sendMessage("\u00A7cOnly the coven leader can claim chunks.");
+            return false;
+        }
+
+        String chunkKey = getChunkKey(player.getLocation());
+
+        // Check if another coven already owns this chunk
+        for (CovenData other : covens.values()) {
+            if (other.getCovenId().equals(coven.getCovenId())) continue;
+            if (other.isChunkClaimed(chunkKey)) {
+                player.sendMessage("\u00A7cThis chunk is already claimed by another coven.");
+                return false;
+            }
+        }
+
+        if (coven.isChunkClaimed(chunkKey)) {
+            player.sendMessage("\u00A7cYour coven already owns this chunk.");
+            return false;
+        }
+
+        if (!coven.claimChunk(chunkKey)) {
+            player.sendMessage("\u00A7cYour coven has reached the maximum of " +
+                    CovenData.MAX_CLAIMED_CHUNKS + " claimed chunks.");
+            return false;
+        }
+
+        player.sendMessage("\u00A7aChunk claimed! \u00A77(" + coven.getClaimedChunkCount() +
+                "/" + CovenData.MAX_CLAIMED_CHUNKS + " chunks)");
+
+        // Play effect
+        player.getWorld().spawnParticle(org.bukkit.Particle.ENCHANT,
+                player.getLocation().add(0, 1, 0), 30, 1, 0.5, 1);
+        player.getWorld().playSound(player.getLocation(),
+                org.bukkit.Sound.BLOCK_ENCHANTMENT_TABLE_USE, 1.0f, 1.2f);
+
+        return true;
+    }
+
+    /**
+     * Unclaims the chunk at the player's current location.
+     *
+     * @param player the player unclaiming
+     * @return true if successfully unclaimed
+     */
+    public boolean unclaimChunk(Player player) {
+        CovenData coven = getCovenForMember(player.getUniqueId());
+        if (coven == null) {
+            player.sendMessage("\u00A7cYou are not in a coven.");
+            return false;
+        }
+
+        if (!coven.isLeader(player.getUniqueId())) {
+            player.sendMessage("\u00A7cOnly the coven leader can unclaim chunks.");
+            return false;
+        }
+
+        String chunkKey = getChunkKey(player.getLocation());
+
+        if (!coven.isChunkClaimed(chunkKey)) {
+            player.sendMessage("\u00A7cThis chunk is not claimed by your coven.");
+            return false;
+        }
+
+        coven.unclaimChunk(chunkKey);
+
+        player.sendMessage("\u00A7aChunk unclaimed! \u00A77(" + coven.getClaimedChunkCount() +
+                "/" + CovenData.MAX_CLAIMED_CHUNKS + " chunks)");
+
+        // Play effect
+        player.getWorld().spawnParticle(org.bukkit.Particle.SMOKE,
+                player.getLocation().add(0, 1, 0), 20, 1, 0.5, 1);
+        player.getWorld().playSound(player.getLocation(),
+                org.bukkit.Sound.BLOCK_LAVA_POP, 0.5f, 1.2f);
+
+        return true;
+    }
+
+    /**
+     * Gets the coven that owns a claimed chunk.
+     *
+     * @param chunkKey the chunk key
+     * @return the coven that owns it, or null
+     */
+    public CovenData getCovenForChunk(String chunkKey) {
+        for (CovenData coven : covens.values()) {
+            if (coven.isChunkClaimed(chunkKey)) {
+                return coven;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if a chunk is claimed by any coven.
+     *
+     * @param chunkKey the chunk key
+     * @return true if claimed
+     */
+    public boolean isChunkClaimed(String chunkKey) {
+        return getCovenForChunk(chunkKey) != null;
     }
 }

@@ -47,6 +47,9 @@ public class CovenCommand implements CommandExecutor, TabCompleter {
             case "info" -> handleInfo(player);
             case "list" -> handleList(player);
             case "kick" -> handleKick(player, args);
+            case "claim" -> handleClaim(player);
+            case "unclaim" -> handleUnclaim(player);
+            case "chunks" -> handleChunks(player);
             default -> {
                 sendHelp(player);
                 yield true;
@@ -269,6 +272,61 @@ public class CovenCommand implements CommandExecutor, TabCompleter {
         return true;
     }
 
+    private boolean handleClaim(Player player) {
+        CovenData coven = plugin.getCovenManager().getCovenForMember(player.getUniqueId());
+        if (coven == null) {
+            player.sendMessage("\u00A7cYou are not in a coven.");
+            return true;
+        }
+
+        if (!coven.isLeader(player.getUniqueId())) {
+            player.sendMessage("\u00A7cOnly the coven leader can claim chunks.");
+            return true;
+        }
+
+        plugin.getCovenManager().claimChunk(player);
+        return true;
+    }
+
+    private boolean handleUnclaim(Player player) {
+        CovenData coven = plugin.getCovenManager().getCovenForMember(player.getUniqueId());
+        if (coven == null) {
+            player.sendMessage("\u00A7cYou are not in a coven.");
+            return true;
+        }
+
+        if (!coven.isLeader(player.getUniqueId())) {
+            player.sendMessage("\u00A7cOnly the coven leader can unclaim chunks.");
+            return true;
+        }
+
+        plugin.getCovenManager().unclaimChunk(player);
+        return true;
+    }
+
+    private boolean handleChunks(Player player) {
+        CovenData coven = plugin.getCovenManager().getCovenForMember(player.getUniqueId());
+        if (coven == null) {
+            player.sendMessage("\u00A7cYou are not in a coven.");
+            return true;
+        }
+
+        var chunks = coven.getClaimedChunks();
+        player.sendMessage("\u00A75\u00A7l--- Claimed Chunks (" +
+                coven.getClaimedChunkCount() + "/" + CovenData.MAX_CLAIMED_CHUNKS + ") ---");
+        if (chunks.isEmpty()) {
+            player.sendMessage("\u00A77No chunks claimed yet.");
+        } else {
+            for (String chunkKey : chunks) {
+                String[] parts = chunkKey.split(":");
+                player.sendMessage("\u00A77- \u00A7e" + parts[0] +
+                        " \u00A77[" + parts[1] + ", " + parts[2] + "]");
+            }
+        }
+        player.sendMessage("\u00A75\u00A7l--- End Chunks ---");
+        return true;
+    }
+
     private void sendHelp(Player player) {
         player.sendMessage("\u00A75\u00A7l--- Coven Commands ---");
         player.sendMessage("\u00A77/coven create <name> \u00A7f- Create a new coven");
@@ -277,6 +335,9 @@ public class CovenCommand implements CommandExecutor, TabCompleter {
         player.sendMessage("\u00A77/coven leave \u00A7f- Leave your coven");
         player.sendMessage("\u00A77/coven kick <player> \u00A7f- Kick a member (leader)");
         player.sendMessage("\u00A77/coven disband \u00A7f- Disband the coven (leader)");
+        player.sendMessage("\u00A77/coven claim \u00A7f- Claim chunk (leader)");
+        player.sendMessage("\u00A77/coven unclaim \u00A7f- Unclaim chunk (leader)");
+        player.sendMessage("\u00A77/coven chunks \u00A7f- List claimed chunks");
         player.sendMessage("\u00A77/coven info \u00A7f- Show coven info");
         player.sendMessage("\u00A77/coven list \u00A7f- List all covens");
         player.sendMessage("\u00A75\u00A7l--- End Help ---");
@@ -285,7 +346,8 @@ public class CovenCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 1) {
-            return Arrays.asList("create", "invite", "accept", "leave", "kick", "disband", "info", "list")
+            return Arrays.asList("create", "invite", "accept", "leave", "kick", "disband",
+                            "claim", "unclaim", "chunks", "info", "list")
                     .stream()
                     .filter(s -> s.startsWith(args[0].toLowerCase()))
                     .collect(Collectors.toList());

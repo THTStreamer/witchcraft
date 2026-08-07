@@ -26,9 +26,11 @@ public class DataManager {
     private File playerDataFile;
     private File wardDataFile;
     private File fertilityDataFile;
+    private File covenDataFile;
     private FileConfiguration playerDataConfig;
     private FileConfiguration wardDataConfig;
     private FileConfiguration fertilityDataConfig;
+    private FileConfiguration covenDataConfig;
 
     public DataManager(Witchcraft plugin) {
         this.plugin = plugin;
@@ -41,6 +43,7 @@ public class DataManager {
         playerDataFile = new File(plugin.getDataFolder(), "playerdata.yml");
         wardDataFile = new File(plugin.getDataFolder(), "wards.yml");
         fertilityDataFile = new File(plugin.getDataFolder(), "fertility.yml");
+        covenDataFile = new File(plugin.getDataFolder(), "covens.yml");
 
         if (!playerDataFile.exists()) {
             try { playerDataFile.createNewFile(); } catch (IOException e) { /* ignore */ }
@@ -51,10 +54,14 @@ public class DataManager {
         if (!fertilityDataFile.exists()) {
             try { fertilityDataFile.createNewFile(); } catch (IOException e) { /* ignore */ }
         }
+        if (!covenDataFile.exists()) {
+            try { covenDataFile.createNewFile(); } catch (IOException e) { /* ignore */ }
+        }
 
         playerDataConfig = YamlConfiguration.loadConfiguration(playerDataFile);
         wardDataConfig = YamlConfiguration.loadConfiguration(wardDataFile);
         fertilityDataConfig = YamlConfiguration.loadConfiguration(fertilityDataFile);
+        covenDataConfig = YamlConfiguration.loadConfiguration(covenDataFile);
     }
 
     /**
@@ -171,6 +178,7 @@ public class DataManager {
         savePlayerData();
         saveWardData();
         saveFertilityData();
+        saveCovenData();
         plugin.getLogger().finer("Witchcraft data saved.");
     }
 
@@ -246,6 +254,7 @@ public class DataManager {
         loadPlayerData();
         loadWardData();
         loadFertilityData();
+        loadCovenData();
     }
 
     private void loadPlayerData() {
@@ -319,5 +328,95 @@ public class DataManager {
                 plugin.getLogger().log(Level.WARNING, "Failed to load fertility data for key: " + key, e);
             }
         }
+    }
+
+    /**
+     * Saves coven data to disk.
+     */
+    private void saveCovenData() {
+        covenDataConfig = new YamlConfiguration();
+        for (var entry : covenManagerCache.entrySet()) {
+            CovenData coven = entry.getValue();
+            String path = entry.getKey().toString();
+
+            covenDataConfig.set(path + ".name", coven.getName());
+            covenDataConfig.set(path + ".leader", coven.getLeaderId().toString());
+            covenDataConfig.set(path + ".members", new java.util.ArrayList<>(coven.getMemberIds().stream()
+                    .map(UUID::toString).toList()));
+            covenDataConfig.set(path + ".invites", new java.util.ArrayList<>(coven.getPendingInvites().stream()
+                    .map(UUID::toString).toList()));
+            covenDataConfig.set(path + ".chunks", new java.util.ArrayList<>(coven.getClaimedChunks()));
+            covenDataConfig.set(path + ".created", coven.getCreatedAt());
+        }
+
+        try {
+            covenDataConfig.save(covenDataFile);
+        } catch (IOException e) {
+            plugin.getLogger().log(Level.WARNING, "Failed to save coven data", e);
+        }
+    }
+
+    /**
+     * Loads coven data from disk.
+     *
+     * @return map of coven data keyed by coven ID
+     */
+    private Map<UUID, CovenData> loadCovenData() {
+        covenDataConfig = YamlConfiguration.loadConfiguration(covenDataFile);
+        Map<UUID, CovenData> covens = new ConcurrentHashMap<>();
+
+        for (String key : covenDataConfig.getKeys(false)) {
+            try {
+                UUID covenId = UUID.fromString(key);
+                String name = covenDataConfig.getString(key + ".name", "Unknown");
+                UUID leaderId = UUID.fromString(covenDataConfig.getString(key + ".leader"));
+
+                CovenData coven = new CovenData(covenId, name, leaderId);
+
+                // Load members
+                var members = covenDataConfig.getStringList(key + ".members");
+                coven.getMemberIds().clear();
+                for (String memberId : members) {
+                    coven.getMemberIds().add(UUID.fromString(memberId));
+                }
+
+                // Load invites
+                var invites = covenDataConfig.getStringList(key + ".invites");
+                for (String inviteId : invites) {
+                    coven.addInvite(UUID.fromString(inviteId));
+                }
+
+                // Load claimed chunks
+                var chunks = covenDataConfig.getStringList(key + ".chunks");
+                for (String chunk : chunks) {
+                    coven.claimChunk(chunk);
+                }
+
+                covens.put(covenId, coven);
+            } catch (Exception e) {
+                plugin.getLogger().log(Level.WARNING, "Failed to load coven data for key: " + key, e);
+            }
+        }
+
+        return covens;
+    }
+
+    /**
+     * Gets or creates the coven manager cache. Called by CovenManager on init.
+     *
+     * @return the mutable coven map
+     */
+    public Map<UUID, CovenData> getCovenManagerCache() {
+        return covenManagerCache;
+    }
+
+    private final Map<UUID, CovenData> covenManagerCache = new ConcurrentHashMap<>();
+
+    /**
+     * Loads covens into the cache. Should be called by CovenManager during init.
+     */
+    public void loadCovensIntoCache() {
+        Map<UUID, CovenData> loaded = loadCovenData();
+        covenManagerCache.putAll(loaded);
     }
 }
