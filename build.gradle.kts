@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.witchcraft"
-version = "1.0.2"
+version = "1.0.3"
 description = "An immersive magical progression system for Minecraft"
 
 java {
@@ -15,6 +15,7 @@ java {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+    compileOnly("me.clip:placeholderapi:2.11.6")
 }
 
 tasks {
