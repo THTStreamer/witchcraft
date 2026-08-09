@@ -113,10 +113,7 @@ public final class Witchcraft extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.book.SpellBookTradeListener(this), this);
 
         // Register PlaceholderAPI expansion if present
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            new com.witchcraft.api.WitchcraftPlaceholderExpansion(this).register();
-            getLogger().info("PlaceholderAPI expansion registered.");
-        }
+        com.witchcraft.api.PlaceholderAPIRegistrar.register(this);
 
         // Start periodic save task
         startSaveTask();
