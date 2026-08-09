@@ -1,7 +1,6 @@
 package com.witchcraft.api;
 
 import com.witchcraft.Witchcraft;
-import com.witchcraft.core.Spell;
 import com.witchcraft.data.CovenData;
 import com.witchcraft.data.PlayerData;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
@@ -9,29 +8,7 @@ import org.bukkit.entity.Player;
 
 /**
  * PlaceholderAPI expansion for Witchcraft.
- *
- * Supported placeholders:
- *
- * Player:
- *   %witchcraft_exhausted%          - true/false
- *   %witchcraft_exhaustion_remaining% - remaining ticks
- *   %witchcraft_can_cast%           - true/false
- *   %witchcraft_learned_count%      - number of learned incantations
- *   %witchcraft_rituals_count%      - number of known rituals
- *   %witchcraft_has_guide%          - true/false
- *
- * Coven:
- *   %witchcraft_in_coven%           - true/false
- *   %witchcraft_coven_name%         - coven name
- *   %witchcraft_coven_size%         - member count
- *   %witchcraft_coven_role%         - leader/member
- *   %witchcraft_coven_chunks%       - claimed chunks count
- *   %witchcraft_coven_max_chunks%   - max chunks (4)
- *   %witchcraft_coven_leader%       - leader name
- *
- * Spell-specific:
- *   %witchcraft_knows_<spell_id>%   - true/false
- *   %witchcraft_cooldown_<spell_id>% - remaining cooldown ticks
+ * Registered as an internal expansion (part of the plugin).
  */
 public class WitchcraftPlaceholderExpansion extends PlaceholderExpansion {
 
@@ -58,14 +35,13 @@ public class WitchcraftPlaceholderExpansion extends PlaceholderExpansion {
 
     @Override
     public boolean persist() {
-        return true;
+        return true; // Keep registered across PAPI reloads
     }
 
     @Override
     public String onPlaceholderRequest(Player player, String params) {
         if (player == null) return "";
 
-        // Normalize params to lowercase for case-insensitive matching
         String param = params.toLowerCase();
 
         // ===== Player placeholders =====
@@ -127,26 +103,24 @@ public class WitchcraftPlaceholderExpansion extends PlaceholderExpansion {
 
         if (param.equals("coven_leader")) {
             if (coven == null) return "";
-            org.bukkit.entity.Player leader = org.bukkit.Bukkit.getPlayer(coven.getLeaderId());
+            Player leader = org.bukkit.Bukkit.getPlayer(coven.getLeaderId());
             return leader != null ? leader.getName() : "Offline";
         }
 
         // ===== Spell-specific placeholders =====
 
-        // %witchcraft_knows_<spell_id>%
         if (param.startsWith("knows_")) {
             String spellId = param.substring(6);
             return String.valueOf(plugin.getIncantationManager().hasLearned(
                     player.getUniqueId(), spellId));
         }
 
-        // %witchcraft_cooldown_<spell_id>%
         if (param.startsWith("cooldown_")) {
             String spellId = param.substring(9);
             return String.valueOf(plugin.getIncantationManager().getCooldowns()
                     .getRemainingCooldown(player.getUniqueId(), spellId));
         }
 
-        return null; // unrecognized placeholder
+        return null;
     }
 }

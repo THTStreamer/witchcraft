@@ -7,6 +7,7 @@ author: WitchcraftTeam
 website: https://github.com/WitchcraftPlugin/Witchcraft
 softdepend: []
 load: POSTWORLD
+depend: [PlaceholderAPI]
 
 permissions:
   witchcraft.admin:
