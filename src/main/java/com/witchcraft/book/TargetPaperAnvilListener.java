@@ -7,18 +7,24 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.AnvilInventory;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-/**
- * Detects when paper is renamed to a player's name at an anvil
- * and automatically converts it to a target paper.
- */
+import java.util.HashSet;
+import java.util.Set;
+
 public class TargetPaperAnvilListener implements Listener {
 
+    private static final int TARGET_PAPER_COST = 30;
+
     private final Witchcraft plugin;
+
+    private final Set<Integer> targetPaperAnvils = new HashSet<>();
 
     public TargetPaperAnvilListener(Witchcraft plugin) {
         this.plugin = plugin;
@@ -30,33 +36,25 @@ public class TargetPaperAnvilListener implements Listener {
         ItemStack firstSlot = inventory.getItem(0);
         ItemStack result = event.getResult();
 
-        // Must be paper in first slot
         if (firstSlot == null || firstSlot.getType() != Material.PAPER) return;
-
-        // Must have a result (the renamed item)
         if (result == null) return;
 
-        // Get the rename text from the anvil's rename text field
         String renameText = inventory.getRenameText();
         if (renameText == null || renameText.isBlank()) return;
 
         String trimmedName = renameText.trim();
 
-        // Check if the renamed name matches an online player
         Player target = Bukkit.getPlayer(trimmedName);
         if (target == null) return;
 
-        // Don't allow targeting yourself
         Player holder = null;
         if (inventory.getHolder() instanceof Player) {
             holder = (Player) inventory.getHolder();
         }
         if (holder != null && holder.getUniqueId().equals(target.getUniqueId())) return;
 
-        // Create a target paper and set it as the result
         ItemStack targetPaper = TargetPaper.create(plugin, target.getName(), target.getUniqueId());
 
-        // Preserve the enchantment glow if the original had one
         if (firstSlot.hasItemMeta()) {
             ItemMeta meta = firstSlot.getItemMeta();
             if (meta != null && meta.hasEnchants()) {
@@ -71,5 +69,31 @@ public class TargetPaperAnvilListener implements Listener {
         }
 
         event.setResult(targetPaper);
+        targetPaperAnvils.add(System.identityHashCode(inventory));
+    }
+
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent event) {
+        if (!(event.getWhoClicked() instanceof Player player)) return;
+
+        Inventory inventory = event.getInventory();
+        if (!(inventory instanceof AnvilInventory anvil)) return;
+        if (event.getRawSlot() != 2) return;
+        if (event.getClick() == ClickType.UNKNOWN) return;
+
+        int anvilId = System.identityHashCode(anvil);
+        if (!targetPaperAnvils.contains(anvilId)) return;
+
+        targetPaperAnvils.remove(anvilId);
+
+        if (player.getLevel() < TARGET_PAPER_COST) {
+            event.setCancelled(true);
+            player.sendMessage("\u00A7cYou need " + TARGET_PAPER_COST +
+                    " levels to create a target paper. You have " + player.getLevel() + ".");
+            return;
+        }
+
+        player.setLevel(player.getLevel() - TARGET_PAPER_COST);
+        player.sendMessage("\u00A77Target paper created! \u00A7c-" + TARGET_PAPER_COST + " levels");
     }
 }
