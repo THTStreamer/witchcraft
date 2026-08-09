@@ -8,13 +8,6 @@ website: https://github.com/WitchcraftPlugin/Witchcraft
 
 folia-supported: false
 
-dependencies:
-  server: '*'
-  plugins:
-    PlaceholderAPI:
-      load: BEFORE
-      required: false
-
 permissions:
   witchcraft.admin:
     description: Allows access to all Witchcraft admin commands
