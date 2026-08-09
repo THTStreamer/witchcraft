@@ -111,6 +111,7 @@ public final class Witchcraft extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.coven.CovenChunkListener(this), this);
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.book.SpellBookLootListener(this), this);
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.book.SpellBookTradeListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new com.witchcraft.book.TargetPaperAnvilListener(this), this);
 
         // Register PlaceholderAPI expansion
         try {
