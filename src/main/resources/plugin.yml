@@ -5,9 +5,8 @@ api-version: '1.21'
 description: An immersive magical progression system for Minecraft
 author: WitchcraftTeam
 website: https://github.com/WitchcraftPlugin/Witchcraft
-softdepend: []
+softdepend: [PlaceholderAPI]
 load: POSTWORLD
-depend: [PlaceholderAPI]
 
 permissions:
   witchcraft.admin:
