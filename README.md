@@ -53,6 +53,19 @@ Both methods trigger the same spell effects. Choose the approach that fits your 
 - Cannot cast magic during exhaustion period
 - Persists across server restarts
 
+### Spell Books
+- 68 written books covering all spells, rituals, and coven magic
+- Found as loot in dungeon chests (3% chance)
+- Available from librarian villagers (15% chance)
+- Each book teaches the incantation or ritual when read
+
+### In-Game Grimoire
+- `/grimoire incantations [page]` — browse all incantations with spoken text and descriptions
+- `/grimoire rituals [page]` — browse ritual recipes with ingredients and requirements
+- `/grimoire coven [page]` — browse coven spells with chanting lines
+- Shows learned/unknown status for incantations
+- 8 entries per page, tab-completed
+
 ### Target Paper System
 - Player-targeting rituals and spells require a **target paper** with the target's username
 - Players craft their own target papers by renaming paper at an anvil with the target's username
@@ -64,6 +77,8 @@ Both methods trigger the same spell effects. Choose the approach that fits your 
 
 ### Covens
 - Form groups of witches to unlock more powerful magic
+- Rank system: Priest/Priestess (leaders), Council (officers), Initiates (members)
+- Up to 2 leaders per coven (any combination of Priest/Priestess)
 - Coven rituals require multiple members near the cauldron
 - Coven spells require members to chant incantations in sequence
 - The more members, the stronger the spells
@@ -77,14 +92,30 @@ Both methods trigger the same spell effects. Choose the approach that fits your 
 
 | Command | Description |
 |---|---|
-| `/coven create <name>` | Create a new coven (you become the leader) |
-| `/coven invite <player>` | Invite a player to your coven |
+| `/coven create <name>` | Create a new coven (you become the Priest) |
+| `/coven invite <player>` | Invite a player (leaders only) |
 | `/coven accept` | Accept a pending coven invite |
 | `/coven leave` | Leave your current coven |
-| `/coven kick <player>` | Kick a member (leader only) |
-| `/coven disband` | Disband the coven entirely (leader only) |
-| `/coven info` | View your coven's info |
+| `/coven kick <player>` | Kick a member (leaders only) |
+| `/coven disband` | Disband the coven (leaders only) |
+| `/coven setrank <player> <rank>` | Set a member's rank (leaders only) |
+| `/coven promote <player>` | Promote to next rank (leaders only) |
+| `/coven demote <player>` | Demote to next rank (leaders only) |
+| `/coven transfer <player>` | Transfer leadership (leaders only) |
+| `/coven info` | View your coven's info and ranks |
 | `/coven list` | List all covens on the server |
+| `/coven claim` | Claim current chunk (leaders only) |
+| `/coven unclaim` | Unclaim current chunk (leaders only) |
+| `/coven chunks` | List claimed chunks |
+
+### Coven Ranks
+
+| Rank | Authority | Description |
+|---|---|---|
+| **Priest** | Leader | Full control over the coven |
+| **Priestess** | Leader | Full control over the coven |
+| **Council** | Officer | High-ranking notable member |
+| **Initiate** | Member | Standard coven member |
 
 ### Coven Rituals
 
@@ -724,16 +755,23 @@ Coven rituals require a minimum number of coven members to be present near the c
 |---------|-------------|------------|
 | `/witchcraft help` | Show help | None |
 | `/witchcraft reload` | Reload configuration | `witchcraft.reload` |
-| `/witchcraft givebook [player]` | Give guide book | `witchcraft.admin` |
-| `/witchcraft learn <player> <id>` | Teach incantation | `witchcraft.admin` |
-| `/witchcraft unlearn <player> <id>` | Remove incantation | `witchcraft.admin` |
-| `/witchcraft purge <player>` | Clear all magic effects | `witchcraft.admin` |
 | `/witchcraft list` | List all spells | `witchcraft.admin` |
-| `/witchcraft exhaust <player>` | Apply exhaustion | `witchcraft.admin` |
-| `/witchcraft targetpaper <player>` | Create target paper (admin only) | `witchcraft.admin` |
-| `/witchcraft debug` | Show debug info | `witchcraft.debug` |
+| `/witchcraft admin <sub>` | Admin commands | `witchcraft.admin` |
+| `/coven <sub>` | Coven management | None |
+| `/grimoire <category> [page]` | Browse spells and rituals | `witchcraft.grimoire` |
 
-**Note:** The `/witchcraft targetpaper` command is admin-only. Players create target papers by placing paper in an anvil and renaming it to the target player's exact username.
+### Admin Commands (`/witchcraft admin`)
+
+| Command | Description | Permission |
+|---------|-------------|------------|
+| `givebook [player]` | Give guide book | `witchcraft.admin` |
+| `learn <player> <id>` | Teach incantation | `witchcraft.admin` |
+| `unlearn <player> <id>` | Remove incantation | `witchcraft.admin` |
+| `purge <player>` | Clear all magic effects | `witchcraft.admin` |
+| `exhaust <player>` | Apply exhaustion | `witchcraft.admin` |
+| `targetpaper <player>` | Create target paper | `witchcraft.admin` |
+| `givegrimoire <player> [id]` | Give spell book | `witchcraft.admin` |
+| `debug` | Show debug info | `witchcraft.admin` |
 
 ## Permissions
 
@@ -742,10 +780,11 @@ Coven rituals require a minimum number of coven members to be present near the c
 | `witchcraft.admin` | Access to all admin commands | op |
 | `witchcraft.reload` | Reload configuration | op |
 | `witchcraft.cast` | Cast rituals and incantations | true |
-| `witchcraft.learn` | Learn new incantations | true |
+| `witchcraft.learn` | Learn new incantations from books | true |
 | `witchcraft.curse` | Cast curse spells | true |
 | `witchcraft.protection` | Cast protection spells | true |
 | `witchcraft.scrying` | Cast scrying spells | true |
+| `witchcraft.grimoire` | Use the grimoire command | true |
 | `witchcraft.debug` | Debug commands | op |
 
 ## API

@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.witchcraft"
-version = "1.0.3"
+version = "1.1.0"
 description = "An immersive magical progression system for Minecraft"
 
 java {
