@@ -5,6 +5,7 @@ import com.witchcraft.api.events.WitchCovenCreateEvent;
 import com.witchcraft.api.events.WitchCovenJoinEvent;
 import com.witchcraft.api.events.WitchCovenLeaveEvent;
 import com.witchcraft.data.CovenData;
+import com.witchcraft.data.CovenRank;
 import com.witchcraft.data.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -125,16 +126,106 @@ public class CovenManager {
 
         PlayerData data = plugin.getDataManager().getPlayerData(player.getUniqueId());
 
+        boolean wasLeader = coven.isLeader(player.getUniqueId());
+
         WitchCovenLeaveEvent event = new WitchCovenLeaveEvent(player, coven);
         Bukkit.getPluginManager().callEvent(event);
 
         coven.removeMember(player.getUniqueId());
         data.setCovenId(null);
 
-        if (coven.isLeader(player.getUniqueId())) {
+        if (wasLeader && coven.getSize() == 0) {
             disbandCoven(coven);
         }
 
+        return true;
+    }
+
+    /**
+     * Sets a player's rank within their coven.
+     *
+     * @param setter  the player setting the rank (must be leader)
+     * @param target  the target player
+     * @param rank    the new rank
+     * @return true if rank was set
+     */
+    public boolean setRank(Player setter, Player target, CovenRank rank) {
+        CovenData coven = getCovenForMember(setter.getUniqueId());
+        if (coven == null) return false;
+        if (!coven.isLeader(setter.getUniqueId())) return false;
+        if (!coven.isMember(target.getUniqueId())) return false;
+
+        boolean success = coven.setRank(target.getUniqueId(), rank);
+        if (success) {
+            target.sendMessage("\u00A75Your rank in coven \u00A7e" + coven.getName() +
+                    "\u00A75 has been changed to \u00A7f" + rank.getTitle() + "\u00A75.");
+        }
+        return success;
+    }
+
+    /**
+     * Promotes a player to the next rank.
+     *
+     * @param setter the player promoting (must be leader)
+     * @param target the target player
+     * @return the new rank, or null if promotion failed
+     */
+    public CovenRank promote(Player setter, Player target) {
+        CovenData coven = getCovenForMember(setter.getUniqueId());
+        if (coven == null) return null;
+        if (!coven.isLeader(setter.getUniqueId())) return null;
+        if (!coven.isMember(target.getUniqueId())) return null;
+
+        CovenRank newRank = coven.promote(target.getUniqueId());
+        if (newRank != null) {
+            target.sendMessage("\u00A75You have been promoted to \u00A7f" + newRank.getTitle() +
+                    "\u00A75 in coven \u00A7e" + coven.getName() + "\u00A75.");
+        }
+        return newRank;
+    }
+
+    /**
+     * Demotes a player to the next lower rank.
+     *
+     * @param setter the player demoting (must be leader)
+     * @param target the target player
+     * @return the new rank, or null if demotion failed
+     */
+    public CovenRank demote(Player setter, Player target) {
+        CovenData coven = getCovenForMember(setter.getUniqueId());
+        if (coven == null) return null;
+        if (!coven.isLeader(setter.getUniqueId())) return null;
+        if (!coven.isMember(target.getUniqueId())) return null;
+
+        CovenRank newRank = coven.demote(target.getUniqueId());
+        if (newRank != null) {
+            target.sendMessage("\u00A75You have been demoted to \u00A7f" + newRank.getTitle() +
+                    "\u00A75 in coven \u00A7e" + coven.getName() + "\u00A75.");
+        }
+        return newRank;
+    }
+
+    /**
+     * Transfers leadership to another member.
+     * The current leader becomes a COUNCIL member, and the target becomes a PRIEST.
+     *
+     * @param leader the current leader
+     * @param target the new leader
+     * @return true if transferred
+     */
+    public boolean transferLeadership(Player leader, Player target) {
+        CovenData coven = getCovenForMember(leader.getUniqueId());
+        if (coven == null) return false;
+        if (!coven.isLeader(leader.getUniqueId())) return false;
+        if (!coven.isMember(target.getUniqueId())) return false;
+
+        // Demote current leader to council
+        coven.setRank(leader.getUniqueId(), CovenRank.COUNCIL);
+        // Promote target to priest
+        coven.setRank(target.getUniqueId(), CovenRank.PRIEST);
+
+        leader.sendMessage("\u00A75Leadership transferred to \u00A7f" + target.getName() + "\u00A75.");
+        target.sendMessage("\u00A75You are now the \u00A7fPriest\u00A75 of coven \u00A7e" + coven.getName() + "\u00A75.");
         return true;
     }
 

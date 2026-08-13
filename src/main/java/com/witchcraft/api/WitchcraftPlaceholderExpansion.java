@@ -6,6 +6,8 @@ import com.witchcraft.data.PlayerData;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 
+import java.util.UUID;
+
 /**
  * PlaceholderAPI expansion for Witchcraft.
  * Registered as an internal expansion (part of the plugin).
@@ -90,7 +92,7 @@ public class WitchcraftPlaceholderExpansion extends PlaceholderExpansion {
 
         if (param.equals("coven_role")) {
             if (coven == null) return "";
-            return coven.isLeader(player.getUniqueId()) ? "leader" : "member";
+            return coven.getRank(player.getUniqueId()).getName();
         }
 
         if (param.equals("coven_chunks")) {
@@ -103,7 +105,11 @@ public class WitchcraftPlaceholderExpansion extends PlaceholderExpansion {
 
         if (param.equals("coven_leader")) {
             if (coven == null) return "";
-            Player leader = org.bukkit.Bukkit.getPlayer(coven.getLeaderId());
+            var leaders = coven.getMembersWithRank(com.witchcraft.data.CovenRank.PRIEST);
+            leaders.addAll(coven.getMembersWithRank(com.witchcraft.data.CovenRank.PRIESTESS));
+            if (leaders.isEmpty()) return "None";
+            UUID leaderId = leaders.iterator().next();
+            Player leader = org.bukkit.Bukkit.getPlayer(leaderId);
             return leader != null ? leader.getName() : "Offline";
         }
 

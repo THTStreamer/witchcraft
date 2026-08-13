@@ -340,13 +340,19 @@ public class DataManager {
             String path = entry.getKey().toString();
 
             covenDataConfig.set(path + ".name", coven.getName());
-            covenDataConfig.set(path + ".leader", coven.getLeaderId().toString());
             covenDataConfig.set(path + ".members", new java.util.ArrayList<>(coven.getMemberIds().stream()
                     .map(UUID::toString).toList()));
             covenDataConfig.set(path + ".invites", new java.util.ArrayList<>(coven.getPendingInvites().stream()
                     .map(UUID::toString).toList()));
             covenDataConfig.set(path + ".chunks", new java.util.ArrayList<>(coven.getClaimedChunks()));
             covenDataConfig.set(path + ".created", coven.getCreatedAt());
+
+            // Save ranks
+            java.util.Map<UUID, CovenRank> ranks = coven.getRanks();
+            for (var rankEntry : ranks.entrySet()) {
+                covenDataConfig.set(path + ".ranks." + rankEntry.getKey().toString(),
+                        rankEntry.getValue().name());
+            }
         }
 
         try {
@@ -369,15 +375,53 @@ public class DataManager {
             try {
                 UUID covenId = UUID.fromString(key);
                 String name = covenDataConfig.getString(key + ".name", "Unknown");
-                UUID leaderId = UUID.fromString(covenDataConfig.getString(key + ".leader"));
+
+                // Determine leader from ranks (first PRIEST or PRIESTESS found)
+                UUID leaderId = null;
+                var ranksSection = covenDataConfig.getConfigurationSection(key + ".ranks");
+                if (ranksSection != null) {
+                    for (String rankKey : ranksSection.getKeys(false)) {
+                        String rankName = ranksSection.getString(rankKey);
+                        if (rankName != null && (rankName.equals("PRIEST") || rankName.equals("PRIESTESS"))) {
+                            leaderId = UUID.fromString(rankKey);
+                            break;
+                        }
+                    }
+                }
+                // Fallback: first member
+                if (leaderId == null) {
+                    var members = covenDataConfig.getStringList(key + ".members");
+                    if (!members.isEmpty()) {
+                        leaderId = UUID.fromString(members.get(0));
+                    }
+                }
 
                 CovenData coven = new CovenData(covenId, name, leaderId);
 
                 // Load members
                 var members = covenDataConfig.getStringList(key + ".members");
                 coven.getMemberIds().clear();
+                coven.getRanks().clear();
+                coven.getRanks().put(leaderId, CovenRank.PRIEST);
                 for (String memberId : members) {
-                    coven.getMemberIds().add(UUID.fromString(memberId));
+                    UUID memberUUID = UUID.fromString(memberId);
+                    if (!memberUUID.equals(leaderId)) {
+                        coven.getMemberIds().add(memberUUID);
+                    }
+                }
+
+                // Load ranks (overriding defaults)
+                if (ranksSection != null) {
+                    for (String rankKey : ranksSection.getKeys(false)) {
+                        UUID memberUUID = UUID.fromString(rankKey);
+                        String rankName = ranksSection.getString(rankKey);
+                        try {
+                            CovenRank rank = CovenRank.valueOf(rankName);
+                            coven.getRanks().put(memberUUID, rank);
+                        } catch (IllegalArgumentException e) {
+                            coven.getRanks().put(memberUUID, CovenRank.INITIATE);
+                        }
+                    }
                 }
 
                 // Load invites
