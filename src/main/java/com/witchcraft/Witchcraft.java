@@ -103,6 +103,26 @@ public final class Witchcraft extends JavaPlugin {
             getLogger().severe("Failed to register coven command: " + e.getMessage());
         }
 
+        // Register grimoire command
+        var grimoireCommand = new com.witchcraft.commands.GrimoireCommand(this);
+        try {
+            var getMap = Bukkit.getServer().getClass().getMethod("getCommandMap");
+            var commandMap = (org.bukkit.command.CommandMap) getMap.invoke(Bukkit.getServer());
+            var cmd = new org.bukkit.command.Command("grimoire", "Browse spells and rituals", "/grimoire <category> [page]", List.of("gr")) {
+                @Override
+                public boolean execute(CommandSender sender, String commandLabel, String[] args) {
+                    return grimoireCommand.onCommand(sender, this, commandLabel, args);
+                }
+                @Override
+                public List<String> tabComplete(CommandSender sender, String alias, String[] args) {
+                    return grimoireCommand.onTabComplete(sender, this, alias, args);
+                }
+            };
+            commandMap.register("witchcraft", cmd);
+        } catch (Exception e) {
+            getLogger().severe("Failed to register grimoire command: " + e.getMessage());
+        }
+
         // Register listeners
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.ritual.RitualListener(this), this);
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.incantation.IncantationListener(this), this);

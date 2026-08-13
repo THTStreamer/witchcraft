@@ -33,3 +33,6 @@ permissions:
   witchcraft.debug:
     description: Allows debug commands
     default: op
+  witchcraft.grimoire:
+    description: Allows using the grimoire to browse spells and rituals
+    default: true
