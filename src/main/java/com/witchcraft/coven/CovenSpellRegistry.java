@@ -179,6 +179,125 @@ public class CovenSpellRegistry {
                 ),
                 new com.witchcraft.spells.ritual.EternalDamnationCovenSpell(plugin),
                 1600));
+
+        // === NEW COVEN CURSES (10) ===
+        register(new CovenSpell(plugin,
+                "writhing_roots_curse",
+                "Curse of Writhing Roots",
+                com.witchcraft.core.SpellCategory.CURSE,
+                3, 20.0,
+                java.util.List.of(
+                        "radices torquere ligare",
+                        "terra constringere hostes",
+                        "vinea strangulare inimicos"
+                ),
+                new com.witchcraft.spells.ritual.WrithingRootsCurse(plugin),
+                600));
+        register(new CovenSpell(plugin,
+                "sinking_mire_curse",
+                "Curse of the Sinking Mire",
+                com.witchcraft.core.SpellCategory.CURSE,
+                2, 15.0,
+                java.util.List.of(
+                        "palus vorare profundus",
+                        "lutum trahere deorsum"
+                ),
+                new com.witchcraft.spells.ritual.SinkingMireCurse(plugin),
+                400));
+        register(new CovenSpell(plugin,
+                "withered_fields_curse",
+                "Curse of Withered Fields",
+                com.witchcraft.core.SpellCategory.CURSE,
+                3, 25.0,
+                java.util.List.of(
+                        "ager marcescere arefacere",
+                        "messis perdere infelix",
+                        "terra sterilis maledicta"
+                ),
+                new com.witchcraft.spells.ritual.WitheredFieldsCurse(plugin),
+                600));
+        register(new CovenSpell(plugin,
+                "howling_void_curse",
+                "Curse of the Howling Void",
+                com.witchcraft.core.SpellCategory.CURSE,
+                3, 25.0,
+                java.util.List.of(
+                        "inanis ululare vorax",
+                        "vacuum clamare tenebris",
+                        "abyssus devorare animas"
+                ),
+                new com.witchcraft.spells.ritual.HowlingVoidCurse(plugin),
+                600));
+        register(new CovenSpell(plugin,
+                "brittle_earth_curse",
+                "Curse of Brittle Earth",
+                com.witchcraft.core.SpellCategory.CURSE,
+                2, 15.0,
+                java.util.List.of(
+                        "terra fragilis rumpere",
+                        "solum infirmus fatiscere"
+                ),
+                new com.witchcraft.spells.ritual.BrittleEarthCurse(plugin),
+                400));
+        register(new CovenSpell(plugin,
+                "pallid_plague_curse",
+                "Curse of the Pallid Plague",
+                com.witchcraft.core.SpellCategory.CURSE,
+                3, 20.0,
+                java.util.List.of(
+                        "pallidus pestis serpere",
+                        "morbus luridus consumere",
+                        "contagium expandere late"
+                ),
+                new com.witchcraft.spells.ritual.PallidPlagueCurse(plugin),
+                600));
+        register(new CovenSpell(plugin,
+                "starless_night_curse",
+                "Curse of the Starless Night",
+                com.witchcraft.core.SpellCategory.CURSE,
+                3, 20.0,
+                java.util.List.of(
+                        "nox sine astris obscura",
+                        "caelum vacuus tenebris",
+                        "sidera extinguere perpetuo"
+                ),
+                new com.witchcraft.spells.ritual.StarlessNightCurse(plugin),
+                600));
+        register(new CovenSpell(plugin,
+                "crushing_weight_curse",
+                "Curse of Crushing Weight",
+                com.witchcraft.core.SpellCategory.CURSE,
+                2, 15.0,
+                java.util.List.of(
+                        "pondus immensum opprimere",
+                        "gravitas conculcare hostes"
+                ),
+                new com.witchcraft.spells.ritual.CrushingWeightCurse(plugin),
+                400));
+        register(new CovenSpell(plugin,
+                "fetid_bog_curse",
+                "Curse of the Fetid Bog",
+                com.witchcraft.core.SpellCategory.CURSE,
+                2, 15.0,
+                java.util.List.of(
+                        "palus foetida venenare",
+                        "uligo tabida inficere"
+                ),
+                new com.witchcraft.spells.ritual.FetidBogCurse(plugin),
+                400));
+        register(new CovenSpell(plugin,
+                "eternal_night_curse",
+                "Curse of Eternal Night",
+                com.witchcraft.core.SpellCategory.CURSE,
+                4, 30.0,
+                java.util.List.of(
+                        "nox aeterna descendat",
+                        "tenebrae perpetua regnare",
+                        "sol extinguere in aeternum",
+                        "caligo infinita dominare"
+                ),
+                new com.witchcraft.spells.ritual.EternalNightCurse(plugin),
+                800));
     }
 
     public void register(CovenSpell spell) {

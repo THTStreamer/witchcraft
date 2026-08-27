@@ -126,6 +126,30 @@ public class SpellRegistry {
         registerSpell(new com.witchcraft.spells.ritual.MassTransmutationCovenSpell(plugin));
         registerSpell(new com.witchcraft.spells.ritual.SoulHarvestCovenSpell(plugin));
         registerSpell(new com.witchcraft.spells.ritual.EternalDamnationCovenSpell(plugin));
+
+        // === NEW SINGULAR CURSES (10) ===
+        registerSpell(new com.witchcraft.spells.curse.LevitationCurse(plugin));
+        registerSpell(new com.witchcraft.spells.curse.FragilityCurse(plugin));
+        registerSpell(new com.witchcraft.spells.curse.DarknessCurse(plugin));
+        registerSpell(new com.witchcraft.spells.curse.HollowVeinCurse(plugin));
+        registerSpell(new com.witchcraft.spells.curse.EncumbranceCurse(plugin));
+        registerSpell(new com.witchcraft.spells.curse.VertigoCurse(plugin));
+        registerSpell(new com.witchcraft.spells.curse.FrostCurse(plugin));
+        registerSpell(new com.witchcraft.spells.curse.BansheeCurse(plugin));
+        registerSpell(new com.witchcraft.spells.curse.DecayCurse(plugin));
+        registerSpell(new com.witchcraft.spells.curse.EclipseCurse(plugin));
+
+        // === NEW COVEN CURSES (10) ===
+        registerSpell(new com.witchcraft.spells.ritual.WrithingRootsCurse(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.SinkingMireCurse(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.WitheredFieldsCurse(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.HowlingVoidCurse(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.BrittleEarthCurse(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.PallidPlagueCurse(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.StarlessNightCurse(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.CrushingWeightCurse(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.FetidBogCurse(plugin));
+        registerSpell(new com.witchcraft.spells.ritual.EternalNightCurse(plugin));
     }
 
     public void registerSpell(Spell spell) {

@@ -385,6 +385,88 @@ public class IncantationManager {
                 "Lists all nearby players with distance and direction",
                 "player reveal", "revelare congregatio"
         ));
+
+        // === NEW SINGULAR CURSE INCANTATIONS (10) ===
+        registerIncantation(new Incantation(
+                "curse_levitation",
+                "levitas corpus ascendere",
+                "levitation_curse",
+                "Curse of Levitation",
+                "Lifts the target helplessly into the air",
+                "levitation curse", "corpus ascendere"
+        ));
+        registerIncantation(new Incantation(
+                "curse_fragility",
+                "ossa fragilis rumpere",
+                "fragility_curse",
+                "Curse of Fragility",
+                "Makes the target's bones brittle and weak",
+                "fragility curse", "ossa rumpere"
+        ));
+        registerIncantation(new Incantation(
+                "curse_darkness",
+                "tenebris aeterna obscurare",
+                "darkness_curse",
+                "Curse of Darkness",
+                "Engulfs the target in eternal darkness",
+                "darkness curse", "aeterna obscurare"
+        ));
+        registerIncantation(new Incantation(
+                "curse_hollow_vein",
+                "sanguis vacuus exhaurire",
+                "hollow_vein_curse",
+                "Curse of the Hollow Vein",
+                "Drains the blood and vitality from the target",
+                "hollow vein curse", "sanguis exhaurire"
+        ));
+        registerIncantation(new Incantation(
+                "curse_encumbrance",
+                "pondus gravis opprimere",
+                "encumbrance_curse",
+                "Curse of Encumbrance",
+                "Crushes the target under unbearable weight",
+                "encumbrance curse", "pondus opprimere"
+        ));
+        registerIncantation(new Incantation(
+                "curse_vertigo",
+                "vertigo gyrus confundere",
+                "vertigo_curse",
+                "Curse of Vertigo",
+                "Spins the target's world into chaos",
+                "vertigo curse", "gyrus confundere"
+        ));
+        registerIncantation(new Incantation(
+                "curse_frost",
+                "gelu frigus mordere",
+                "frost_curse",
+                "Curse of Frost",
+                "Freezes the target with biting cold",
+                "frost curse", "gelu mordere"
+        ));
+        registerIncantation(new Incantation(
+                "curse_banshee",
+                "ululatus spiritus clamare",
+                "banshee_curse",
+                "Curse of the Banshee",
+                "Shatters the target's senses with a ghostly wail",
+                "banshee curse", "spiritus clamare"
+        ));
+        registerIncantation(new Incantation(
+                "curse_decay",
+                "putredo tabes consumere",
+                "decay_curse",
+                "Curse of Decay",
+                "Rots the target's flesh from within",
+                "decay curse", "putredo consumere"
+        ));
+        registerIncantation(new Incantation(
+                "curse_eclipse",
+                "sol obscura tenebris",
+                "eclipse_curse",
+                "Curse of the Eclipse",
+                "Blots the sun from the target's sky",
+                "eclipse curse", "sol tenebris"
+        ));
     }
 
     /**

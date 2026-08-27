@@ -439,6 +439,130 @@ public class RitualRecipeRegistry {
                 .covenSize(5)
                 .covenRadius(50.0)
                 .build());
+
+        // === NEW SINGULAR CURSES (10) ===
+        register(RitualRecipe.builder("levitation_curse")
+                .displayName("Curse of Levitation")
+                .ingredients(Ingredient.FEATHER, Ingredient.PHANTOM_MEMBRANE, Ingredient.ECHO_SHARD)
+                .ritualDuration(120)
+                .build());
+        register(RitualRecipe.builder("fragility_curse")
+                .displayName("Curse of Fragility")
+                .ingredients(Ingredient.BONE_MEAL, Ingredient.IRON_INGOT, Ingredient.QUARTZ)
+                .ritualDuration(120)
+                .build());
+        register(RitualRecipe.builder("darkness_curse")
+                .displayName("Curse of Darkness")
+                .ingredients(Ingredient.ECHO_SHARD, Ingredient.CRYING_OBSIDIAN, Ingredient.COAL)
+                .ritualDuration(120)
+                .build());
+        register(RitualRecipe.builder("hollow_vein_curse")
+                .displayName("Curse of the Hollow Vein")
+                .ingredients(Ingredient.GHAST_TEAR, Ingredient.FERMENTED_SPIDER_EYE, Ingredient.PRISMARINE_SHARD)
+                .ritualDuration(120)
+                .build());
+        register(RitualRecipe.builder("encumbrance_curse")
+                .displayName("Curse of Encumbrance")
+                .ingredients(Ingredient.OBSIDIAN, Ingredient.IRON_INGOT, Ingredient.GUNPOWDER)
+                .ritualDuration(120)
+                .build());
+        register(RitualRecipe.builder("vertigo_curse")
+                .displayName("Curse of Vertigo")
+                .ingredients(Ingredient.FEATHER, Ingredient.FERMENTED_SPIDER_EYE, Ingredient.GLOWSTONE_DUST)
+                .ritualDuration(120)
+                .build());
+        register(RitualRecipe.builder("frost_curse")
+                .displayName("Curse of Frost")
+                .ingredients(Ingredient.PRISMARINE_SHARD, Ingredient.PRISMARINE_CRYSTALS, Ingredient.COAL)
+                .ritualDuration(120)
+                .build());
+        register(RitualRecipe.builder("banshee_curse")
+                .displayName("Curse of the Banshee")
+                .ingredients(Ingredient.ECHO_SHARD, Ingredient.GHAST_TEAR, Ingredient.FERMENTED_SPIDER_EYE)
+                .ritualDuration(140)
+                .build());
+        register(RitualRecipe.builder("decay_curse")
+                .displayName("Curse of Decay")
+                .ingredients(Ingredient.SPIDER_EYE, Ingredient.BONE_MEAL, Ingredient.PRISMARINE_CRYSTALS)
+                .ritualDuration(120)
+                .build());
+        register(RitualRecipe.builder("eclipse_curse")
+                .displayName("Curse of the Eclipse")
+                .ingredients(Ingredient.ECHO_SHARD, Ingredient.QUARTZ, Ingredient.CRYING_OBSIDIAN)
+                .ritualDuration(140)
+                .build());
+
+        // === NEW COVEN CURSES (10) ===
+        register(RitualRecipe.builder("writhing_roots_curse")
+                .displayName("Curse of Writhing Roots")
+                .ingredients(Ingredient.BONE_MEAL, Ingredient.ECHO_SHARD, Ingredient.OBSIDIAN, Ingredient.AMETHYST_SHARD)
+                .ritualDuration(300)
+                .covenSize(3)
+                .covenRadius(20.0)
+                .build());
+        register(RitualRecipe.builder("sinking_mire_curse")
+                .displayName("Curse of the Sinking Mire")
+                .ingredients(Ingredient.PRISMARINE_SHARD, Ingredient.PRISMARINE_CRYSTALS, Ingredient.SPIDER_EYE, Ingredient.COAL)
+                .ritualDuration(280)
+                .covenSize(2)
+                .covenRadius(15.0)
+                .build());
+        register(RitualRecipe.builder("withered_fields_curse")
+                .displayName("Curse of Withered Fields")
+                .ingredients(Ingredient.NETHER_WART, Ingredient.BONE_MEAL, Ingredient.GHAST_TEAR, Ingredient.ECHO_SHARD)
+                .ritualDuration(300)
+                .covenSize(3)
+                .covenRadius(25.0)
+                .build());
+        register(RitualRecipe.builder("howling_void_curse")
+                .displayName("Curse of the Howling Void")
+                .ingredients(Ingredient.PHANTOM_MEMBRANE, Ingredient.ECHO_SHARD, Ingredient.GHAST_TEAR, Ingredient.QUARTZ)
+                .ritualDuration(320)
+                .covenSize(3)
+                .covenRadius(25.0)
+                .build());
+        register(RitualRecipe.builder("brittle_earth_curse")
+                .displayName("Curse of Brittle Earth")
+                .ingredients(Ingredient.OBSIDIAN, Ingredient.CRYING_OBSIDIAN, Ingredient.IRON_INGOT, Ingredient.COAL)
+                .ritualDuration(280)
+                .covenSize(2)
+                .covenRadius(15.0)
+                .build());
+        register(RitualRecipe.builder("pallid_plague_curse")
+                .displayName("Curse of the Pallid Plague")
+                .ingredients(Ingredient.NETHER_WART, Ingredient.SPIDER_EYE, Ingredient.GHAST_TEAR, Ingredient.FERMENTED_SPIDER_EYE)
+                .ritualDuration(300)
+                .covenSize(3)
+                .covenRadius(20.0)
+                .build());
+        register(RitualRecipe.builder("starless_night_curse")
+                .displayName("Curse of the Starless Night")
+                .ingredients(Ingredient.ECHO_SHARD, Ingredient.CRYING_OBSIDIAN, Ingredient.AMETHYST_SHARD, Ingredient.QUARTZ)
+                .ritualDuration(300)
+                .covenSize(3)
+                .covenRadius(20.0)
+                .build());
+        register(RitualRecipe.builder("crushing_weight_curse")
+                .displayName("Curse of Crushing Weight")
+                .ingredients(Ingredient.IRON_INGOT, Ingredient.GOLD_INGOT, Ingredient.OBSIDIAN, Ingredient.GUNPOWDER)
+                .ritualDuration(280)
+                .covenSize(2)
+                .covenRadius(15.0)
+                .build());
+        register(RitualRecipe.builder("fetid_bog_curse")
+                .displayName("Curse of the Fetid Bog")
+                .ingredients(Ingredient.SPIDER_EYE, Ingredient.FERMENTED_SPIDER_EYE, Ingredient.GHAST_TEAR, Ingredient.PRISMARINE_SHARD)
+                .ritualDuration(280)
+                .covenSize(2)
+                .covenRadius(15.0)
+                .build());
+        register(RitualRecipe.builder("eternal_night_curse")
+                .displayName("Curse of Eternal Night")
+                .ingredients(Ingredient.ECHO_SHARD, Ingredient.CRYING_OBSIDIAN, Ingredient.DRAGON_BREATH, Ingredient.GHAST_TEAR)
+                .ritualDuration(400)
+                .covenSize(4)
+                .covenRadius(30.0)
+                .build());
     }
 
     /**
