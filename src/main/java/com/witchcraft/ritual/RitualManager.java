@@ -583,24 +583,130 @@ public class RitualManager {
     }
 
     /**
-     * Plays charging effects with increasing intensity.
+     * Plays charging effects with increasing intensity - witchy swirl above cauldron.
      */
     private void playChargingEffects(Location location, double progress) {
         var world = location.getWorld();
         if (world == null) return;
 
-        int baseCount = (int) (10 * progress);
-        double spread = 0.5 + progress;
+        double density = plugin.getConfigManager().getConfig().getDouble("effects.particle-density", 1.0);
+        if (density <= 0) return;
 
+        Location center = location.clone().add(0.5, 1.1, 0.5);
+
+        int witchCount = (int) (4 * progress * density);
+        if (witchCount > 0) {
+            try {
+                world.spawnParticle(org.bukkit.Particle.WITCH, center, witchCount, 0.4, 0.2, 0.4, 0.03);
+            } catch (Exception e) {
+                world.spawnParticle(org.bukkit.Particle.ENCHANT, center, witchCount, 0.4, 0.2, 0.4, 0.4);
+            }
+        }
+
+        int enchantCount = (int) (6 * progress * density + 2);
         world.spawnParticle(org.bukkit.Particle.ENCHANT,
-                location.clone().add(0, 1, 0), baseCount, spread, spread, spread);
+                center.clone().add(0, 0.4, 0), enchantCount, 0.5, 0.4, 0.5, 0.6);
+
         world.spawnParticle(org.bukkit.Particle.SMOKE,
-                location.clone().add(0, 0.5, 0), baseCount / 2, 0.3, 0.3, 0.3);
+                center.clone().add(0, -0.2, 0), (int) (2 * progress * density + 1), 0.2, 0.1, 0.2, 0.02);
+
+        if (progress > 0.6) {
+            try {
+                world.spawnParticle(org.bukkit.Particle.SOUL_FIRE_FLAME,
+                        center.clone().add(0, 0.5, 0), (int) (2 * density), 0.3, 0.3, 0.3, 0.02);
+            } catch (Exception e) {
+                world.spawnParticle(org.bukkit.Particle.FLAME,
+                        center.clone().add(0, 0.5, 0), (int) (2 * density), 0.3, 0.3, 0.3, 0.02);
+            }
+        }
+
+        if (progress > 0.85) {
+            world.spawnParticle(org.bukkit.Particle.PORTAL,
+                    center.clone().add(0, 0.8, 0), (int) (8 * density), 0.3, 0.4, 0.3, 0.5);
+        }
 
         // Play ambient sounds during charge
         if (progress > 0.5 && Math.random() < 0.1) {
             world.playSound(location, org.bukkit.Sound.BLOCK_AMETHYST_BLOCK_CHIME,
                     0.3f, 0.8f + (float) progress * 0.4f);
+        }
+        if (progress > 0.3 && Math.random() < 0.07) {
+            world.playSound(location, org.bukkit.Sound.BLOCK_BREWING_STAND_BREW,
+                    0.2f, 1.2f);
+        }
+    }
+
+    /**
+     * Checks if a cauldron location is currently active or pending ritual.
+     */
+    public boolean isCauldronActiveOrPending(Location loc) {
+        String key = getLocationKey(loc);
+        return activeRituals.containsKey(key) || pendingRituals.containsKey(key);
+    }
+
+    /**
+     * Spawns subtle witchy ambient particles above idle water cauldrons near players.
+     * Called periodically (every 10 ticks) to make water cauldrons feel magical.
+     */
+    public void spawnAmbientCauldronParticles() {
+        double density = plugin.getConfigManager().getConfig().getDouble("effects.particle-density", 1.0);
+        if (density <= 0) return;
+
+        java.util.Set<String> spawned = new java.util.HashSet<>();
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            Location ploc = player.getLocation();
+            org.bukkit.World world = ploc.getWorld();
+            if (world == null) continue;
+
+            int px = ploc.getBlockX();
+            int py = ploc.getBlockY();
+            int pz = ploc.getBlockZ();
+            int radius = 10;
+            int yRadius = 4;
+
+            for (int dx = -radius; dx <= radius; dx++) {
+                for (int dz = -radius; dz <= radius; dz++) {
+                    if (dx * dx + dz * dz > radius * radius) continue;
+                    for (int dy = -yRadius; dy <= yRadius; dy++) {
+                        Block block = world.getBlockAt(px + dx, py + dy, pz + dz);
+                        if (block.getType() != Material.WATER_CAULDRON) continue;
+
+                        String key = getLocationKey(block.getLocation());
+                        if (!spawned.add(key)) continue;
+
+                        // Skip cauldrons that are actively charging - they already have strong effects
+                        if (isCauldronActiveOrPending(block.getLocation())) continue;
+
+                        Location center = block.getLocation().add(0.5, 1.1, 0.5);
+                        try {
+                            world.spawnParticle(org.bukkit.Particle.WITCH, center,
+                                    (int) (2 * density), 0.25, 0.15, 0.25, 0.01);
+                        } catch (Exception e) {
+                            world.spawnParticle(org.bukkit.Particle.ENCHANT, center,
+                                    (int) (2 * density), 0.25, 0.15, 0.25, 0.3);
+                        }
+                        world.spawnParticle(org.bukkit.Particle.ENCHANT,
+                                center.clone().add(0, 0.2, 0), (int) (3 * density), 0.3, 0.2, 0.3, 0.4);
+                        world.spawnParticle(org.bukkit.Particle.SMOKE,
+                                center.clone().add(0, -0.2, 0), (int) (1 * density + 1), 0.15, 0.05, 0.15, 0.01);
+                        // occasional soul flame flicker
+                        if (Math.random() < 0.15 * density) {
+                            try {
+                                world.spawnParticle(org.bukkit.Particle.SOUL_FIRE_FLAME,
+                                        center.clone().add(0, 0.3, 0), 1, 0.2, 0.2, 0.2, 0.01);
+                            } catch (Exception ex) {
+                                world.spawnParticle(org.bukkit.Particle.FLAME,
+                                        center.clone().add(0, 0.3, 0), 1, 0.2, 0.2, 0.2, 0.01);
+                            }
+                        }
+                        // occasional portal swirl
+                        if (Math.random() < 0.08 * density) {
+                            world.spawnParticle(org.bukkit.Particle.PORTAL,
+                                    center.clone().add(0, 0.6, 0), 4, 0.2, 0.3, 0.2, 0.4);
+                        }
+                    }
+                }
+            }
         }
     }
 

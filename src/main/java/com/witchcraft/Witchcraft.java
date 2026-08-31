@@ -153,6 +153,13 @@ public final class Witchcraft extends JavaPlugin {
             }
         }, 1L, 1L);
 
+        // Ambient witchy particles above active water cauldrons
+        Bukkit.getScheduler().runTaskTimer(this, () -> {
+            if (ritualManager != null) {
+                ritualManager.spawnAmbientCauldronParticles();
+            }
+        }, 10L, 10L);
+
         getLogger().info("Witchcraft has been enabled. The ancient arts awaken...");
     }
 
