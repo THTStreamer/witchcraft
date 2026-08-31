@@ -1,6 +1,7 @@
 package com.witchcraft;
 
 import com.witchcraft.book.GuideBookBuilder;
+import com.witchcraft.book.LoreBookManager;
 import com.witchcraft.book.SpellBookManager;
 import com.witchcraft.commands.WitchcraftCommand;
 import com.witchcraft.config.ConfigManager;
@@ -36,6 +37,7 @@ public final class Witchcraft extends JavaPlugin {
     private ArcaneExhaustion arcaneExhaustion;
     private GuideBookBuilder guideBookBuilder;
     private SpellBookManager spellBookManager;
+    private LoreBookManager loreBookManager;
     private CovenManager covenManager;
     private CovenSpellRegistry covenSpellRegistry;
 
@@ -53,6 +55,7 @@ public final class Witchcraft extends JavaPlugin {
         this.ritualManager = new RitualManager(this);
         this.guideBookBuilder = new GuideBookBuilder(this);
         this.spellBookManager = new SpellBookManager();
+        this.loreBookManager = new LoreBookManager();
         this.covenManager = new CovenManager(this);
         this.covenSpellRegistry = new CovenSpellRegistry(this);
 
@@ -132,6 +135,7 @@ public final class Witchcraft extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.book.SpellBookLootListener(this), this);
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.book.SpellBookTradeListener(this), this);
         Bukkit.getPluginManager().registerEvents(new com.witchcraft.book.TargetPaperAnvilListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new com.witchcraft.book.BookLearnListener(this), this);
 
         // Register PlaceholderAPI expansion
         try {
@@ -256,5 +260,9 @@ public final class Witchcraft extends JavaPlugin {
 
     public SpellBookManager getSpellBookManager() {
         return spellBookManager;
+    }
+
+    public LoreBookManager getLoreBookManager() {
+        return loreBookManager;
     }
 }

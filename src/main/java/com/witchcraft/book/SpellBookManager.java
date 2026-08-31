@@ -1,8 +1,10 @@
 package com.witchcraft.book;
 
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.*;
 
@@ -32,8 +34,13 @@ public class SpellBookManager {
         return spellBooks.size();
     }
 
+    public static final String SPELL_BOOK_KEY = "witchcraft_spell_book";
+    public static final String LORE_BOOK_KEY = "witchcraft_lore_book";
+
     /**
      * Creates a written book ItemStack for the given spell ID.
+     * Stores spellId in PDC for learning, and paginates content to 15 chars/line,
+     * 14 lines/page, 50 pages max (same as GuideBookBuilder).
      *
      * @param spellId the spell ID
      * @return the written book item, or null if not found
@@ -48,10 +55,112 @@ public class SpellBookManager {
 
         meta.setTitle(data.getTitle());
         meta.setAuthor("The Old Ones");
-        meta.setPages(data.getPages());
+        meta.setPages(paginate(data.getPages()));
         meta.setGeneration(BookMeta.Generation.ORIGINAL);
+        // Store spellId in PDC for learning
+        meta.getPersistentDataContainer().set(
+                new NamespacedKey("witchcraft", SPELL_BOOK_KEY),
+                PersistentDataType.STRING, data.getSpellId());
         book.setItemMeta(meta);
         return book;
+    }
+
+    /**
+     * Checks if an ItemStack is a witchcraft spell book.
+     */
+    public static boolean isSpellBook(ItemStack item) {
+        if (item == null || item.getType() != Material.WRITTEN_BOOK) return false;
+        var meta = item.getItemMeta();
+        if (meta == null) return false;
+        return meta.getPersistentDataContainer().has(
+                new NamespacedKey("witchcraft", SPELL_BOOK_KEY), PersistentDataType.STRING);
+    }
+
+    /**
+     * Gets the spellId stored in a spell book's PDC.
+     */
+    public static String getSpellIdFromBook(ItemStack item) {
+        if (!isSpellBook(item)) return null;
+        var meta = item.getItemMeta();
+        if (meta == null) return null;
+        return meta.getPersistentDataContainer().get(
+                new NamespacedKey("witchcraft", SPELL_BOOK_KEY), PersistentDataType.STRING);
+    }
+
+    /**
+     * Paginates raw lines into proper book pages respecting Minecraft limits:
+     * 15 visible chars/line, 14 lines/page, 50 pages max. Strips color codes for length.
+     */
+    private List<String> paginate(List<String> rawPages) {
+        // If rawPages already looks like paginated pages (each entry is a page with \n),
+        // we still run through formatter to ensure limits.
+        // Here rawPages are actually lines that may contain \n already; flatten first.
+        List<String> rawLines = new ArrayList<>();
+        for (String p : rawPages) {
+            // Split existing pages that contain \n into lines
+            if (p.contains("\n")) {
+                rawLines.addAll(Arrays.asList(p.split("\n", -1)));
+            } else {
+                rawLines.add(p);
+            }
+        }
+        // Re-paginate using guide book logic
+        List<String> pages = new ArrayList<>();
+        StringBuilder currentPage = new StringBuilder();
+        int lineCount = 0;
+        for (String line : rawLines) {
+            if (line.equals("\u00A70 ") || line.equals("§0 ")) {
+                if (currentPage.length() > 0) {
+                    pages.add(currentPage.toString());
+                    currentPage = new StringBuilder();
+                    lineCount = 0;
+                }
+                continue;
+            }
+            if (lineCount >= 14) {
+                pages.add(currentPage.toString());
+                currentPage = new StringBuilder();
+                lineCount = 0;
+            }
+            List<String> wrapped = wrapLine(line, 15);
+            for (String w : wrapped) {
+                if (lineCount >= 14) {
+                    pages.add(currentPage.toString());
+                    currentPage = new StringBuilder();
+                    lineCount = 0;
+                }
+                if (lineCount > 0) currentPage.append("\n");
+                currentPage.append(w);
+                lineCount++;
+            }
+        }
+        if (currentPage.length() > 0) pages.add(currentPage.toString());
+        if (pages.size() > 50) pages = pages.subList(0, 50);
+        if (pages.isEmpty()) pages.add("");
+        return pages;
+    }
+
+    private List<String> wrapLine(String line, int maxLen) {
+        List<String> wrapped = new ArrayList<>();
+        if (line == null || line.isEmpty()) { wrapped.add(line == null ? "" : line); return wrapped; }
+        String stripped = org.bukkit.ChatColor.stripColor(line);
+        if (stripped.length() <= maxLen) { wrapped.add(line); return wrapped; }
+        if (line.length() <= maxLen) { wrapped.add(line); return wrapped; }
+        String[] words = line.split(" ");
+        StringBuilder cur = new StringBuilder();
+        for (String word : words) {
+            String test = cur.isEmpty() ? word : cur + " " + word;
+            String testStripped = org.bukkit.ChatColor.stripColor(test);
+            if (testStripped.length() > maxLen && !cur.isEmpty()) {
+                wrapped.add(cur.toString());
+                cur = new StringBuilder(word);
+            } else {
+                if (!cur.isEmpty()) cur.append(" ");
+                cur.append(word);
+            }
+        }
+        if (!cur.isEmpty()) wrapped.add(cur.toString());
+        return wrapped;
     }
 
     /**

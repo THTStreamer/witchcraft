@@ -353,6 +353,16 @@ public class RitualManager {
             return;
         }
 
+        // Check if caster knows this ritual (only caster needs to know, even for coven)
+        // Admins bypass via witchcraft.admin
+        if (!caster.hasPermission("witchcraft.admin")) {
+            var pdata = plugin.getDataManager().getPlayerData(caster.getUniqueId());
+            if (!pdata.knowsRitual(recipe.getSpellId())) {
+                caster.sendMessage("\u00A7cYou haven't learned this ritual. Read its book: \u00A77" + recipe.getDisplayName());
+                return;
+            }
+        }
+
         // Check if spell requires a target and one is set
         if (spell != null && spell.requiresTarget() && !cauldron.hasTarget()) {
             caster.sendMessage(plugin.getConfigManager().getMessage("ritual.target-required"));

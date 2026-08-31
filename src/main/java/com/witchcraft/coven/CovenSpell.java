@@ -98,6 +98,15 @@ public class CovenSpell {
                 return false;
             }
 
+            // Check if caster knows this coven spell/ritual (only caster needs to know)
+            if (!speaker.hasPermission("witchcraft.admin")) {
+                var pdata = plugin.getDataManager().getPlayerData(speaker.getUniqueId());
+                if (!pdata.knowsRitual(id)) {
+                    speaker.sendMessage("\u00A7cYou haven't learned this coven spell. Read its book: \u00A77" + displayName);
+                    return false;
+                }
+            }
+
             // Start a new active spell
             active = new ActiveCovenSpell(coven, speaker, center, incantationLines.size());
             activeSpells.put(coven.getCovenId(), active);
