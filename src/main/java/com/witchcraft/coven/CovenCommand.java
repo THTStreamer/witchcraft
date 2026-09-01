@@ -521,10 +521,14 @@ public class CovenCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 2) {
-            return Bukkit.getOnlinePlayers().stream()
-                    .map(Player::getName)
-                    .filter(name -> name.toLowerCase().startsWith(args[1].toLowerCase()))
-                    .collect(Collectors.toList());
+            String first = args[0].toLowerCase();
+            if (Arrays.asList("invite", "kick", "promote", "demote", "transfer", "setrank").contains(first)) {
+                return Bukkit.getOnlinePlayers().stream()
+                        .map(Player::getName)
+                        .filter(name -> name.toLowerCase().startsWith(args[1].toLowerCase()))
+                        .collect(Collectors.toList());
+            }
+            return new ArrayList<>();
         }
 
         if (args.length == 3 && args[0].equalsIgnoreCase("setrank")) {

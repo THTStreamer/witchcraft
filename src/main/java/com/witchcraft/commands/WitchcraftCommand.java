@@ -103,7 +103,7 @@ public class WitchcraftCommand implements CommandExecutor, TabCompleter {
                     .collect(Collectors.toList());
         }
 
-        if (args.length == 2 && args[0].equalsIgnoreCase("admin") && sender.hasPermission("witchcraft.admin")) {
+        if (args.length >= 2 && args[0].equalsIgnoreCase("admin") && sender.hasPermission("witchcraft.admin")) {
             return adminCommand.onTabComplete(sender, command, label, shiftArgs(args));
         }
 
